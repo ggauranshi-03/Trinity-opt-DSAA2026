@@ -124,7 +124,7 @@ def get_model(num_classes=10):
 # ─────────────────────────────── Hybrid ZFO Optimizer ──────────────────────────
 class Trinity(torch.optim.Optimizer):
     """
-    Hybrid ZFO: Adam (FO) + K-FAC preconditioning (SO) + Two-point SPSA (ZO)
+    Hybrid ZFO: Adam (FO) + K-FAC preconditioning (SO) + Two-point RDSA (ZO)
 
     ── First-order (FO) ───────────────────────────────────────────────────────
     Adam with bias-corrected first and second moment tracking (betas, eps).
@@ -144,7 +144,7 @@ class Trinity(torch.optim.Optimizer):
     Layers whose Kronecker-factor dimension exceeds max_kfac_dim are skipped
     and fall back to plain Adam (avoids OOM for very wide layers).
 
-    ── Zeroth-order (ZO): two-point SPSA ─────────────────────────────────────
+    ── Zeroth-order (ZO): two-point RDSA ─────────────────────────────────────
     Every zo_interval steps a two-point finite-difference gradient estimate
         ĝ_ZO ≈ [f(θ+εz) − f(θ-εz)] / (2ε) · z,   z ~ N(0, I)
     is added (scaled by zo_scale) to the backprop gradient *before* the Adam
@@ -159,7 +159,7 @@ class Trinity(torch.optim.Optimizer):
                  # K-FAC
                  damping=1e-2, kfac_interval=10, kfac_decay=0.95,
                  max_kfac_dim=2400,
-                 # ZO-SPSA
+                 # ZO-RDSA
                  zo_interval=20, zo_epsilon=1e-3, zo_scale=0.1):
 
         params   = [p for p in model.parameters() if p.requires_grad]
@@ -327,7 +327,7 @@ class Trinity(torch.optim.Optimizer):
         do_kfac = (self._step % self.kfac_interval == 0)
         do_zo   = (self._step % self.zo_interval   == 0)
 
-        # ── ZO: two-point SPSA gradient augmentation ──────────────────────────
+        # ── ZO: two-point RDSA gradient augmentation ──────────────────────────
         if do_zo and closure is not None:
             params = self.param_groups[0]['params']
             saved  = [p.data.clone() for p in params]
