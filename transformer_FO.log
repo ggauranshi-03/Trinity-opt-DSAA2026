@@ -15,3 +15,6 @@ wandb: 🚀 View run at https://wandb.ai/dcll-iiitd/Trinity-Benchmark/runs/2m0gj
 /home/gauranshi/miniconda3/lib/python3.12/site-packages/torch/utils/data/dataloader.py:668: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
   warnings.warn(warn_msg)
 [FO] Epoch 1/100 - Loss: 1.6940, Val Acc: 16.31%, Head: 20.31%, Med: 0.30%, Tail: 0.00%
+[FO] Epoch 2/100 - Loss: 1.4571, Val Acc: 18.19%, Head: 22.74%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 3/100 - Loss: 1.3553, Val Acc: 20.48%, Head: 25.60%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 4/100 - Loss: 1.3135, Val Acc: 21.19%, Head: 26.49%, Med: 0.00%, Tail: 0.00%

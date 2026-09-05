@@ -17,3 +17,6 @@ wandb: 🚀 View run at https://wandb.ai/dcll-iiitd/Trinity-Benchmark/runs/llmhq
 /home/gauranshi/Trinity-opt-DSAA2026/train_transformer_dsaa.py:85: UserWarning: Full backward hook is firing when gradients are computed with respect to module outputs since no inputs require gradients. See https://docs.pytorch.org/docs/main/generated/torch.nn.Module.html#torch.nn.Module.register_full_backward_hook for more details.
   loss.backward()
 [SO] Epoch 1/100 - Loss: 1.7070, Val Acc: 16.01%, Head: 19.99%, Med: 0.10%, Tail: 0.00%
+[SO] Epoch 2/100 - Loss: 1.4532, Val Acc: 19.60%, Head: 24.50%, Med: 0.00%, Tail: 0.00%
+[SO] Epoch 3/100 - Loss: 1.3511, Val Acc: 15.91%, Head: 19.89%, Med: 0.00%, Tail: 0.00%
+[SO] Epoch 4/100 - Loss: 1.3043, Val Acc: 19.41%, Head: 24.26%, Med: 0.00%, Tail: 0.00%
