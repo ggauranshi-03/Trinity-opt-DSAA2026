@@ -1,0 +1,2 @@
+epoch,train_loss,train_acc,val_loss,val_acc,head_acc,med_acc,tail_acc,time_s
+1,1.6982,40.54,3.0888,16.10,20.12,0.00,0.00,4474.2

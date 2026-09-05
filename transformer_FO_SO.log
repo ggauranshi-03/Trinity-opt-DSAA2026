@@ -1,0 +1,61 @@
+[*] Generated Long-Tailed CIFAR-10 (Imbalance: 0.01). Total train samples: 12406
+/home/gauranshi/miniconda3/lib/python3.12/site-packages/torch/nn/modules/transformer.py:392: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /home/gauranshi/.netrc.
+wandb: Currently logged in as: anant-jain (dcll-iiitd) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: setting up run 9vsi7ld0
+wandb: Tracking run with wandb version 0.28.2
+wandb: Run data is saved locally in /home/gauranshi/Trinity-opt-DSAA2026/wandb/run-20260905_102600-9vsi7ld0
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run ViT_FO_SO_cifar10_imb0.01
+wandb: ⭐️ View project at https://wandb.ai/dcll-iiitd/Trinity-Benchmark
+wandb: 🚀 View run at https://wandb.ai/dcll-iiitd/Trinity-Benchmark/runs/9vsi7ld0
+sys:1: UserWarning: Full backward hook is firing when gradients are computed with respect to module outputs since no inputs require gradients. See https://docs.pytorch.org/docs/main/generated/torch.nn.Module.html#torch.nn.Module.register_full_backward_hook for more details.
+[FO_SO] Epoch 1/20 - Loss: 1.7107, Val Acc: 16.38%, Head: 20.29%, Med: 0.75%, Tail: 0.00%
+[FO_SO] Epoch 2/20 - Loss: 1.4446, Val Acc: 16.56%, Head: 20.70%, Med: 0.00%, Tail: 0.00%
+[FO_SO] Epoch 3/20 - Loss: 1.3703, Val Acc: 17.50%, Head: 21.88%, Med: 0.00%, Tail: 0.00%
+[FO_SO] Epoch 4/20 - Loss: 1.3070, Val Acc: 19.81%, Head: 24.76%, Med: 0.00%, Tail: 0.00%
+[FO_SO] Epoch 5/20 - Loss: 1.2606, Val Acc: 19.04%, Head: 23.80%, Med: 0.00%, Tail: 0.00%
+[FO_SO] Epoch 6/20 - Loss: 1.2391, Val Acc: 23.93%, Head: 29.91%, Med: 0.00%, Tail: 0.00%
+[FO_SO] Epoch 7/20 - Loss: 1.1940, Val Acc: 25.91%, Head: 32.39%, Med: 0.00%, Tail: 0.00%
+[FO_SO] Epoch 8/20 - Loss: 1.1678, Val Acc: 23.78%, Head: 29.73%, Med: 0.00%, Tail: 0.00%
+[FO_SO] Epoch 9/20 - Loss: 1.1409, Val Acc: 24.95%, Head: 31.19%, Med: 0.00%, Tail: 0.00%
+[FO_SO] Epoch 10/20 - Loss: 1.1081, Val Acc: 24.52%, Head: 30.65%, Med: 0.00%, Tail: 0.00%
+[FO_SO] Epoch 11/20 - Loss: 1.0968, Val Acc: 26.31%, Head: 32.89%, Med: 0.00%, Tail: 0.00%
+[FO_SO] Epoch 12/20 - Loss: 1.0636, Val Acc: 25.34%, Head: 31.68%, Med: 0.00%, Tail: 0.00%
+[FO_SO] Epoch 13/20 - Loss: 1.0462, Val Acc: 25.36%, Head: 31.70%, Med: 0.00%, Tail: 0.00%
+[FO_SO] Epoch 14/20 - Loss: 1.0158, Val Acc: 26.96%, Head: 33.70%, Med: 0.00%, Tail: 0.00%
+[FO_SO] Epoch 15/20 - Loss: 1.0042, Val Acc: 27.47%, Head: 34.34%, Med: 0.00%, Tail: 0.00%
+[FO_SO] Epoch 16/20 - Loss: 0.9836, Val Acc: 26.12%, Head: 32.65%, Med: 0.00%, Tail: 0.00%
+[FO_SO] Epoch 17/20 - Loss: 0.9707, Val Acc: 29.22%, Head: 36.52%, Med: 0.00%, Tail: 0.00%
+[FO_SO] Epoch 18/20 - Loss: 0.9537, Val Acc: 28.03%, Head: 35.04%, Med: 0.00%, Tail: 0.00%
+[FO_SO] Epoch 19/20 - Loss: 0.9552, Val Acc: 29.31%, Head: 36.64%, Med: 0.00%, Tail: 0.00%
+[FO_SO] Epoch 20/20 - Loss: 0.9464, Val Acc: 29.31%, Head: 36.64%, Med: 0.00%, Tail: 0.00%
+wandb: updating run metadata
+wandb: uploading output.log; uploading wandb-summary.json; uploading config.yaml
+wandb: uploading history steps 19-19, summary, console lines 20-20
+wandb: 
+wandb: Run history:
+wandb:        epoch ▁▁▂▂▂▃▃▄▄▄▅▅▅▆▆▇▇▇██
+wandb:    train/acc ▁▃▄▄▅▅▅▆▆▇▇▇▇▇██████
+wandb:   train/loss █▆▅▄▄▄▃▃▃▂▂▂▂▂▂▁▁▁▁▁
+wandb:      val/acc ▁▁▂▃▂▅▆▅▆▅▆▆▆▇▇▆█▇██
+wandb: val/head_acc ▁▁▂▃▃▅▆▅▆▅▆▆▆▇▇▆█▇██
+wandb:     val/loss ▇█▇▅▆▄▂▃▃▃▂▄▄▃▃▃▁▂▁▁
+wandb:  val/med_acc █▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: val/tail_acc ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: 
+wandb: Run summary:
+wandb:        epoch 20
+wandb:    train/acc 67.29002
+wandb:   train/loss 0.94645
+wandb:      val/acc 29.31
+wandb: val/head_acc 36.6375
+wandb:     val/loss 2.45771
+wandb:  val/med_acc 0
+wandb: val/tail_acc 0
+wandb: 
+wandb: 🚀 View run ViT_FO_SO_cifar10_imb0.01 at: https://wandb.ai/dcll-iiitd/Trinity-Benchmark/runs/9vsi7ld0
+wandb: ⭐️ View project at: https://wandb.ai/dcll-iiitd/Trinity-Benchmark
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20260905_102600-9vsi7ld0/logs

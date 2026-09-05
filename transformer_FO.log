@@ -1,0 +1,17 @@
+/home/gauranshi/miniconda3/lib/python3.12/site-packages/torch/cuda/__init__.py:182: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at /pytorch/c10/cuda/CUDAFunctions.cpp:119.)
+  return torch._C._cuda_getDeviceCount() > 0
+[*] Generated Long-Tailed CIFAR-10 (Imbalance: 0.01). Total train samples: 12406
+/home/gauranshi/miniconda3/lib/python3.12/site-packages/torch/nn/modules/transformer.py:392: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /home/gauranshi/.netrc.
+wandb: Currently logged in as: anant-jain (dcll-iiitd) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: setting up run 2m0gjrqk
+wandb: Tracking run with wandb version 0.28.2
+wandb: Run data is saved locally in /home/gauranshi/Trinity-opt-DSAA2026/wandb/run-20260905_120752-2m0gjrqk
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run ViT_FO_cifar10_imb0.01
+wandb: ⭐️ View project at https://wandb.ai/dcll-iiitd/Trinity-Benchmark
+wandb: 🚀 View run at https://wandb.ai/dcll-iiitd/Trinity-Benchmark/runs/2m0gjrqk
+/home/gauranshi/miniconda3/lib/python3.12/site-packages/torch/utils/data/dataloader.py:668: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
+  warnings.warn(warn_msg)
+[FO] Epoch 1/100 - Loss: 1.6940, Val Acc: 16.31%, Head: 20.31%, Med: 0.30%, Tail: 0.00%

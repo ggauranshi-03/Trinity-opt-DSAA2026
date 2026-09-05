@@ -1,0 +1,142 @@
+[*] Generated Long-Tailed CIFAR-100 (Imbalance: 0.005). Total train samples: 9502
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /home/gauranshi/.netrc.
+wandb: Currently logged in as: anant-jain (dcll-iiitd) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: setting up run kt7jmedd
+wandb: Tracking run with wandb version 0.28.2
+wandb: Run data is saved locally in /home/gauranshi/Trinity-opt-DSAA2026/wandb/run-20260905_073647-kt7jmedd
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run Ablation_SO_100ep
+wandb: ⭐️ View project at https://wandb.ai/dcll-iiitd/Trinity-Ablation
+wandb: 🚀 View run at https://wandb.ai/dcll-iiitd/Trinity-Ablation/runs/kt7jmedd
+sys:1: UserWarning: Full backward hook is firing when gradients are computed with respect to module outputs since no inputs require gradients. See https://docs.pytorch.org/docs/main/generated/torch.nn.Module.html#torch.nn.Module.register_full_backward_hook for more details.
+[SO] Epoch 1/100 - Loss: 3.4956, Val Acc: 7.90% (Time: 25.6s)
+[SO] Epoch 2/100 - Loss: 2.9541, Val Acc: 11.51% (Time: 28.6s)
+[SO] Epoch 3/100 - Loss: 2.6585, Val Acc: 14.55% (Time: 25.2s)
+[SO] Epoch 4/100 - Loss: 2.4506, Val Acc: 15.96% (Time: 28.7s)
+[SO] Epoch 5/100 - Loss: 2.2403, Val Acc: 17.92% (Time: 25.6s)
+[SO] Epoch 6/100 - Loss: 2.1006, Val Acc: 18.66% (Time: 29.0s)
+[SO] Epoch 7/100 - Loss: 1.9392, Val Acc: 20.29% (Time: 25.9s)
+[SO] Epoch 8/100 - Loss: 1.8090, Val Acc: 21.03% (Time: 28.2s)
+[SO] Epoch 9/100 - Loss: 1.6998, Val Acc: 22.81% (Time: 25.3s)
+[SO] Epoch 10/100 - Loss: 1.5992, Val Acc: 22.14% (Time: 28.4s)
+[SO] Epoch 11/100 - Loss: 1.5070, Val Acc: 22.31% (Time: 25.4s)
+[SO] Epoch 12/100 - Loss: 1.4005, Val Acc: 23.06% (Time: 27.9s)
+[SO] Epoch 13/100 - Loss: 1.3220, Val Acc: 23.48% (Time: 24.5s)
+[SO] Epoch 14/100 - Loss: 1.2323, Val Acc: 24.45% (Time: 27.6s)
+[SO] Epoch 15/100 - Loss: 1.1600, Val Acc: 24.44% (Time: 24.2s)
+[SO] Epoch 16/100 - Loss: 1.0676, Val Acc: 24.02% (Time: 26.8s)
+[SO] Epoch 17/100 - Loss: 0.9892, Val Acc: 24.12% (Time: 24.1s)
+[SO] Epoch 18/100 - Loss: 0.8970, Val Acc: 25.48% (Time: 27.7s)
+[SO] Epoch 19/100 - Loss: 0.8571, Val Acc: 25.51% (Time: 24.6s)
+[SO] Epoch 20/100 - Loss: 0.8082, Val Acc: 25.25% (Time: 27.0s)
+[SO] Epoch 21/100 - Loss: 0.7504, Val Acc: 26.04% (Time: 23.8s)
+[SO] Epoch 22/100 - Loss: 0.6943, Val Acc: 25.85% (Time: 26.7s)
+[SO] Epoch 23/100 - Loss: 0.6313, Val Acc: 24.82% (Time: 23.9s)
+[SO] Epoch 24/100 - Loss: 0.5659, Val Acc: 26.33% (Time: 27.0s)
+[SO] Epoch 25/100 - Loss: 0.5171, Val Acc: 25.70% (Time: 24.1s)
+[SO] Epoch 26/100 - Loss: 0.4849, Val Acc: 25.43% (Time: 27.4s)
+[SO] Epoch 27/100 - Loss: 0.4478, Val Acc: 25.59% (Time: 24.3s)
+[SO] Epoch 28/100 - Loss: 0.4039, Val Acc: 25.54% (Time: 26.6s)
+[SO] Epoch 29/100 - Loss: 0.3885, Val Acc: 25.52% (Time: 24.5s)
+[SO] Epoch 30/100 - Loss: 0.3536, Val Acc: 25.07% (Time: 27.9s)
+[SO] Epoch 31/100 - Loss: 0.3363, Val Acc: 25.69% (Time: 24.1s)
+[SO] Epoch 32/100 - Loss: 0.3003, Val Acc: 25.38% (Time: 28.3s)
+[SO] Epoch 33/100 - Loss: 0.3053, Val Acc: 26.20% (Time: 24.1s)
+[SO] Epoch 34/100 - Loss: 0.2628, Val Acc: 26.07% (Time: 27.0s)
+[SO] Epoch 35/100 - Loss: 0.2430, Val Acc: 27.19% (Time: 23.9s)
+[SO] Epoch 36/100 - Loss: 0.2266, Val Acc: 26.08% (Time: 27.9s)
+[SO] Epoch 37/100 - Loss: 0.2070, Val Acc: 26.47% (Time: 25.2s)
+[SO] Epoch 38/100 - Loss: 0.2024, Val Acc: 25.83% (Time: 27.7s)
+[SO] Epoch 39/100 - Loss: 0.1806, Val Acc: 25.75% (Time: 24.2s)
+[SO] Epoch 40/100 - Loss: 0.1797, Val Acc: 26.53% (Time: 27.7s)
+[SO] Epoch 41/100 - Loss: 0.1643, Val Acc: 26.20% (Time: 25.0s)
+[SO] Epoch 42/100 - Loss: 0.1695, Val Acc: 25.92% (Time: 27.7s)
+[SO] Epoch 43/100 - Loss: 0.1578, Val Acc: 26.03% (Time: 24.4s)
+[SO] Epoch 44/100 - Loss: 0.1338, Val Acc: 26.18% (Time: 27.9s)
+[SO] Epoch 45/100 - Loss: 0.1241, Val Acc: 25.92% (Time: 25.3s)
+[SO] Epoch 46/100 - Loss: 0.1225, Val Acc: 26.84% (Time: 28.1s)
+[SO] Epoch 47/100 - Loss: 0.1197, Val Acc: 26.53% (Time: 25.2s)
+[SO] Epoch 48/100 - Loss: 0.0999, Val Acc: 27.11% (Time: 28.0s)
+[SO] Epoch 49/100 - Loss: 0.1038, Val Acc: 26.05% (Time: 25.0s)
+[SO] Epoch 50/100 - Loss: 0.0975, Val Acc: 26.57% (Time: 27.9s)
+[SO] Epoch 51/100 - Loss: 0.0918, Val Acc: 25.99% (Time: 24.7s)
+[SO] Epoch 52/100 - Loss: 0.0872, Val Acc: 26.13% (Time: 27.7s)
+[SO] Epoch 53/100 - Loss: 0.0741, Val Acc: 26.11% (Time: 24.9s)
+[SO] Epoch 54/100 - Loss: 0.0716, Val Acc: 26.96% (Time: 27.5s)
+[SO] Epoch 55/100 - Loss: 0.0677, Val Acc: 26.47% (Time: 24.0s)
+[SO] Epoch 56/100 - Loss: 0.0596, Val Acc: 26.06% (Time: 26.8s)
+[SO] Epoch 57/100 - Loss: 0.0585, Val Acc: 26.72% (Time: 24.0s)
+[SO] Epoch 58/100 - Loss: 0.0525, Val Acc: 26.68% (Time: 26.8s)
+[SO] Epoch 59/100 - Loss: 0.0453, Val Acc: 26.67% (Time: 25.1s)
+[SO] Epoch 60/100 - Loss: 0.0372, Val Acc: 26.62% (Time: 28.1s)
+[SO] Epoch 61/100 - Loss: 0.0448, Val Acc: 26.44% (Time: 24.9s)
+[SO] Epoch 62/100 - Loss: 0.0334, Val Acc: 26.39% (Time: 28.0s)
+[SO] Epoch 63/100 - Loss: 0.0322, Val Acc: 26.89% (Time: 24.9s)
+[SO] Epoch 64/100 - Loss: 0.0301, Val Acc: 26.95% (Time: 27.9s)
+[SO] Epoch 65/100 - Loss: 0.0273, Val Acc: 27.06% (Time: 23.7s)
+[SO] Epoch 66/100 - Loss: 0.0223, Val Acc: 26.80% (Time: 27.4s)
+[SO] Epoch 67/100 - Loss: 0.0214, Val Acc: 26.77% (Time: 24.7s)
+[SO] Epoch 68/100 - Loss: 0.0177, Val Acc: 26.93% (Time: 27.8s)
+[SO] Epoch 69/100 - Loss: 0.0160, Val Acc: 26.65% (Time: 24.2s)
+[SO] Epoch 70/100 - Loss: 0.0156, Val Acc: 26.41% (Time: 27.0s)
+[SO] Epoch 71/100 - Loss: 0.0149, Val Acc: 26.45% (Time: 24.2s)
+[SO] Epoch 72/100 - Loss: 0.0127, Val Acc: 26.95% (Time: 26.8s)
+[SO] Epoch 73/100 - Loss: 0.0127, Val Acc: 26.91% (Time: 24.7s)
+[SO] Epoch 74/100 - Loss: 0.0113, Val Acc: 27.00% (Time: 27.5s)
+[SO] Epoch 75/100 - Loss: 0.0114, Val Acc: 27.05% (Time: 24.7s)
+[SO] Epoch 76/100 - Loss: 0.0088, Val Acc: 27.13% (Time: 26.9s)
+[SO] Epoch 77/100 - Loss: 0.0091, Val Acc: 27.13% (Time: 24.6s)
+[SO] Epoch 78/100 - Loss: 0.0071, Val Acc: 27.26% (Time: 26.8s)
+[SO] Epoch 79/100 - Loss: 0.0073, Val Acc: 27.14% (Time: 24.8s)
+[SO] Epoch 80/100 - Loss: 0.0054, Val Acc: 27.44% (Time: 26.9s)
+[SO] Epoch 81/100 - Loss: 0.0051, Val Acc: 27.05% (Time: 24.1s)
+[SO] Epoch 82/100 - Loss: 0.0048, Val Acc: 27.21% (Time: 26.8s)
+[SO] Epoch 83/100 - Loss: 0.0045, Val Acc: 27.11% (Time: 24.6s)
+[SO] Epoch 84/100 - Loss: 0.0057, Val Acc: 26.78% (Time: 27.5s)
+[SO] Epoch 85/100 - Loss: 0.0041, Val Acc: 27.14% (Time: 24.4s)
+[SO] Epoch 86/100 - Loss: 0.0033, Val Acc: 26.97% (Time: 27.5s)
+[SO] Epoch 87/100 - Loss: 0.0042, Val Acc: 27.04% (Time: 24.3s)
+[SO] Epoch 88/100 - Loss: 0.0038, Val Acc: 26.96% (Time: 29.1s)
+[SO] Epoch 89/100 - Loss: 0.0036, Val Acc: 27.17% (Time: 24.1s)
+[SO] Epoch 90/100 - Loss: 0.0032, Val Acc: 27.18% (Time: 27.3s)
+[SO] Epoch 91/100 - Loss: 0.0029, Val Acc: 27.35% (Time: 24.4s)
+[SO] Epoch 92/100 - Loss: 0.0036, Val Acc: 27.28% (Time: 27.1s)
+[SO] Epoch 93/100 - Loss: 0.0034, Val Acc: 27.42% (Time: 24.3s)
+[SO] Epoch 94/100 - Loss: 0.0030, Val Acc: 27.12% (Time: 27.6s)
+[SO] Epoch 95/100 - Loss: 0.0036, Val Acc: 27.36% (Time: 24.1s)
+[SO] Epoch 96/100 - Loss: 0.0038, Val Acc: 27.20% (Time: 27.6s)
+[SO] Epoch 97/100 - Loss: 0.0031, Val Acc: 27.32% (Time: 24.7s)
+[SO] Epoch 98/100 - Loss: 0.0035, Val Acc: 27.26% (Time: 27.4s)
+[SO] Epoch 99/100 - Loss: 0.0038, Val Acc: 27.31% (Time: 24.0s)
+[SO] Epoch 100/100 - Loss: 0.0030, Val Acc: 27.08% (Time: 26.7s)
+wandb: updating run metadata
+wandb: uploading output.log; uploading wandb-summary.json; uploading config.yaml
+wandb: uploading output.log; uploading config.yaml
+wandb: uploading history steps 99-99, summary, console lines 100-100
+wandb: 
+wandb: Run history:
+wandb:        epoch ▁▁▁▂▂▂▂▂▂▃▃▃▃▃▄▄▄▄▄▄▅▅▅▅▅▆▆▆▆▇▇▇▇▇▇█████
+wandb: time/epoch_s ▃█▃█▄▂▆▁▇▆▂▂▁▇▁▁▃▇▃▇▃▇▇▇▆▃▇▁▅▂▂▅▅▆▁▂▆▂▆▅
+wandb:    train/acc ▁▁▂▃▃▄▄▅▅▆▇▇▇▇▇▇▇▇▇█████████████████████
+wandb:   train/loss █▇▅▅▄▄▄▄▃▃▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:      val/acc ▁▅▆▆▆▇▇▇▇▇▇█▇▇▇▇▇▇▇▇███▇▇██▇████████████
+wandb: val/head_acc ▁▆▆▇▇▇▇▇▇▇▇█▇▇██▇█▇▇████████████████████
+wandb:     val/loss ▃▂▁▁▂▂▃▃▃▃▄▄▄▅▅▅▅▆▆▆▇▇▇▇▇███████████████
+wandb:  val/med_acc ▁▃▅▆▇▇▇▇▇▆▇▇▇▇▇███▇▇▇█████████▇█████████
+wandb: val/tail_acc ▁▂▂▄▄▅▆▆▆█▇▆▆▆▇█▇▇▆▆▆▇▆▇▇▇▆▇▇▇██▇▇▇▇▇▇▇▇
+wandb: 
+wandb: Run summary:
+wandb:        epoch 100
+wandb: time/epoch_s 26.65107
+wandb:    train/acc 99.9579
+wandb:   train/loss 0.00304
+wandb:      val/acc 27.08
+wandb: val/head_acc 56.03333
+wandb:     val/loss 7.17335
+wandb:  val/med_acc 27
+wandb: val/tail_acc 4.87179
+wandb: 
+wandb: 🚀 View run Ablation_SO_100ep at: https://wandb.ai/dcll-iiitd/Trinity-Ablation/runs/kt7jmedd
+wandb: ⭐️ View project at: https://wandb.ai/dcll-iiitd/Trinity-Ablation
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20260905_073647-kt7jmedd/logs

@@ -1,0 +1,51 @@
+[*] Generated Long-Tailed CIFAR-10 (Imbalance: 0.01). Total train samples: 12406
+/home/gauranshi/miniconda3/lib/python3.12/site-packages/torch/nn/modules/transformer.py:392: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /home/gauranshi/.netrc.
+wandb: Currently logged in as: anant-jain (dcll-iiitd) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: setting up run qxsq8upu
+wandb: Tracking run with wandb version 0.28.2
+wandb: Run data is saved locally in /home/gauranshi/Trinity-opt-DSAA2026/wandb/run-20260905_103152-qxsq8upu
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run ViT_Full_cifar10_imb0.01
+wandb: ⭐️ View project at https://wandb.ai/dcll-iiitd/Trinity-Benchmark
+wandb: 🚀 View run at https://wandb.ai/dcll-iiitd/Trinity-Benchmark/runs/qxsq8upu
+sys:1: UserWarning: Full backward hook is firing when gradients are computed with respect to module outputs since no inputs require gradients. See https://docs.pytorch.org/docs/main/generated/torch.nn.Module.html#torch.nn.Module.register_full_backward_hook for more details.
+[Full] Epoch 1/20 - Loss: 1.6762, Val Acc: 13.23%, Head: 16.54%, Med: 0.00%, Tail: 0.00%
+[Full] Epoch 2/20 - Loss: 1.4234, Val Acc: 17.69%, Head: 22.11%, Med: 0.00%, Tail: 0.00%
+[Full] Epoch 3/20 - Loss: 1.3486, Val Acc: 20.00%, Head: 25.00%, Med: 0.00%, Tail: 0.00%
+[Full] Epoch 4/20 - Loss: 1.2909, Val Acc: 21.66%, Head: 27.07%, Med: 0.00%, Tail: 0.00%
+[Full] Epoch 5/20 - Loss: 1.2512, Val Acc: 21.20%, Head: 26.50%, Med: 0.00%, Tail: 0.00%
+[Full] Epoch 6/20 - Loss: 1.2064, Val Acc: 23.19%, Head: 28.99%, Med: 0.00%, Tail: 0.00%
+[Full] Epoch 7/20 - Loss: 1.1750, Val Acc: 22.67%, Head: 28.34%, Med: 0.00%, Tail: 0.00%
+[Full] Epoch 8/20 - Loss: 1.1400, Val Acc: 24.41%, Head: 30.51%, Med: 0.00%, Tail: 0.00%
+[Full] Epoch 9/20 - Loss: 1.1207, Val Acc: 25.21%, Head: 31.51%, Med: 0.00%, Tail: 0.00%
+[Full] Epoch 10/20 - Loss: 1.0837, Val Acc: 24.45%, Head: 30.56%, Med: 0.00%, Tail: 0.00%
+[Full] Epoch 11/20 - Loss: 1.0634, Val Acc: 25.88%, Head: 32.35%, Med: 0.00%, Tail: 0.00%
+[Full] Epoch 12/20 - Loss: 1.0463, Val Acc: 26.82%, Head: 33.52%, Med: 0.00%, Tail: 0.00%
+[Full] Epoch 13/20 - Loss: 1.0238, Val Acc: 29.82%, Head: 37.27%, Med: 0.00%, Tail: 0.00%
+[Full] Epoch 14/20 - Loss: 1.0077, Val Acc: 26.58%, Head: 33.23%, Med: 0.00%, Tail: 0.00%
+[Full] Epoch 15/20 - Loss: 0.9757, Val Acc: 28.39%, Head: 35.49%, Med: 0.00%, Tail: 0.00%
+[Full] Epoch 16/20 - Loss: 0.9692, Val Acc: 28.77%, Head: 35.96%, Med: 0.00%, Tail: 0.00%
+[Full] Epoch 17/20 - Loss: 0.9476, Val Acc: 29.60%, Head: 37.00%, Med: 0.00%, Tail: 0.00%
+Traceback (most recent call last):
+  File "/home/gauranshi/Trinity-opt-DSAA2026/train_transformer_dsaa.py", line 142, in <module>
+    main()
+  File "/home/gauranshi/Trinity-opt-DSAA2026/train_transformer_dsaa.py", line 85, in main
+    loss.backward()
+  File "/home/gauranshi/miniconda3/lib/python3.12/site-packages/torch/_tensor.py", line 625, in backward
+    torch.autograd.backward(
+  File "/home/gauranshi/miniconda3/lib/python3.12/site-packages/torch/autograd/__init__.py", line 354, in backward
+    _engine_run_backward(
+  File "/home/gauranshi/miniconda3/lib/python3.12/site-packages/torch/autograd/graph.py", line 841, in _engine_run_backward
+    return Variable._execution_engine.run_backward(  # Calls into the C++ engine to run the backward pass
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+torch.AcceleratorError: CUDA error: unknown error
+Search for `cudaErrorUnknown' in https://docs.nvidia.com/cuda/cuda-runtime-api/group__CUDART__TYPES.html for more information.
+CUDA kernel errors might be asynchronously reported at some other API call, so the stacktrace below might be incorrect.
+For debugging consider passing CUDA_LAUNCH_BLOCKING=1
+Compile with `TORCH_USE_CUDA_DSA` to enable device-side assertions.
+
+[1;34mwandb[0m: 
+[1;34mwandb[0m: 🚀 View run [33mViT_Full_cifar10_imb0.01[0m at: [34mhttps://wandb.ai/dcll-iiitd/Trinity-Benchmark/runs/qxsq8upu[0m
+[1;34mwandb[0m: Find logs at: [1;35mwandb/run-20260905_103152-qxsq8upu/logs[0m
