@@ -7,7 +7,7 @@ import time
 import argparse
 import wandb
 from datasets_lt import get_dataloaders, PerClassEvaluator
-from run_full_ablation import Trinity
+from trinity_optimizer import Trinity
 
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 

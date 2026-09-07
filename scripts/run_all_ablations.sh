@@ -1,4 +1,6 @@
 #!/bin/bash
+# Move to repository root regardless of where script is called from
+cd "$(dirname "$0")/.." || exit 1
 mkdir -p logs
 
 # Run first batch of 4 variants on the 4 GPUs

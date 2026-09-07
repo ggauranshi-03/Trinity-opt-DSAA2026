@@ -1,3 +1,18 @@
-wandb/
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# PyTorch and experiment artifacts
 data/
-_pycache__/
+wandb/
+*.pt
+*.pth
+*.tar
+
+# OS and Editor files
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+*.swp

@@ -1,4 +1,6 @@
 #!/bin/bash
+# Move to repository root regardless of where script is called from
+cd "$(dirname "$0")/.." || exit 1
 mkdir -p logs
 
 echo "Starting Transformer on GPU 1..."
