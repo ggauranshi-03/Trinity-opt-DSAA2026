@@ -1,0 +1,22 @@
+==========================================
+SLURM_CLUSTER_NAME = paramprabha
+SLURM_JOB_ACCOUNT = nsmext
+SLURM_JOB_ID = 639541
+SLURM_JOB_NAME = trinity_ablation
+SLURM_JOB_NODELIST = rpgpu025
+SLURM_JOB_USER = ldls-iiitd
+SLURM_JOB_UID = 52385
+SLURM_JOB_PARTITION = gpu
+SLURM_TASK_PID = 2818300
+SLURM_SUBMIT_DIR = /scratch/ldls-iiitd/group1_dir/Trinity-opt-DSAA2026
+SLURM_CPUS_ON_NODE = 1
+SLURM_NTASKS = 
+SLURM_TASK_PID = 2818300
+==========================================
+Starting FO on GPU 0...
+Starting ZO on GPU 1...
+Starting SO on GPU 2...
+FO finished. Starting FO_ZO on GPU 0...
+ZO finished. Starting FO_SO on GPU 1...
+SO finished. Starting Full on GPU 2...
+All Transformer ablation studies (100 epochs) have completed!

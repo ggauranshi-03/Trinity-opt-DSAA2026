@@ -1,20 +1,147 @@
-/home/gauranshi/miniconda3/lib/python3.12/site-packages/torch/cuda/__init__.py:182: UserWarning: CUDA initialization: CUDA unknown error - this may be due to an incorrectly set up environment, e.g. changing env variable CUDA_VISIBLE_DEVICES after program start. Setting the available devices to be zero. (Triggered internally at /pytorch/c10/cuda/CUDAFunctions.cpp:119.)
-  return torch._C._cuda_getDeviceCount() > 0
+/scratch/ldls-iiitd/group1_dir/dcll/Slakshna/Bhaskera/.venv/lib/python3.11/site-packages/torchvision/datasets/cifar.py:83: VisibleDeprecationWarning: dtype(): align should be passed as Python or NumPy boolean but got `align=0`. Did you mean to pass a tuple to create a subarray type? (Deprecated NumPy 2.4)
+  entry = pickle.load(f, encoding="latin1")
 [*] Generated Long-Tailed CIFAR-10 (Imbalance: 0.01). Total train samples: 12406
-/home/gauranshi/miniconda3/lib/python3.12/site-packages/torch/nn/modules/transformer.py:392: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+/scratch/ldls-iiitd/group1_dir/dcll/Slakshna/Bhaskera/.venv/lib/python3.11/site-packages/torch/utils/data/dataloader.py:624: UserWarning: This DataLoader will create 2 worker processes in total. Our suggested max number of worker in current system is 1, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
   warnings.warn(
-wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /home/gauranshi/.netrc.
-wandb: Currently logged in as: anant-jain (dcll-iiitd) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
-wandb: setting up run 2m0gjrqk
-wandb: Tracking run with wandb version 0.28.2
-wandb: Run data is saved locally in /home/gauranshi/Trinity-opt-DSAA2026/wandb/run-20260905_120752-2m0gjrqk
+/scratch/ldls-iiitd/group1_dir/dcll/Slakshna/Bhaskera/.venv/lib/python3.11/site-packages/torch/nn/modules/transformer.py:385: UserWarning: enable_nested_tensor is True, but self.use_nested_tensor is False because encoder_layer.norm_first was True
+  warnings.warn(
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /home/ldls-iiitd/.netrc.
+wandb: W&B API key is configured. Use `wandb login --relogin` to force relogin
+wandb: setting up run ik15gh5m
+wandb: Tracking run with wandb version 0.28.1
+wandb: Run data is saved locally in /scratch/ldls-iiitd/group1_dir/Trinity-opt-DSAA2026/wandb/run-20260906_235605-ik15gh5m
 wandb: Run `wandb offline` to turn off syncing.
 wandb: Syncing run ViT_FO_cifar10_imb0.01
-wandb: ⭐️ View project at https://wandb.ai/dcll-iiitd/Trinity-Benchmark
-wandb: 🚀 View run at https://wandb.ai/dcll-iiitd/Trinity-Benchmark/runs/2m0gjrqk
-/home/gauranshi/miniconda3/lib/python3.12/site-packages/torch/utils/data/dataloader.py:668: UserWarning: 'pin_memory' argument is set as true but no accelerator is found, then device pinned memory won't be used.
-  warnings.warn(warn_msg)
-[FO] Epoch 1/100 - Loss: 1.6940, Val Acc: 16.31%, Head: 20.31%, Med: 0.30%, Tail: 0.00%
-[FO] Epoch 2/100 - Loss: 1.4571, Val Acc: 18.19%, Head: 22.74%, Med: 0.00%, Tail: 0.00%
-[FO] Epoch 3/100 - Loss: 1.3553, Val Acc: 20.48%, Head: 25.60%, Med: 0.00%, Tail: 0.00%
-[FO] Epoch 4/100 - Loss: 1.3135, Val Acc: 21.19%, Head: 26.49%, Med: 0.00%, Tail: 0.00%
+wandb: ⭐️ View project at https://wandb.ai/somshekar24157-indraprastha-institute-of-information-tec/Trinity-Benchmark
+wandb: 🚀 View run at https://wandb.ai/somshekar24157-indraprastha-institute-of-information-tec/Trinity-Benchmark/runs/ik15gh5m
+/scratch/ldls-iiitd/group1_dir/dcll/Slakshna/Bhaskera/.venv/lib/python3.11/site-packages/torch/utils/data/dataloader.py:624: UserWarning: This DataLoader will create 2 worker processes in total. Our suggested max number of worker in current system is 1, which is smaller than what this DataLoader is going to create. Please be aware that excessive worker creation might get DataLoader running slow or even freeze, lower the worker number to avoid potential slowness/freeze if necessary.
+  warnings.warn(
+[FO] Epoch 1/100 - Loss: 1.7413, Val Acc: 19.54%, Head: 24.43%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 2/100 - Loss: 1.4571, Val Acc: 17.59%, Head: 21.99%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 3/100 - Loss: 1.3587, Val Acc: 18.40%, Head: 23.00%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 4/100 - Loss: 1.3398, Val Acc: 19.03%, Head: 23.79%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 5/100 - Loss: 1.3088, Val Acc: 19.91%, Head: 24.89%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 6/100 - Loss: 1.2836, Val Acc: 23.45%, Head: 29.31%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 7/100 - Loss: 1.2481, Val Acc: 23.72%, Head: 29.65%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 8/100 - Loss: 1.2171, Val Acc: 23.72%, Head: 29.65%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 9/100 - Loss: 1.2304, Val Acc: 22.91%, Head: 28.64%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 10/100 - Loss: 1.2049, Val Acc: 24.56%, Head: 30.70%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 11/100 - Loss: 1.1962, Val Acc: 23.16%, Head: 28.95%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 12/100 - Loss: 1.1852, Val Acc: 24.17%, Head: 30.21%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 13/100 - Loss: 1.1525, Val Acc: 26.81%, Head: 33.51%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 14/100 - Loss: 1.1425, Val Acc: 25.45%, Head: 31.81%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 15/100 - Loss: 1.1368, Val Acc: 24.55%, Head: 30.69%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 16/100 - Loss: 1.1297, Val Acc: 25.92%, Head: 32.40%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 17/100 - Loss: 1.1351, Val Acc: 26.57%, Head: 33.21%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 18/100 - Loss: 1.1062, Val Acc: 26.28%, Head: 32.85%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 19/100 - Loss: 1.1010, Val Acc: 25.27%, Head: 31.59%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 20/100 - Loss: 1.0750, Val Acc: 26.24%, Head: 32.80%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 21/100 - Loss: 1.0533, Val Acc: 27.22%, Head: 34.02%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 22/100 - Loss: 1.0496, Val Acc: 26.55%, Head: 33.19%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 23/100 - Loss: 1.0359, Val Acc: 28.36%, Head: 35.45%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 24/100 - Loss: 1.0274, Val Acc: 26.05%, Head: 32.56%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 25/100 - Loss: 1.0216, Val Acc: 26.27%, Head: 32.84%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 26/100 - Loss: 1.0022, Val Acc: 26.52%, Head: 33.15%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 27/100 - Loss: 1.0091, Val Acc: 28.83%, Head: 36.04%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 28/100 - Loss: 0.9931, Val Acc: 29.97%, Head: 37.46%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 29/100 - Loss: 0.9814, Val Acc: 29.01%, Head: 36.26%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 30/100 - Loss: 0.9739, Val Acc: 29.45%, Head: 36.81%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 31/100 - Loss: 0.9749, Val Acc: 30.23%, Head: 37.79%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 32/100 - Loss: 0.9564, Val Acc: 29.31%, Head: 36.64%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 33/100 - Loss: 0.9589, Val Acc: 30.15%, Head: 37.69%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 34/100 - Loss: 0.9486, Val Acc: 28.51%, Head: 35.64%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 35/100 - Loss: 0.9440, Val Acc: 28.72%, Head: 35.90%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 36/100 - Loss: 0.9439, Val Acc: 31.05%, Head: 38.81%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 37/100 - Loss: 0.9304, Val Acc: 30.41%, Head: 38.01%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 38/100 - Loss: 0.9216, Val Acc: 31.46%, Head: 39.33%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 39/100 - Loss: 0.9150, Val Acc: 31.13%, Head: 38.91%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 40/100 - Loss: 0.9147, Val Acc: 32.03%, Head: 40.04%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 41/100 - Loss: 0.9103, Val Acc: 32.50%, Head: 40.62%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 42/100 - Loss: 0.8934, Val Acc: 30.80%, Head: 38.50%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 43/100 - Loss: 0.8920, Val Acc: 34.66%, Head: 43.33%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 44/100 - Loss: 0.8905, Val Acc: 33.07%, Head: 41.34%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 45/100 - Loss: 0.8734, Val Acc: 32.50%, Head: 40.62%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 46/100 - Loss: 0.8819, Val Acc: 33.31%, Head: 41.64%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 47/100 - Loss: 0.8721, Val Acc: 34.07%, Head: 42.59%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 48/100 - Loss: 0.8618, Val Acc: 35.27%, Head: 44.09%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 49/100 - Loss: 0.8478, Val Acc: 32.08%, Head: 40.10%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 50/100 - Loss: 0.8369, Val Acc: 32.32%, Head: 40.40%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 51/100 - Loss: 0.8389, Val Acc: 32.80%, Head: 41.00%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 52/100 - Loss: 0.8306, Val Acc: 34.95%, Head: 43.69%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 53/100 - Loss: 0.8251, Val Acc: 33.92%, Head: 42.40%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 54/100 - Loss: 0.8198, Val Acc: 33.72%, Head: 42.15%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 55/100 - Loss: 0.8117, Val Acc: 35.62%, Head: 44.52%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 56/100 - Loss: 0.8005, Val Acc: 33.90%, Head: 42.38%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 57/100 - Loss: 0.7975, Val Acc: 35.68%, Head: 44.60%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 58/100 - Loss: 0.7900, Val Acc: 37.04%, Head: 46.30%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 59/100 - Loss: 0.7891, Val Acc: 34.88%, Head: 43.60%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 60/100 - Loss: 0.7814, Val Acc: 33.89%, Head: 42.36%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 61/100 - Loss: 0.7750, Val Acc: 38.04%, Head: 47.55%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 62/100 - Loss: 0.7649, Val Acc: 37.75%, Head: 47.19%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 63/100 - Loss: 0.7698, Val Acc: 39.05%, Head: 48.80%, Med: 0.05%, Tail: 0.00%
+[FO] Epoch 64/100 - Loss: 0.7554, Val Acc: 36.60%, Head: 45.75%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 65/100 - Loss: 0.7469, Val Acc: 36.71%, Head: 45.89%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 66/100 - Loss: 0.7432, Val Acc: 40.53%, Head: 50.62%, Med: 0.15%, Tail: 0.00%
+[FO] Epoch 67/100 - Loss: 0.7412, Val Acc: 38.73%, Head: 48.40%, Med: 0.05%, Tail: 0.00%
+[FO] Epoch 68/100 - Loss: 0.7374, Val Acc: 40.81%, Head: 51.01%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 69/100 - Loss: 0.7292, Val Acc: 38.63%, Head: 48.27%, Med: 0.05%, Tail: 0.00%
+[FO] Epoch 70/100 - Loss: 0.7267, Val Acc: 38.20%, Head: 47.75%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 71/100 - Loss: 0.7254, Val Acc: 39.52%, Head: 49.40%, Med: 0.00%, Tail: 0.00%
+[FO] Epoch 72/100 - Loss: 0.7180, Val Acc: 39.54%, Head: 49.40%, Med: 0.10%, Tail: 0.00%
+[FO] Epoch 73/100 - Loss: 0.7152, Val Acc: 39.48%, Head: 49.29%, Med: 0.25%, Tail: 0.00%
+[FO] Epoch 74/100 - Loss: 0.7103, Val Acc: 40.61%, Head: 50.73%, Med: 0.15%, Tail: 0.00%
+[FO] Epoch 75/100 - Loss: 0.7122, Val Acc: 39.98%, Head: 49.96%, Med: 0.05%, Tail: 0.00%
+[FO] Epoch 76/100 - Loss: 0.7082, Val Acc: 40.63%, Head: 50.76%, Med: 0.10%, Tail: 0.00%
+[FO] Epoch 77/100 - Loss: 0.6904, Val Acc: 40.90%, Head: 51.08%, Med: 0.20%, Tail: 0.00%
+[FO] Epoch 78/100 - Loss: 0.6927, Val Acc: 39.61%, Head: 49.46%, Med: 0.20%, Tail: 0.00%
+[FO] Epoch 79/100 - Loss: 0.6835, Val Acc: 41.17%, Head: 51.31%, Med: 0.60%, Tail: 0.00%
+[FO] Epoch 80/100 - Loss: 0.6842, Val Acc: 40.68%, Head: 50.80%, Med: 0.20%, Tail: 0.00%
+[FO] Epoch 81/100 - Loss: 0.6829, Val Acc: 40.61%, Head: 50.64%, Med: 0.50%, Tail: 0.00%
+[FO] Epoch 82/100 - Loss: 0.6788, Val Acc: 41.03%, Head: 51.24%, Med: 0.20%, Tail: 0.00%
+[FO] Epoch 83/100 - Loss: 0.6790, Val Acc: 41.68%, Head: 52.08%, Med: 0.10%, Tail: 0.00%
+[FO] Epoch 84/100 - Loss: 0.6739, Val Acc: 42.19%, Head: 52.61%, Med: 0.50%, Tail: 0.00%
+[FO] Epoch 85/100 - Loss: 0.6744, Val Acc: 41.25%, Head: 51.48%, Med: 0.35%, Tail: 0.00%
+[FO] Epoch 86/100 - Loss: 0.6571, Val Acc: 41.76%, Head: 52.04%, Med: 0.65%, Tail: 0.00%
+[FO] Epoch 87/100 - Loss: 0.6584, Val Acc: 41.70%, Head: 51.98%, Med: 0.60%, Tail: 0.00%
+[FO] Epoch 88/100 - Loss: 0.6584, Val Acc: 41.42%, Head: 51.51%, Med: 1.05%, Tail: 0.00%
+[FO] Epoch 89/100 - Loss: 0.6596, Val Acc: 41.72%, Head: 52.00%, Med: 0.60%, Tail: 0.00%
+[FO] Epoch 90/100 - Loss: 0.6495, Val Acc: 42.26%, Head: 52.56%, Med: 1.05%, Tail: 0.00%
+[FO] Epoch 91/100 - Loss: 0.6539, Val Acc: 42.14%, Head: 52.48%, Med: 0.80%, Tail: 0.00%
+[FO] Epoch 92/100 - Loss: 0.6541, Val Acc: 42.12%, Head: 52.41%, Med: 0.95%, Tail: 0.00%
+[FO] Epoch 93/100 - Loss: 0.6545, Val Acc: 42.03%, Head: 52.38%, Med: 0.65%, Tail: 0.00%
+[FO] Epoch 94/100 - Loss: 0.6476, Val Acc: 42.15%, Head: 52.51%, Med: 0.70%, Tail: 0.00%
+[FO] Epoch 95/100 - Loss: 0.6494, Val Acc: 42.14%, Head: 52.49%, Med: 0.75%, Tail: 0.00%
+[FO] Epoch 96/100 - Loss: 0.6467, Val Acc: 42.14%, Head: 52.49%, Med: 0.75%, Tail: 0.00%
+[FO] Epoch 97/100 - Loss: 0.6550, Val Acc: 42.28%, Head: 52.66%, Med: 0.75%, Tail: 0.00%
+[FO] Epoch 98/100 - Loss: 0.6484, Val Acc: 42.22%, Head: 52.59%, Med: 0.75%, Tail: 0.00%
+[FO] Epoch 99/100 - Loss: 0.6464, Val Acc: 42.23%, Head: 52.60%, Med: 0.75%, Tail: 0.00%
+[FO] Epoch 100/100 - Loss: 0.6459, Val Acc: 42.19%, Head: 52.55%, Med: 0.75%, Tail: 0.00%
+wandb: updating run metadata
+wandb: uploading output.log; uploading wandb-summary.json; uploading config.yaml
+wandb: uploading output.log; uploading config.yaml
+wandb: uploading data
+wandb: 
+wandb: Run history:
+wandb:        epoch ▁▁▂▂▂▂▂▂▂▂▃▃▃▃▃▄▄▄▄▄▅▅▅▅▅▆▆▆▆▆▇▇▇▇▇▇████
+wandb:    train/acc ▁▁▂▂▂▃▃▃▄▄▅▅▅▅▅▆▆▆▆▆▆▇▇▇▇▇▇▇▇▇▇▇████████
+wandb:   train/loss ██▇▆▆▆▆▅▄▄▄▄▄▄▄▄▃▃▃▃▃▃▂▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁
+wandb:      val/acc ▁▂▂▂▃▃▃▃▃▄▄▄▄▄▄▅▆▅▆▅▆▆▅▆▆▇▇█▇▇███▇██████
+wandb: val/head_acc ▂▁▁▃▃▄▃▄▄▄▃▅▅▄▄▅▅▅▆▅▆▆▆▆▆▇▆▇▇█▇█████████
+wandb:     val/loss █▆▇▇▆▇▆▅▅▅▄▄▄▅▅▄▃▄▄▃▃▂▂▂▃▁▂▂▂▂▂▁▁▁▁▁▁▁▁▁
+wandb:  val/med_acc ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▂▁▃▂▁▂▂▂▅█▇▆
+wandb: val/tail_acc ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: 
+wandb: Run summary:
+wandb:        epoch 100
+wandb:    train/acc 77.72046
+wandb:   train/loss 0.64591
+wandb:      val/acc 42.19
+wandb: val/head_acc 52.55
+wandb:     val/loss 1.9549
+wandb:  val/med_acc 0.75
+wandb: val/tail_acc 0
+wandb: 
+wandb: 🚀 View run ViT_FO_cifar10_imb0.01 at: https://wandb.ai/somshekar24157-indraprastha-institute-of-information-tec/Trinity-Benchmark/runs/ik15gh5m
+wandb: ⭐️ View project at: https://wandb.ai/somshekar24157-indraprastha-institute-of-information-tec/Trinity-Benchmark
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20260906_235605-ik15gh5m/logs
