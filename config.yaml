@@ -1,0 +1,63 @@
+# Shared experiment configuration for the Trinity optimizer comparison study.
+# All training scripts (train_resnet18_dsaa.py, train_transformer_dsaa.py,
+# train_wide_resnet_dsaa.py) read hyperparameters from this file instead of
+# hardcoding them, so every architecture is compared under identical settings.
+
+dataset:
+  name: cifar10          # cifar10 | cifar100 (Long-Tailed variant, IF = imb_factor)
+  imb_factor: 0.01        # 0.01 -> imbalance factor 100 (img_max * 0.01^(...))
+  batch_size: 128
+  num_workers: 2
+
+training:
+  epochs: 200
+  grad_clip_norm: 1.0
+  seed: 42
+  lr_schedule: cosine     # CosineAnnealingLR over `epochs`
+
+optimizers:
+  adam:
+    lr: 0.001
+    betas: [0.9, 0.999]
+    eps: 1.0e-8
+    weight_decay: 1.0e-4
+
+  rmsprop:
+    lr: 0.001
+    alpha: 0.99
+    eps: 1.0e-8
+    momentum: 0.0
+    weight_decay: 1.0e-4
+
+  sgd:
+    lr: 0.1
+    momentum: 0.9
+    nesterov: true
+    weight_decay: 5.0e-4
+
+  trinity:
+    lr: 0.001
+    betas: [0.9, 0.999]
+    eps: 1.0e-8
+    weight_decay: 1.0e-4
+    damping: 0.01
+    kfac_stat_interval: 10
+    kfac_inv_interval: 100
+    kfac_decay: 0.95
+    max_kfac_dim: 2400
+    sensor_interval: 100
+    sensor_probes: 4
+    sensor_nblocks: 2
+    sensor_eps: 0.01
+    ema_alpha: 0.7
+    rho_lo: 0.15
+    rho_hi: 0.35
+    dwell_time: 500
+    beta_max: 0.3
+    escape_nu_thr: 0.75
+    escape_gamma_g: 0.3
+    escape_r: 0.001
+    escape_lock: 200
+    use_gc: true
+    use_so: true
+    use_zo: true

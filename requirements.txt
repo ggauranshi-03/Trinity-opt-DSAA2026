@@ -2,11 +2,11 @@
 torch>=2.0.0
 torchvision>=0.15.0
 
-# Experiment Tracking & Optimization Sweeps
+# Experiment Tracking
 wandb>=0.15.0
-optuna>=3.0.0
 
 # Numerical, Visualization & System Utilities
 numpy>=1.22.0
 matplotlib>=3.5.0
 psutil>=5.9.0
+PyYAML>=6.0
