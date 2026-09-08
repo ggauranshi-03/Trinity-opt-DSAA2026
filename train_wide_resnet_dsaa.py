@@ -43,8 +43,9 @@ def main():
 
     optimizer, scheduler, needs_closure = build_optimizer(args.optimizer, model, cfg, epochs)
 
-    run = wandb.init(project="Trinity-Benchmark",
-                      name=f"WideResNet_{args.optimizer}_{ds_cfg['name']}_imb{ds_cfg['imb_factor']}",
+    run = wandb.init(project=f"{cfg['wandb']['project']}-wideresnet",
+                      group=f"{ds_cfg['name']}_imb{ds_cfg['imb_factor']}",
+                      name=args.optimizer,
                       config={**vars(args), **ds_cfg, **tr_cfg, 'optimizer': args.optimizer})
 
     for epoch in range(epochs):

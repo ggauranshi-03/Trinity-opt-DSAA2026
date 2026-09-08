@@ -3,6 +3,12 @@
 # train_wide_resnet_dsaa.py) read hyperparameters from this file instead of
 # hardcoding them, so every architecture is compared under identical settings.
 
+wandb:
+  # Base project name. Each training script appends "-{model}" (e.g.
+  # "trinity-optimizer-comparison-resnet18") so that one wandb project holds every
+  # optimizer's run for a given model+dataset, all directly comparable in one place.
+  project: trinity-optimizer-comparison
+
 dataset:
   name: cifar10          # cifar10 | cifar100 (Long-Tailed variant, IF = imb_factor)
   imb_factor: 0.01        # 0.01 -> imbalance factor 100 (img_max * 0.01^(...))
