@@ -49,7 +49,7 @@ def build_optimizer(name, model, cfg, epochs):
             kfac_stat_interval=p.get('kfac_stat_interval', 10),
             kfac_inv_interval=p.get('kfac_inv_interval', 100),
             kfac_decay=p.get('kfac_decay', 0.95),
-            max_kfac_dim=p.get('max_kfac_dim', 2400),
+            max_kfac_dim=p.get('max_kfac_dim', 4800),
             sensor_interval=p.get('sensor_interval', 100),
             sensor_probes=p.get('sensor_probes', 4),
             sensor_nblocks=p.get('sensor_nblocks', 2),
@@ -70,5 +70,17 @@ def build_optimizer(name, model, cfg, epochs):
     else:
         raise ValueError(f"Unknown optimizer '{name}'")
 
-    scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=epochs)
+    warmup_epochs = cfg.get('training', {}).get('warmup_epochs', 0)
+    if warmup_epochs > 0:
+        warmup_scheduler = torch.optim.lr_scheduler.LinearLR(
+            optimizer, start_factor=0.01, end_factor=1.0, total_iters=warmup_epochs
+        )
+        cosine_scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(
+            optimizer, T_max=max(epochs - warmup_epochs, 1), eta_min=1e-6
+        )
+        scheduler = torch.optim.lr_scheduler.SequentialLR(
+            optimizer, schedulers=[warmup_scheduler, cosine_scheduler], milestones=[warmup_epochs]
+        )
+    else:
+        scheduler = torch.optim.lr_scheduler.CosineAnnealingLR(optimizer, T_max=epochs)
     return optimizer, scheduler, needs_closure

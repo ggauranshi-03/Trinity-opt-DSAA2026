@@ -28,7 +28,7 @@ class Trinity(torch.optim.Optimizer):
 
     def __init__(self, model, lr=1e-3, betas=(0.9, 0.999), eps=1e-8, weight_decay=1e-4,
                  damping=1e-2, kfac_stat_interval=10, kfac_inv_interval=100, kfac_decay=0.95,
-                 max_kfac_dim=2400,
+                 max_kfac_dim=4800,
                  sensor_interval=100, sensor_probes=4, sensor_nblocks=2, sensor_eps=1e-2,
                  ema_alpha=0.7, rho_lo=0.15, rho_hi=0.35, dwell_time=500, beta_max=0.3,
                  escape_nu_thr=0.75, escape_gamma_g=0.3, escape_r=1e-3, escape_lock=200,

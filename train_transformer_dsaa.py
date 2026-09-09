@@ -12,6 +12,48 @@ from optimizer_factory import load_config, build_optimizer, OPTIMIZER_CHOICES
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
+class MultiheadSelfAttention(nn.Module):
+    def __init__(self, embed_dim=768, num_heads=12):
+        super().__init__()
+        self.embed_dim = embed_dim
+        self.num_heads = num_heads
+        self.head_dim = embed_dim // num_heads
+        assert self.head_dim * num_heads == embed_dim, "embed_dim must be divisible by num_heads"
+
+        # Explicit linear modules so Trinity discovers and preconditions Q, K, V, and Out
+        self.q_proj = nn.Linear(embed_dim, embed_dim)
+        self.k_proj = nn.Linear(embed_dim, embed_dim)
+        self.v_proj = nn.Linear(embed_dim, embed_dim)
+        self.out_proj = nn.Linear(embed_dim, embed_dim)
+
+    def forward(self, x):
+        B, S, D = x.shape
+        q = self.q_proj(x).view(B, S, self.num_heads, self.head_dim).transpose(1, 2)
+        k = self.k_proj(x).view(B, S, self.num_heads, self.head_dim).transpose(1, 2)
+        v = self.v_proj(x).view(B, S, self.num_heads, self.head_dim).transpose(1, 2)
+
+        out = torch.nn.functional.scaled_dot_product_attention(q, k, v)
+        out = out.transpose(1, 2).reshape(B, S, D)
+        return self.out_proj(out)
+
+
+class TransformerBlock(nn.Module):
+    def __init__(self, embed_dim=768, num_heads=12, dim_feedforward=3072):
+        super().__init__()
+        self.norm1 = nn.LayerNorm(embed_dim)
+        self.self_attn = MultiheadSelfAttention(embed_dim, num_heads)
+        self.norm2 = nn.LayerNorm(embed_dim)
+        self.linear1 = nn.Linear(embed_dim, dim_feedforward)
+        self.activation = nn.GELU()
+        self.linear2 = nn.Linear(dim_feedforward, embed_dim)
+
+    def forward(self, x):
+        # norm_first (Pre-LN)
+        x = x + self.self_attn(self.norm1(x))
+        x = x + self.linear2(self.activation(self.linear1(self.norm2(x))))
+        return x
+
+
 class CIFAR100MTransformer(nn.Module):
     def __init__(self, num_classes=10):
         super().__init__()
@@ -21,16 +63,13 @@ class CIFAR100MTransformer(nn.Module):
         self.patch_embed = nn.Conv2d(3, self.embed_dim, kernel_size=self.patch_size, stride=self.patch_size)
         self.cls_token = nn.Parameter(torch.zeros(1, 1, self.embed_dim))
         self.pos_embed = nn.Parameter(torch.zeros(1, 64 + 1, self.embed_dim))
+        nn.init.trunc_normal_(self.pos_embed, std=0.02)
+        nn.init.trunc_normal_(self.cls_token, std=0.02)
 
-        encoder_layer = nn.TransformerEncoderLayer(
-            d_model=self.embed_dim,
-            nhead=12,
-            dim_feedforward=3072,
-            activation="gelu",
-            batch_first=True,
-            norm_first=True
-        )
-        self.transformer = nn.TransformerEncoder(encoder_layer, num_layers=12)
+        self.blocks = nn.ModuleList([
+            TransformerBlock(embed_dim=self.embed_dim, num_heads=12, dim_feedforward=3072)
+            for _ in range(12)
+        ])
 
         self.norm = nn.LayerNorm(self.embed_dim)
         self.head = nn.Linear(self.embed_dim, num_classes)
@@ -41,7 +80,8 @@ class CIFAR100MTransformer(nn.Module):
         cls_tokens = self.cls_token.expand(B, -1, -1)
         x = torch.cat((cls_tokens, x), dim=1)
         x = x + self.pos_embed
-        x = self.transformer(x)
+        for block in self.blocks:
+            x = block(x)
         x = self.norm(x[:, 0])
         return self.head(x)
 

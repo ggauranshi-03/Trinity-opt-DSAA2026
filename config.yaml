@@ -7,7 +7,7 @@ wandb:
   # Base project name. Each training script appends "-{model}" (e.g.
   # "trinity-optimizer-comparison-resnet18") so that one wandb project holds every
   # optimizer's run for a given model+dataset, all directly comparable in one place.
-  project: trinity-optimizer-comparison-200
+  project: wideresnet-trinity-optimizer-comparison-200
 
 dataset:
   name: cifar10          # cifar10 | cifar100 (Long-Tailed variant, IF = imb_factor)
@@ -16,10 +16,11 @@ dataset:
   num_workers: 2
 
 training:
-  epochs: 20
+  epochs: 200
   grad_clip_norm: 1.0
   seed: 42
   lr_schedule: cosine     # CosineAnnealingLR over `epochs`
+  warmup_epochs: 5        # 5 epochs linear warmup for transformer and representation stability
 
 optimizers:
   adam:
@@ -53,10 +54,9 @@ optimizers:
     # d_max. Measured SO-eligible share of trackable params at each setting:
     #   2400 -> ResNet-18 36.6% | WRN-101-2 33.8% | ViT 11.2%
     #   4800 -> ResNet-18  100% | WRN-101-2 77.3% | ViT  100%
-    # At 2400 the ViT's 768<->3072 MLP layers are all excluded, i.e. ~89% of it is
-    # never preconditioned (exactly what note N10 warns about). The paper plan asks
-    # for d_max "per arch"; raise this to >=4800 unless memory forbids it.
-    max_kfac_dim: 2400
+    # At 2400 the ViT's 768<->3072 MLP layers and ResNet-18 layer4 convs are excluded.
+    # Setting max_kfac_dim to 4800 enables 100% of ResNet-18 and 100% of ViT layers.
+    max_kfac_dim: 4800
     sensor_interval: 100
     sensor_probes: 4
     sensor_nblocks: 2
