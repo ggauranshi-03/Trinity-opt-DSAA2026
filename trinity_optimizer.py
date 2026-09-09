@@ -85,6 +85,21 @@ class Trinity(torch.optim.Optimizer):
         self._collecting = True  # F_collect: gates KFAC stat hooks off during ZO probing
         self._rr_ptr = 0
 
+        # Diagnostics: cumulative counters since the last get_diagnostics() call, so the
+        # training loop can log, per epoch, which of the three paths (plain AdamW /
+        # K-FAC-preconditioned / ZO escape-perturbation) blocks are actually taking,
+        # and how the grafting scale (direction-from-active, magnitude-from-shadow
+        # ratio) is behaving. Without this the only visibility from outside is the
+        # loss curve, which conflates all of these together.
+        self._diag_blocks_probed = 0
+        self._diag_escape_fires = 0
+        self._diag_kfac_inv_success = 0
+        self._diag_kfac_inv_fail = 0
+        self._diag_scale_sum = 0.0
+        self._diag_scale_count = 0
+        self._diag_scale_min = None
+        self._diag_scale_max = None
+
         self._m_A = {}
         self._m_G = {}
         self._kA = {}
@@ -362,6 +377,7 @@ class Trinity(torch.optim.Optimizer):
                 st['m'].mul_(0.5)
 
         info['lock'] = self.escape_lock
+        self._diag_escape_fires += 1
 
     # ---------------------------------------------------------------- K-FAC (Alg. 1, Phase 3)
 
@@ -418,8 +434,9 @@ class Trinity(torch.optim.Optimizer):
                 G_inv = torch.linalg.inv((G + dG * torch.eye(G.size(0), device=G.device)).cpu()).to(G.device)
                 self._Ai[mid] = A_inv
                 self._Gi[mid] = G_inv
+                self._diag_kfac_inv_success += 1
             except RuntimeError:
-                pass
+                self._diag_kfac_inv_fail += 1
 
     def _precond(self, mid, m, gw, gb):
         Ai, Gi = self._Ai[mid], self._Gi[mid]
@@ -509,6 +526,7 @@ class Trinity(torch.optim.Optimizer):
                 info['rho_ema'] = self.ema_alpha * info['rho_ema'] + (1 - self.ema_alpha) * rho_hat
                 info['nu'] = nu_hat
                 S_t.append(mid)
+                self._diag_blocks_probed += 1
             if self.use_so:
                 self._controller(t)
 
@@ -566,6 +584,12 @@ class Trinity(torch.optim.Optimizer):
             else:
                 scale = 1.0
 
+            scale_val = scale.item() if torch.is_tensor(scale) else scale
+            self._diag_scale_sum += scale_val
+            self._diag_scale_count += 1
+            self._diag_scale_min = scale_val if self._diag_scale_min is None else min(self._diag_scale_min, scale_val)
+            self._diag_scale_max = scale_val if self._diag_scale_max is None else max(self._diag_scale_max, scale_val)
+
             w.data.add_(-lr * (scale * dw_act + self.weight_decay * w.data))
             if b is not None and db_act is not None:
                 b.data.add_(-lr * (scale * db_act.to(b.dtype) + self.weight_decay * b.data))
@@ -579,3 +603,57 @@ class Trinity(torch.optim.Optimizer):
             p.data.add_(-lr * (d + self.weight_decay * p.data))
 
         return None
+
+    def get_diagnostics(self, reset=True):
+        """Which of the three paths blocks are actually taking, right now.
+
+        - mode counts: a LIVE snapshot of how many blocks are currently sitting in
+          FO (plain AdamW) vs SO (K-FAC-preconditioned) mode.
+        - escape_fires / blocks_probed / kfac_inv_*: CUMULATIVE counts of events
+          since the last call (the "third path" — ZO perturbation kicks — plus how
+          much sensing/inversion activity actually happened), so a training loop
+          can call this once per epoch and log a per-epoch rate.
+        - grafting_scale_*: the direction-from-active/magnitude-from-shadow ratio
+          actually applied at the update step, aggregated over the same window.
+          Near 1.0 means "active mode's own update already had shadow-AdamW-like
+          magnitude"; far from 1.0 means grafting is doing real rescaling work
+          (or, if consistently tiny, that SO-mode updates are being crushed).
+
+        Call this once per epoch (reset=True, the default) so the numbers describe
+        "this epoch," not a running average since training started.
+        """
+        n_blocks = len(self._block_state)
+        n_so = sum(1 for i in self._block_state.values() if i['mode'] == 'SO')
+        rho_vals = [i['rho_ema'] for i in self._block_state.values() if i['so_eligible']]
+        nu_vals = [i['nu'] for i in self._block_state.values()]
+
+        diag = {
+            'n_blocks': n_blocks,
+            'n_so': n_so,
+            'n_fo': n_blocks - n_so,
+            'so_frac': n_so / max(n_blocks, 1),
+            'rho_mean': sum(rho_vals) / len(rho_vals) if rho_vals else float('nan'),
+            'rho_min': min(rho_vals) if rho_vals else float('nan'),
+            'rho_max': max(rho_vals) if rho_vals else float('nan'),
+            'nu_mean': sum(nu_vals) / len(nu_vals) if nu_vals else float('nan'),
+            'blocks_probed': self._diag_blocks_probed,
+            'escape_fires': self._diag_escape_fires,
+            'kfac_inv_success': self._diag_kfac_inv_success,
+            'kfac_inv_fail': self._diag_kfac_inv_fail,
+            'grafting_scale_mean': (self._diag_scale_sum / self._diag_scale_count
+                                     if self._diag_scale_count else float('nan')),
+            'grafting_scale_min': self._diag_scale_min if self._diag_scale_min is not None else float('nan'),
+            'grafting_scale_max': self._diag_scale_max if self._diag_scale_max is not None else float('nan'),
+        }
+
+        if reset:
+            self._diag_blocks_probed = 0
+            self._diag_escape_fires = 0
+            self._diag_kfac_inv_success = 0
+            self._diag_kfac_inv_fail = 0
+            self._diag_scale_sum = 0.0
+            self._diag_scale_count = 0
+            self._diag_scale_min = None
+            self._diag_scale_max = None
+
+        return diag

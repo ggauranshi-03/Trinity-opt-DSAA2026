@@ -110,7 +110,7 @@ def main():
                     f"{val_metrics.get('medium_shot_acc', 0):.2f},"
                     f"{val_metrics.get('few_shot_acc', 0):.2f},{epoch_time:.1f}\n")
 
-        wandb.log({
+        log_dict = {
             'epoch': epoch + 1,
             'train/loss': train_loss,
             'train/acc': train_acc,
@@ -119,7 +119,10 @@ def main():
             'val/head_acc': val_metrics.get('many_shot_acc', 0),
             'val/med_acc': val_metrics.get('medium_shot_acc', 0),
             'val/tail_acc': val_metrics.get('few_shot_acc', 0),
-        })
+        }
+        if hasattr(optimizer, 'get_diagnostics'):
+            log_dict.update({f'trinity/{k}': v for k, v in optimizer.get_diagnostics().items()})
+        wandb.log(log_dict)
 
     wandb.finish()
 
