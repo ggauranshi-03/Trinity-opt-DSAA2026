@@ -50,6 +50,12 @@ optimizers:
     kfac_stat_interval: 10
     kfac_inv_interval: 100
     kfac_decay: 0.95
+    # d_max. Measured SO-eligible share of trackable params at each setting:
+    #   2400 -> ResNet-18 36.6% | WRN-101-2 33.8% | ViT 11.2%
+    #   4800 -> ResNet-18  100% | WRN-101-2 77.3% | ViT  100%
+    # At 2400 the ViT's 768<->3072 MLP layers are all excluded, i.e. ~89% of it is
+    # never preconditioned (exactly what note N10 warns about). The paper plan asks
+    # for d_max "per arch"; raise this to >=4800 unless memory forbids it.
     max_kfac_dim: 2400
     sensor_interval: 100
     sensor_probes: 4
@@ -60,6 +66,7 @@ optimizers:
     rho_hi: 0.35
     dwell_time: 500
     beta_max: 0.3
+    grad_ema_alpha: 0.99      # EMA coeff for the gbar gradient-norm reference (escape)
     escape_nu_thr: 0.75
     escape_gamma_g: 0.3
     escape_r: 0.001
@@ -67,3 +74,6 @@ optimizers:
     use_gc: true
     use_so: true
     use_zo: true
+    use_escape: true
+    use_grafting: true
+    force_so_always: false

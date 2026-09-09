@@ -32,8 +32,9 @@ class Trinity(torch.optim.Optimizer):
                  sensor_interval=100, sensor_probes=4, sensor_nblocks=2, sensor_eps=1e-2,
                  ema_alpha=0.7, rho_lo=0.15, rho_hi=0.35, dwell_time=500, beta_max=0.3,
                  escape_nu_thr=0.75, escape_gamma_g=0.3, escape_r=1e-3, escape_lock=200,
-                 use_gc=True, use_so=True, use_zo=True, force_so_always=False,
-                 delta=1e-12):
+                 grad_ema_alpha=0.99,
+                 use_gc=True, use_so=True, use_zo=True, use_escape=True, use_grafting=True,
+                 force_so_always=False, delta=1e-12):
         params = [p for p in model.parameters() if p.requires_grad]
         defaults = dict(lr=lr)
         super().__init__(params, defaults)
@@ -59,6 +60,14 @@ class Trinity(torch.optim.Optimizer):
         self.dwell_time = dwell_time
         self.beta_max = beta_max
 
+        # Separate, slower coefficient for the gradient-norm reference gbar. The
+        # pseudocode writes only "gbar <- EMA(||g||)" with no coefficient, and reusing
+        # alpha_ema=0.7 gives gbar an effective window of ~3 steps -- so the escape
+        # condition ||g|| <= gamma_g*gbar (gamma_g=0.3) would require a >3x gradient
+        # collapse within ~3 steps and would essentially never fire. gbar is meant to
+        # be a stable "typical recent gradient scale" reference, hence a long horizon.
+        self.grad_ema_alpha = grad_ema_alpha
+
         self.escape_nu_thr = escape_nu_thr
         self.escape_gamma_g = escape_gamma_g
         self.escape_r = escape_r
@@ -67,6 +76,8 @@ class Trinity(torch.optim.Optimizer):
         self.use_gc = use_gc
         self.use_so = use_so
         self.use_zo = use_zo
+        self.use_escape = use_escape
+        self.use_grafting = use_grafting
         self.force_so_always = force_so_always
         self.delta = delta
 
@@ -82,49 +93,51 @@ class Trinity(torch.optim.Optimizer):
         self._Gi = {}
         self._mods = {}
 
+        # Block discovery (which Linear/Conv2d weight+bias pairs form a "block") is
+        # independent of use_so: ZO sensing/escape and gradient centralization are all
+        # block-oriented and must work even when K-FAC itself is disabled (e.g. the
+        # "escape only" ablation variant). Only the A/G-capturing hooks (needed
+        # exclusively by K-FAC) are gated by use_so.
+        self._discover_blocks()
         if self.use_so:
             self._register_hooks()
 
         self._kfac_ids = set()
         for m in self._mods.values():
             self._kfac_ids.add(id(m.weight))
-            if m.bias is not None:
+            if self._block_bias(m) is not None:
                 self._kfac_ids.add(id(m.bias))
+
+        # SO-eligible = within the K-FAC factor-dimension budget (d_max). Blocks that
+        # exceed it are permanently FO (N10): excluded from the controller's candidate
+        # pool/budget AND from the ZO sensing round-robin, not just from inversion.
+        self._so_eligible_ids = (
+            [mid for mid, m in self._mods.items() if self._is_so_eligible(m)]
+            if self.use_so else []
+        )
+        so_eligible_set = set(self._so_eligible_ids)
 
         self._block_state = {}
         for mid, m in self._mods.items():
-            d_l = m.weight.numel() + (m.bias.numel() if m.bias is not None else 0)
+            bb = self._block_bias(m)
+            d_l = m.weight.numel() + (bb.numel() if bb is not None else 0)
+            eligible = mid in so_eligible_set
             self._block_state[mid] = dict(
-                mode='SO' if (self.use_so and self.force_so_always) else 'FO',
-                rho_ema=1.0, nu=0.0, dwell=0, lock=0, grad_norm_ema=0.0,
+                mode='SO' if (self.use_so and self.force_so_always and eligible) else 'FO',
+                so_eligible=eligible,
+                rho_ema=1.0, nu=0.0, last_switch=0, lock=0, grad_norm_ema=0.0,
                 d_l=d_l,
-                shadow_w={}, shadow_b={} if m.bias is not None else None,
-                active_w={}, active_b={} if m.bias is not None else None,
+                shadow_w={}, shadow_b={} if bb is not None else None,
+                active_w={}, active_b={} if bb is not None else None,
             )
 
         self._other_state = {}
 
         if self.use_so and len(self._mods) > 0:
-            def _kfac_factor_dims(m):
-                # A-side (input) factor dim, G-side (output) factor dim, as formed in
-                # _update_kfac_stats: for Linear these are in/out features (+1 for bias
-                # on the A side); for Conv2d, in_channels*kH*kW and out_channels.
-                if isinstance(m, nn.Linear):
-                    a_dim = m.weight.shape[1] + (1 if m.bias is not None else 0)
-                    g_dim = m.weight.shape[0]
-                else:
-                    a_dim = m.weight.shape[1] * m.weight.shape[2] * m.weight.shape[3] + \
-                        (1 if m.bias is not None else 0)
-                    g_dim = m.weight.shape[0]
-                return a_dim, g_dim
-
-            total = sum(m.weight.numel() + (m.bias.numel() if m.bias is not None else 0)
+            total = sum(m.weight.numel() + self._bias_numel(m)
                         for m in self._mods.values())
-            excluded = 0
-            for m in self._mods.values():
-                a_dim, g_dim = _kfac_factor_dims(m)
-                if a_dim > self.max_kfac_dim or g_dim > self.max_kfac_dim:
-                    excluded += m.weight.numel() + (m.bias.numel() if m.bias is not None else 0)
+            excluded = sum(m.weight.numel() + self._bias_numel(m)
+                           for mid, m in self._mods.items() if mid not in so_eligible_set)
             frac = excluded / max(total, 1)
             if frac > 0:
                 print(f"[Trinity] d_max={self.max_kfac_dim}: {frac:.3%} of trackable "
@@ -132,13 +145,48 @@ class Trinity(torch.optim.Optimizer):
 
     # ------------------------------------------------------------------ hooks
 
-    def _register_hooks(self):
+    def _discover_blocks(self):
         for m in self.model.modules():
             if isinstance(m, (nn.Linear, nn.Conv2d)):
-                mid = id(m)
-                self._mods[mid] = m
-                m.register_forward_hook(self._fwd(mid))
-                m.register_full_backward_hook(self._bwd(mid))
+                self._mods[id(m)] = m
+
+    def _register_hooks(self):
+        for mid, m in self._mods.items():
+            m.register_forward_hook(self._fwd(mid))
+            m.register_full_backward_hook(self._bwd(mid))
+
+    def _block_bias(self, m):
+        """The block's bias, or None if absent or frozen.
+
+        A frozen bias is not part of the optimizable block (it is not even in the
+        optimizer's param list): it must not be perturbed by the sensor or the escape
+        actuator, must not contribute a ones-column to the A factor, and must not
+        receive an update. Every site that asks "does this block have a bias?" must
+        agree, or the A factor's dimension and the preconditioner's input disagree.
+        """
+        b = m.bias
+        return b if (b is not None and b.requires_grad) else None
+
+    def _bias_numel(self, m):
+        b = self._block_bias(m)
+        return b.numel() if b is not None else 0
+
+    def _kfac_factor_dims(self, m):
+        # A-side (input) and G-side (output) Kronecker factor dims, as formed in
+        # _update_kfac_stats: for Linear these are in/out features (+1 for bias on
+        # the A side); for Conv2d, in_channels*kH*kW and out_channels.
+        if isinstance(m, nn.Linear):
+            a_dim = m.weight.shape[1] + (1 if self._block_bias(m) is not None else 0)
+            g_dim = m.weight.shape[0]
+        else:
+            a_dim = m.weight.shape[1] * m.weight.shape[2] * m.weight.shape[3] + \
+                (1 if self._block_bias(m) is not None else 0)
+            g_dim = m.weight.shape[0]
+        return a_dim, g_dim
+
+    def _is_so_eligible(self, m):
+        a_dim, g_dim = self._kfac_factor_dims(m)
+        return a_dim <= self.max_kfac_dim and g_dim <= self.max_kfac_dim
 
     def _fwd(self, mid):
         def h(mod, inp, out):
@@ -178,7 +226,7 @@ class Trinity(torch.optim.Optimizer):
 
     def _zo_probe(self, mid, closure):
         m = self._mods[mid]
-        w, b = m.weight, m.bias
+        w, b = m.weight, self._block_bias(m)
 
         self._collecting = False
         self._set_probe_mode(True)
@@ -222,15 +270,23 @@ class Trinity(torch.optim.Optimizer):
 
     # -------------------------------------------------------------- CONTROLLER (Alg. 3)
 
-    def _controller(self):
+    def _controller(self, t):
         if self.force_so_always:
             return
-        B = len(self._mods)
+        eligible_ids = self._so_eligible_ids
+        B = len(eligible_ids)
+        if B == 0:
+            return
         cand = set()
-        for mid in self._mods:
+        for mid in eligible_ids:
             info = self._block_state[mid]
-            info['dwell'] += 1
-            if info['dwell'] < self.dwell_time:
+            # tau_dwell is measured in TRAINING STEPS, not controller invocations.
+            # The controller only runs every sensor_interval steps, so incrementing a
+            # counter per invocation would make tau_dwell=500 mean 500*100 = 50k steps
+            # -- longer than an entire 200-300 epoch run on LT-CIFAR-10, and no block
+            # would ever switch to SO. The C3 sweep {0,100,500,2000} is only coherent
+            # in steps.
+            if t - info['last_switch'] < self.dwell_time:
                 if info['mode'] == 'SO':
                     cand.add(mid)
                 continue
@@ -243,12 +299,31 @@ class Trinity(torch.optim.Optimizer):
         if len(cand) > budget:
             cand = set(sorted(cand, key=lambda m: self._block_state[m]['rho_ema'])[:budget])
 
-        for mid in self._mods:
+        for mid in eligible_ids:
             info = self._block_state[mid]
             new_mode = 'SO' if mid in cand else 'FO'
             if new_mode != info['mode']:
-                info['dwell'] = 0
+                if new_mode == 'SO':
+                    self._warm_start_active(info)
+                info['last_switch'] = t
                 info['mode'] = new_mode
+
+    def _clone_state(self, src):
+        if not src:
+            return {}
+        return {'step': src['step'], 'm': src['m'].clone(), 'v': src['v'].clone()}
+
+    def _warm_start_active(self, info):
+        # FO->SO transition: snapshot the shadow AdamW moments into a FRESH,
+        # independent dict for the active (K-FAC) Adam state (N8: "starts warm
+        # rather than from zero"). Must be an independent copy, not an alias —
+        # aliasing the two dicts would let the active branch's later updates
+        # (on preconditioned gradients) silently corrupt the shadow AdamW state,
+        # which is required to always track plain-AdamW-only statistics for
+        # grafting.
+        info['active_w'] = self._clone_state(info['shadow_w'])
+        if info['shadow_b'] is not None:
+            info['active_b'] = self._clone_state(info['shadow_b'])
 
     # ---------------------------------------------------------- ZO escape actuator
 
@@ -259,7 +334,7 @@ class Trinity(torch.optim.Optimizer):
         if info['nu'] < self.escape_nu_thr:
             return
         m = self._mods[mid]
-        w, b = m.weight, m.bias
+        w, b = m.weight, self._block_bias(m)
         if w.grad is None:
             return
         gn2 = w.grad.data.norm().item() ** 2
@@ -269,15 +344,18 @@ class Trinity(torch.optim.Optimizer):
         if grad_norm > self.escape_gamma_g * info['grad_norm_ema'] + 1e-12:
             return
 
-        theta_norm_w = w.data.norm().item()
-        u = torch.randn_like(w)
-        u = u / (u.norm() + 1e-12)
-        w.data.add_(self.escape_r * theta_norm_w * u)
+        # u ~ Uniform(S^{d_l-1}) over the JOINT [w; b] block, scaled by the block's
+        # combined parameter norm (Alg. 1, lines 22-23) — one direction/norm across
+        # the whole block, not two independent per-tensor perturbations.
+        uw = torch.randn_like(w)
+        ub = torch.randn_like(b) if b is not None else None
+        u_norm = self._frob(uw, ub).clamp_min(1e-12)
+        theta_norm = self._frob(w.data, b.data if b is not None else None)
+        step_scale = (self.escape_r * theta_norm / u_norm).item()
+
+        w.data.add_(step_scale * uw)
         if b is not None:
-            theta_norm_b = b.data.norm().item()
-            ub = torch.randn_like(b)
-            ub = ub / (ub.norm() + 1e-12)
-            b.data.add_(self.escape_r * theta_norm_b * ub)
+            b.data.add_(step_scale * ub)
 
         for st in (info['shadow_w'], info['shadow_b'], info['active_w'], info['active_b']):
             if st and 'm' in st:
@@ -297,7 +375,7 @@ class Trinity(torch.optim.Optimizer):
             if isinstance(m, nn.Linear):
                 A = A_raw.view(-1, A_raw.size(-1))
                 G = G_raw.view(-1, G_raw.size(-1))
-                if m.bias is not None:
+                if self._block_bias(m) is not None:
                     A = torch.cat([A, A.new_ones(A.size(0), 1)], dim=1)
             else:
                 B = A_raw.size(0)
@@ -305,7 +383,7 @@ class Trinity(torch.optim.Optimizer):
                                 stride=m.stride, dilation=m.dilation).to(A_raw.device)
                 Auf = unf(A_raw)
                 A = Auf.permute(0, 2, 1).reshape(-1, Auf.size(1))
-                if m.bias is not None:
+                if self._block_bias(m) is not None:
                     A = torch.cat([A, A.new_ones(A.size(0), 1)], dim=1)
                 G = (G_raw.view(B, G_raw.size(1), -1).permute(0, 2, 1).reshape(-1, G_raw.size(1)))
 
@@ -345,19 +423,19 @@ class Trinity(torch.optim.Optimizer):
 
     def _precond(self, mid, m, gw, gb):
         Ai, Gi = self._Ai[mid], self._Gi[mid]
-        if isinstance(m, nn.Linear):
-            if gb is not None:
-                C = torch.cat([gw, gb.unsqueeze(1)], dim=1)
-                P = Gi @ C @ Ai
-                return P[:, :-1], P[:, -1]
-            return Gi @ gw @ Ai, None
+        # The A factor carries an appended ones-column iff the MODULE has a bias (see
+        # _update_kfac_stats), so this branch must key off m.bias, NOT off gb: if a
+        # bias exists but has no grad (a frozen bias), keying off gb picks the
+        # no-bias path and Ai's dimension no longer matches -> shape error.
+        Gw = gw if isinstance(m, nn.Linear) else gw.view(gw.size(0), -1)
+        if self._block_bias(m) is not None:
+            gb_col = gb.unsqueeze(1) if gb is not None else Gw.new_zeros(Gw.size(0), 1)
+            P = Gi @ torch.cat([Gw, gb_col], dim=1) @ Ai
+            pw = P[:, :-1]
+            pb = P[:, -1] if gb is not None else None
         else:
-            Gw = gw.view(gw.size(0), -1)
-            if gb is not None:
-                C = torch.cat([Gw, gb.unsqueeze(1)], dim=1)
-                P = Gi @ C @ Ai
-                return P[:, :-1].view_as(gw), P[:, -1]
-            return (Gi @ Gw @ Ai).view_as(gw), None
+            pw, pb = Gi @ Gw @ Ai, None
+        return (pw if isinstance(m, nn.Linear) else pw.reshape_as(gw)), pb
 
     # ----------------------------------------------------------------- AdamW core
 
@@ -393,17 +471,35 @@ class Trinity(torch.optim.Optimizer):
         t = self._step
         lr = self.param_groups[0]['lr']
 
-        # gradient centralization on raw gradients (ndim >= 2)
+        # Gradient centralization (Yong et al.) on the RAW gradient, restricted to the
+        # tracked Linear/Conv2d weight blocks (ndim >= 2 block weights) — not every
+        # ndim>=2 parameter in the model, which would also catch non-layer tensors
+        # like a ViT's cls_token/pos_embed that GC was never intended for.
         if self.use_gc:
-            for p in self.param_groups[0]['params']:
-                if p.grad is not None and p.grad.dim() >= 2:
-                    g = p.grad.data
+            for m in self._mods.values():
+                w = m.weight
+                if w.grad is not None and w.grad.dim() >= 2:
+                    g = w.grad.data
                     g.sub_(g.mean(dim=tuple(range(1, g.dim())), keepdim=True))
 
         # ---- Phase 1: ZO sensing (round-robin, every sensor_interval steps) ----
+        # Sensing itself only needs use_zo: nu_hat feeds the escape actuator even
+        # when K-FAC (use_so) is disabled (e.g. the "escape only" ablation variant).
+        # The CONTROLLER (which turns SO mode on/off) only makes sense when use_so.
         S_t = []
-        if self.use_zo and self.use_so and t % self.sensor_interval == 0 and len(self._mods) > 0:
-            block_ids = list(self._mods.keys())
+        if self.use_zo and t % self.sensor_interval == 0 and len(self._mods) > 0:
+            # Which blocks to rotate through: nu_hat (escape trigger) is meaningful for
+            # EVERY block, rho_hat (controller) only for SO-eligible ones. Sensor
+            # overhead is fixed by sensor_nblocks regardless of which blocks are picked,
+            # so when escape is on we rotate over all blocks -- restricting to
+            # SO-eligible blocks would save nothing while leaving d_max-excluded blocks
+            # (e.g. ResNet-18's layer4, ~75% of its parameters) unable to ever escape.
+            if self.use_escape:
+                block_ids = list(self._mods.keys())
+            elif self.use_so:
+                block_ids = self._so_eligible_ids
+            else:
+                block_ids = []
             n_blocks = len(block_ids)
             for _ in range(min(self.sensor_nblocks, n_blocks)):
                 mid = block_ids[self._rr_ptr % n_blocks]
@@ -413,10 +509,11 @@ class Trinity(torch.optim.Optimizer):
                 info['rho_ema'] = self.ema_alpha * info['rho_ema'] + (1 - self.ema_alpha) * rho_hat
                 info['nu'] = nu_hat
                 S_t.append(mid)
-            self._controller()
+            if self.use_so:
+                self._controller(t)
 
         # ---- Phase 2: ZO escape actuator + lockout/grad-norm EMA bookkeeping ----
-        if self.use_zo:
+        if self.use_escape:
             for mid in S_t:
                 self._escape_check(mid)
         for mid, m in self._mods.items():
@@ -425,9 +522,11 @@ class Trinity(torch.optim.Optimizer):
             gn2 = 0.0
             if m.weight.grad is not None:
                 gn2 += m.weight.grad.data.norm().item() ** 2
-            if m.bias is not None and m.bias.grad is not None:
-                gn2 += m.bias.grad.data.norm().item() ** 2
-            info['grad_norm_ema'] = self.ema_alpha * info['grad_norm_ema'] + (1 - self.ema_alpha) * (gn2 ** 0.5)
+            bb = self._block_bias(m)
+            if bb is not None and bb.grad is not None:
+                gn2 += bb.grad.data.norm().item() ** 2
+            a = self.grad_ema_alpha
+            info['grad_norm_ema'] = a * info['grad_norm_ema'] + (1 - a) * (gn2 ** 0.5)
 
         # ---- Phase 3: K-FAC factors + gated inverses ----
         if self.use_so and t % self.kfac_stat_interval == 0:
@@ -438,7 +537,7 @@ class Trinity(torch.optim.Optimizer):
         # ---- Phase 4: update engine with grafting ----
         for mid, m in self._mods.items():
             info = self._block_state[mid]
-            w, b = m.weight, m.bias
+            w, b = m.weight, self._block_bias(m)
             if w.grad is None:
                 continue
             gw = w.grad.data.clone()
@@ -452,13 +551,20 @@ class Trinity(torch.optim.Optimizer):
                 dw_act = self._adam_delta(pw, info['active_w'])
                 db_act = self._adam_delta(pb, info['active_b']) if pb is not None else None
             else:
+                # FO mode: just reuse the shadow AdamW delta this step. Do NOT alias
+                # info['active_w'] to info['shadow_w'] here — that would make a later
+                # SO-mode _adam_delta(pw, info['active_w']) call mutate the SAME dict
+                # object as shadow_w, corrupting the shadow AdamW trajectory that
+                # grafting depends on. Warm-starting active on FO->SO transition is
+                # handled once, by _warm_start_active() in _controller().
                 dw_act, db_act = dw_ad, db_ad
-                info['active_w'] = info['shadow_w']
-                info['active_b'] = info['shadow_b']
 
-            norm_ad = self._frob(dw_ad, db_ad)
-            norm_act = self._frob(dw_act, db_act)
-            scale = (norm_ad / (norm_act + self.delta)).to(dw_act.dtype)
+            if self.use_grafting:
+                norm_ad = self._frob(dw_ad, db_ad)
+                norm_act = self._frob(dw_act, db_act)
+                scale = (norm_ad / (norm_act + self.delta)).to(dw_act.dtype)
+            else:
+                scale = 1.0
 
             w.data.add_(-lr * (scale * dw_act + self.weight_decay * w.data))
             if b is not None and db_act is not None:

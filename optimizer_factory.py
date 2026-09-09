@@ -57,11 +57,14 @@ def build_optimizer(name, model, cfg, epochs):
             ema_alpha=p.get('ema_alpha', 0.7),
             rho_lo=p.get('rho_lo', 0.15), rho_hi=p.get('rho_hi', 0.35),
             dwell_time=p.get('dwell_time', 500), beta_max=p.get('beta_max', 0.3),
+            grad_ema_alpha=p.get('grad_ema_alpha', 0.99),
             escape_nu_thr=p.get('escape_nu_thr', 0.75),
             escape_gamma_g=p.get('escape_gamma_g', 0.3),
             escape_r=p.get('escape_r', 1e-3), escape_lock=p.get('escape_lock', 200),
             use_gc=p.get('use_gc', True), use_so=p.get('use_so', True),
-            use_zo=p.get('use_zo', True))
+            use_zo=p.get('use_zo', True), use_escape=p.get('use_escape', True),
+            use_grafting=p.get('use_grafting', True),
+            force_so_always=p.get('force_so_always', False))
         needs_closure = True
 
     else:
