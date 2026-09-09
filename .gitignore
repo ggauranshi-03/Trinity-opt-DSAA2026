@@ -2,7 +2,7 @@
 __pycache__/
 *.py[cod]
 *$py.class
-
+nohup.out
 # PyTorch and experiment artifacts
 data/
 wandb/
@@ -15,4 +15,4 @@ wandb/
 Thumbs.db
 .vscode/
 .idea/
-*.swp
+*.swp
