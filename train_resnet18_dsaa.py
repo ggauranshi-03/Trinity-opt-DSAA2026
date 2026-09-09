@@ -99,10 +99,19 @@ def main():
         scheduler.step()
         epoch_time = time.time() - epoch_start
 
+        diag = optimizer.get_diagnostics() if hasattr(optimizer, 'get_diagnostics') else None
+        diag_str = ""
+        if diag is not None:
+            diag_str = (f" | SO: {diag['n_so']}/{diag['n_blocks']}, "
+                        f"rho: {diag['rho_mean']:.3f}, nu: {diag['nu_mean']:.3f}, "
+                        f"escape: {diag['escape_fires']}, "
+                        f"kfac_inv: {diag['kfac_inv_success']}/{diag['kfac_inv_success']+diag['kfac_inv_fail']}, "
+                        f"graft_scale: {diag['grafting_scale_mean']:.3f}")
+
         print(f"[{args.optimizer}] Epoch {epoch+1}/{epochs} - Loss: {train_loss:.4f}, "
               f"Val Acc: {val_acc:.2f}%, Head: {val_metrics.get('many_shot_acc', 0):.2f}%, "
               f"Med: {val_metrics.get('medium_shot_acc', 0):.2f}%, "
-              f"Tail: {val_metrics.get('few_shot_acc', 0):.2f}%")
+              f"Tail: {val_metrics.get('few_shot_acc', 0):.2f}%{diag_str}")
 
         with open(csv_path, 'a') as f:
             f.write(f"{epoch+1},{train_loss:.4f},{train_acc:.2f},{val_loss:.4f},{val_acc:.2f},"
@@ -120,8 +129,8 @@ def main():
             'val/med_acc': val_metrics.get('medium_shot_acc', 0),
             'val/tail_acc': val_metrics.get('few_shot_acc', 0),
         }
-        if hasattr(optimizer, 'get_diagnostics'):
-            log_dict.update({f'trinity/{k}': v for k, v in optimizer.get_diagnostics().items()})
+        if diag is not None:
+            log_dict.update({f'trinity/{k}': v for k, v in diag.items()})
         wandb.log(log_dict)
 
     wandb.finish()
