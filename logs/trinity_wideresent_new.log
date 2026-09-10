@@ -194,3 +194,55 @@ wandb: 🚀 View run at https://wandb.ai/dcll-iiitd/wideresnet-trinity-optimizer
 [trinity] Epoch 181/200 - Loss: 0.0009, Val Acc: 62.22%, Head: 71.10%, Med: 26.70%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.467, escape: 0, kfac_inv: 40/40, graft_scale: 0.796
 [trinity] Epoch 182/200 - Loss: 0.0005, Val Acc: 62.12%, Head: 71.06%, Med: 26.35%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.450, escape: 3, kfac_inv: 40/40, graft_scale: 0.791
 [trinity] Epoch 183/200 - Loss: 0.0004, Val Acc: 62.09%, Head: 70.71%, Med: 27.60%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.483, escape: 6, kfac_inv: 40/40, graft_scale: 0.786
+[trinity] Epoch 184/200 - Loss: 0.0004, Val Acc: 61.95%, Head: 70.79%, Med: 26.60%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.507, escape: 3, kfac_inv: 40/40, graft_scale: 0.775
+[trinity] Epoch 185/200 - Loss: 0.0005, Val Acc: 62.34%, Head: 70.78%, Med: 28.60%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.493, escape: 2, kfac_inv: 40/40, graft_scale: 0.780
+[trinity] Epoch 186/200 - Loss: 0.0004, Val Acc: 62.22%, Head: 71.04%, Med: 26.95%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.493, escape: 0, kfac_inv: 40/40, graft_scale: 0.779
+[trinity] Epoch 187/200 - Loss: 0.0006, Val Acc: 62.36%, Head: 71.12%, Med: 27.30%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.450, escape: 2, kfac_inv: 40/40, graft_scale: 0.779
+[trinity] Epoch 188/200 - Loss: 0.0010, Val Acc: 62.19%, Head: 70.81%, Med: 27.70%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.412, escape: 4, kfac_inv: 40/40, graft_scale: 0.781
+[trinity] Epoch 189/200 - Loss: 0.0008, Val Acc: 62.31%, Head: 71.06%, Med: 27.30%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.412, escape: 2, kfac_inv: 40/40, graft_scale: 0.777
+[trinity] Epoch 190/200 - Loss: 0.0003, Val Acc: 62.22%, Head: 71.11%, Med: 26.65%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.443, escape: 9, kfac_inv: 40/40, graft_scale: 0.784
+[trinity] Epoch 191/200 - Loss: 0.0006, Val Acc: 62.39%, Head: 71.05%, Med: 27.75%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.493, escape: 10, kfac_inv: 40/40, graft_scale: 0.785
+[trinity] Epoch 192/200 - Loss: 0.0004, Val Acc: 62.20%, Head: 71.06%, Med: 26.75%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.471, escape: 7, kfac_inv: 40/40, graft_scale: 0.781
+[trinity] Epoch 193/200 - Loss: 0.0002, Val Acc: 62.06%, Head: 70.85%, Med: 26.90%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.521, escape: 7, kfac_inv: 40/40, graft_scale: 0.778
+[trinity] Epoch 194/200 - Loss: 0.0002, Val Acc: 62.62%, Head: 71.26%, Med: 28.05%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.519, escape: 0, kfac_inv: 40/40, graft_scale: 0.781
+[trinity] Epoch 195/200 - Loss: 0.0003, Val Acc: 62.22%, Head: 70.95%, Med: 27.30%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.517, escape: 0, kfac_inv: 40/40, graft_scale: 0.782
+[trinity] Epoch 196/200 - Loss: 0.0005, Val Acc: 62.43%, Head: 70.96%, Med: 28.30%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.545, escape: 9, kfac_inv: 40/40, graft_scale: 0.789
+[trinity] Epoch 197/200 - Loss: 0.0010, Val Acc: 62.00%, Head: 70.44%, Med: 28.25%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.519, escape: 6, kfac_inv: 40/40, graft_scale: 0.792
+[trinity] Epoch 198/200 - Loss: 0.0004, Val Acc: 62.21%, Head: 70.75%, Med: 28.05%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.460, escape: 0, kfac_inv: 40/40, graft_scale: 0.795
+[trinity] Epoch 199/200 - Loss: 0.0004, Val Acc: 62.15%, Head: 70.88%, Med: 27.25%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.355, escape: 1, kfac_inv: 40/40, graft_scale: 0.789
+wandb: updating run metadata
+wandb: uploading output.log; uploading wandb-summary.json; uploading config.yaml
+wandb: uploading wandb-summary.json; uploading config.yaml
+wandb: uploading history steps 199-199, summary, console lines 200-200
+wandb: 
+wandb: Run history:
+wandb:                       epoch ▁▁▂▂▂▂▃▃▃▃▃▃▃▃▃▄▄▄▄▄▅▅▅▅▅▆▆▆▆▆▇▇▇▇▇█████
+wandb:                   train/acc ▁▂▃▄▅▅▆▆▆▆▇▇████████████████████████████
+wandb:                  train/loss █▅▅▅▄▃▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       trinity/blocks_probed ▁███████▁█████▁██▁█▁███▁████████████████
+wandb:        trinity/escape_fires ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▃▆▄▁▃▁▆▁▂▁▁▆▃▁▆█
+wandb:  trinity/grafting_scale_max ▁▁▁▁▁▁▁▁▁▁▁▁▃▃▂▂▄▃▃█▅▇█▇█▅▇▅▄▄▅▅▅▄▃▆▃▄▆▃
+wandb: trinity/grafting_scale_mean ███████▁▁▁▁▁▂▂▂▂▂▂▂▃▂▃▂▃▂▂▂▂▃▃▃▃▂▃▃▂▂▂▂▂
+wandb:  trinity/grafting_scale_min ███████▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       trinity/kfac_inv_fail ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:    trinity/kfac_inv_success ▁▁▁▁▁▁▁▁███████████████████▁████████████
+wandb:                         +13 ...
+wandb: 
+wandb: Run summary:
+wandb:                       epoch 200
+wandb:                   train/acc 99.98388
+wandb:                  train/loss 0.00062
+wandb:       trinity/blocks_probed 14
+wandb:        trinity/escape_fires 2
+wandb:  trinity/grafting_scale_max 1.06081
+wandb: trinity/grafting_scale_mean 0.78596
+wandb:  trinity/grafting_scale_min 0.05905
+wandb:       trinity/kfac_inv_fail 0
+wandb:    trinity/kfac_inv_success 40
+wandb:                         +13 ...
+wandb: 
+wandb: 🚀 View run trinity at: https://wandb.ai/dcll-iiitd/wideresnet-trinity-optimizer-comparison-200-wideresnet/runs/vjaigo1o
+wandb: ⭐️ View project at: https://wandb.ai/dcll-iiitd/wideresnet-trinity-optimizer-comparison-200-wideresnet
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20260910_104606-vjaigo1o/logs
+[trinity] Epoch 200/200 - Loss: 0.0006, Val Acc: 62.45%, Head: 70.80%, Med: 29.05%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.324, escape: 2, kfac_inv: 40/40, graft_scale: 0.786
