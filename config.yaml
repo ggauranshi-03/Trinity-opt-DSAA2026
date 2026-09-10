@@ -7,7 +7,7 @@ wandb:
   # Base project name. Each training script appends "-{model}" (e.g.
   # "trinity-optimizer-comparison-resnet18") so that one wandb project holds every
   # optimizer's run for a given model+dataset, all directly comparable in one place.
-  project: transformer-trinity-optimizer-comparison-200
+  project: new-transformer-trinity-optimizer-comparison-200
 
 dataset:
   name: cifar10          # cifar10 | cifar100 (Long-Tailed variant, IF = imb_factor)
@@ -123,3 +123,27 @@ optimizers:
         sensor_interval: 50
         ema_alpha: 0.3
         damping: 0.5
+
+      # transformer_small: train_transformer_small_dsaa.py, depth=6/embed_dim=384
+      # instead of depth=12/embed_dim=768 -> 38 Trinity blocks instead of 74 (patch_embed
+      # + 6*(q,k,v,out,linear1,linear2) + head), roughly halfway between ResNet-18's
+      # ~18-20 blocks and the large transformer's 74. Starting point only, scaled down
+      # from the large-transformer findings above, NOT independently validated on this
+      # architecture yet:
+      #   - use_gc: false carries over. Root cause 1 (GC hurting Linear Q/K/V/out_proj/
+      #     MLP weights) is about layer TYPE, not block count, so it should still apply.
+      #   - sensor_nblocks/sensor_interval/ema_alpha are a milder version of the large-
+      #     transformer values (8/50/0.3), since with ~half the blocks the sensor needs
+      #     less boost over the ResNet-tuned shared defaults (2/100/0.7) to cover them
+      #     in a similar number of epochs.
+      #   - damping: 0.3 is a milder version of 0.5, kept elevated because root cause 3
+      #     (K-FAC's correction on attention blocks becoming too sharp once rho collapses)
+      #     was about the attention/Linear structure, not specifically the 74-block count,
+      #     so it may well still need raising here -- watch rho and grafting_scale in the
+      #     diagnostics the same way, and re-tune (all 4 values) if SO blocks stall again.
+      transformer_small:
+        use_gc: false
+        sensor_nblocks: 4
+        sensor_interval: 75
+        ema_alpha: 0.4
+        damping: 0.3
