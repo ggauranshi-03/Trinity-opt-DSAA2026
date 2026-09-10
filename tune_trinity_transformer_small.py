@@ -28,7 +28,6 @@ from train_transformer_small_dsaa import CIFAR100MTransformerSmall
 from trinity_optimizer import Trinity
 
 STUDY_NAME = "trinity_transformer_small"
-STORAGE = "sqlite:///tune_trinity_transformer_small.db"
 TRIAL_EPOCHS = 25   # enough for SO to engage (~epoch 6-10) and the val-acc trend to separate
 
 
@@ -103,12 +102,17 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument('--n_trials', type=int, default=5)
     ap.add_argument('--gpu', type=int, default=0)
+    ap.add_argument('--worker_id', type=int, default=0,
+                     help="Each worker gets its own sqlite file to avoid the "
+                          "concurrent-write crash multiple processes hitting one "
+                          ".db file causes; merge_studies.py combines them after.")
     args = ap.parse_args()
     device = torch.device(f'cuda:{args.gpu}' if torch.cuda.is_available() else 'cpu')
+    storage = f"sqlite:///tune_worker_{args.worker_id}.db"
 
     pruner = optuna.pruners.MedianPruner(n_startup_trials=4, n_warmup_steps=8)
     study = optuna.create_study(
-        study_name=STUDY_NAME, storage=STORAGE, direction='maximize',
+        study_name=STUDY_NAME, storage=storage, direction='maximize',
         pruner=pruner, load_if_exists=True,
         sampler=optuna.samplers.TPESampler(seed=None))
 

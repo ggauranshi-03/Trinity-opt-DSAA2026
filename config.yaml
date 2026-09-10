@@ -7,7 +7,7 @@ wandb:
   # Base project name. Each training script appends "-{model}" (e.g.
   # "trinity-optimizer-comparison-resnet18") so that one wandb project holds every
   # optimizer's run for a given model+dataset, all directly comparable in one place.
-  project: new-transformer-trinity-optimizer-comparison-200
+  project: wideresnet-trinity-optimizer-comparison-200
 
 dataset:
   name: cifar10          # cifar10 | cifar100 (Long-Tailed variant, IF = imb_factor)
@@ -47,7 +47,13 @@ optimizers:
     betas: [0.9, 0.999]
     eps: 1.0e-8
     weight_decay: 1.0e-4
-    damping: 0.5
+    # Reverted to 0.01 (was temporarily 0.5, matching only the transformer's tuned
+    # value -- ambiguous since this shared block also applies to ResNet-18/WideResNet,
+    # which had never been tested at 0.5 and were working fine at 0.01, per logs/
+    # trinity.log and logs/trinity_wresnet.log). Every architecture now gets its own
+    # explicit override below (resnet18/wide_resnet/transformer/transformer_small),
+    # so this shared value is only a fallback for an architecture with no override.
+    damping: 0.01
     kfac_stat_interval: 10
     kfac_inv_interval: 100
     kfac_decay: 0.95
@@ -117,6 +123,45 @@ optimizers:
     #      three kept improving); it's a controlled comparison of the two knobs, not
     #      a full repro -- confirm the real 200-epoch stall clears with this value.
     overrides:
+      # resnet18 / wide_resnet: baselines (logs/trinity.log, logs/trinity_wresnet.log)
+      # had Trinity narrowly beating Adam/RMSprop but losing to SGD on both (ResNet-18:
+      # 59.97% vs SGD's 60.86%; WideResNet: 60.95% vs SGD's 65.02%, a much bigger gap).
+      # Block-count check: ResNet-18 has 21 Trinity blocks (close to what the shared
+      # sensor defaults were hand-tuned for), but WideResNet-101-2 has 105 -- a 5x
+      # mismatch, the same shape of problem the transformer had. So the WideResNet sweep
+      # also searched sensor_nblocks/sensor_interval/ema_alpha; the ResNet-18 sweep left
+      # them at the shared defaults.
+      #
+      # Both come from an 8-GPU Optuna sweep (tune_trinity_cnn.py, 30-epoch budget, val
+      # accuracy as the objective; see tune_resnet18_worker_*.db / tune_wide_resnet_worker_*.db).
+      # IMPORTANT CAVEAT, unlike the transformer sweeps: K-FAC (SO) never turned on in
+      # ANY of the 39 ResNet-18 trials (n_so=0/21 in every trial, including the best
+      # one), and the single best WideResNet trial also had n_so=0/105 -- at only 30
+      # epochs, with these architectures' slower-converging rho_ema, K-FAC didn't get
+      # enough time to engage. So these sweeps mostly tuned lr/weight_decay for the
+      # AdamW+GC-dominated regime, not the actual K-FAC behavior -- the damping/beta_max/
+      # rho_lo/rho_hi values below are correspondingly less trustworthy than the lr/
+      # weight_decay ones. A full 200-epoch run is needed to know whether this actually
+      # beats SGD, not just this 30-epoch proxy.
+      resnet18:
+        lr: 0.001417
+        weight_decay: 0.000947
+        damping: 0.0994
+        beta_max: 0.333
+        rho_lo: 0.1248
+        rho_hi: 0.3405
+
+      wide_resnet:
+        lr: 0.000817
+        weight_decay: 0.000043
+        damping: 0.0163
+        beta_max: 0.393
+        rho_lo: 0.0981
+        rho_hi: 0.2078
+        sensor_nblocks: 7
+        sensor_interval: 52
+        ema_alpha: 0.581
+
       transformer:
         use_gc: false
         sensor_nblocks: 8
@@ -127,23 +172,36 @@ optimizers:
       # transformer_small: train_transformer_small_dsaa.py, depth=6/embed_dim=384
       # instead of depth=12/embed_dim=768 -> 38 Trinity blocks instead of 74 (patch_embed
       # + 6*(q,k,v,out,linear1,linear2) + head), roughly halfway between ResNet-18's
-      # ~18-20 blocks and the large transformer's 74. Starting point only, scaled down
-      # from the large-transformer findings above, NOT independently validated on this
-      # architecture yet:
-      #   - use_gc: false carries over. Root cause 1 (GC hurting Linear Q/K/V/out_proj/
-      #     MLP weights) is about layer TYPE, not block count, so it should still apply.
-      #   - sensor_nblocks/sensor_interval/ema_alpha are a milder version of the large-
-      #     transformer values (8/50/0.3), since with ~half the blocks the sensor needs
-      #     less boost over the ResNet-tuned shared defaults (2/100/0.7) to cover them
-      #     in a similar number of epochs.
-      #   - damping: 0.3 is a milder version of 0.5, kept elevated because root cause 3
-      #     (K-FAC's correction on attention blocks becoming too sharp once rho collapses)
-      #     was about the attention/Linear structure, not specifically the 74-block count,
-      #     so it may well still need raising here -- watch rho and grafting_scale in the
-      #     diagnostics the same way, and re-tune (all 4 values) if SO blocks stall again.
+      # ~18-20 blocks and the large transformer's 74.
+      #
+      # use_gc/sensor_nblocks/sensor_interval/ema_alpha are hand-tuned starting points
+      # scaled down from the large-transformer findings (use_gc off carries over since
+      # root cause 1 was about Linear/attention layer TYPE, not block count; sensor
+      # settings are a milder boost since there are ~half as many blocks to cover).
+      #
+      # lr/weight_decay/damping/beta_max/rho_lo/rho_hi below are NOT hand-tuned -- they
+      # come from an 8-GPU x 5-trial Optuna sweep (tune_trinity_transformer_small.py,
+      # 25-epoch budget, val accuracy as the objective) over exactly these 6 knobs. That
+      # sweep's single clearest finding: lr dominates everything else. Every top-8 trial
+      # (out of 34 complete) had lr in [3.5e-4, 4.3e-4]; every bottom trial had
+      # lr > 1.2e-3. Trinity had simply been inheriting Adam's lr=0.001 unchanged, and it
+      # was never actually tuned for Trinity's own update dynamics (shadow-AdamW step +
+      # grafted K-FAC step compound differently from plain AdamW). Best trial: 43.98%
+      # val acc at epoch 25 (vs the untuned config's ~26-31% val acc around the same
+      # epoch in trinity_transformer_new.log) with the damping/beta_max/rho values below
+      # -- notably a LOWER damping than the 0.3-0.5 used above, suggesting the earlier
+      # "raise damping" fix was partly just compensating for lr being too high; once lr
+      # itself is fixed, K-FAC can run with a lighter touch. Caveat: this ranks trials on
+      # a 25-epoch proxy, not the real 200-epoch run -- confirm the ranking holds at
+      # full length before trusting it for the paper's numbers.
       transformer_small:
         use_gc: false
         sensor_nblocks: 4
         sensor_interval: 75
         ema_alpha: 0.4
-        damping: 0.3
+        lr: 0.000375
+        weight_decay: 0.000225
+        damping: 0.175
+        beta_max: 0.232
+        rho_lo: 0.185
+        rho_hi: 0.272

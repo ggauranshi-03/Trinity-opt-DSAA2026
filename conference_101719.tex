@@ -1040,10 +1040,10 @@ We evaluated our proposed framework across all three deep learning paradigms. Ta
   & \textbf{Acc.} & \textbf{Time\,(s)}
   & \textbf{Acc.} & \textbf{Time\,(s)} \\
 \midrule
-SGD (Nesterov)      & 16.62\% & 414 & 56.52\% & 233 \\
-RMSProp             & 34.20\% & 382 & 57.46\% & 234 \\
-Adam                & 60.38\% & 385 & 59.25\% & 230 \\
-\textbf{Trinity}    & \textbf{63.39\%} & 487 & \textbf{62.96\%} & 312 \\
+SGD (Nesterov)      & \textbf{66.17\%} & 414 & 56.52\% & 233 \\
+RMSProp             & 59.68\% & 382 & 57.46\% & 234 \\
+Adam                & 61.79\% & 385 & 59.25\% & 230 \\
+\textbf{Trinity}    & 63.07\% & 487 & \textbf{62.96\%} & 312 \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1057,10 +1057,10 @@ Adam                & 60.38\% & 385 & 59.25\% & 230 \\
 \toprule
 \textbf{Optimizer} & \textbf{Val.\,Acc.} & \textbf{Total Time\,(s)} \\
 \midrule
-RMSProp             & 27.15\% & 965  \\
-SGD (Nesterov)      & 38.96\% & 946  \\
-\textbf{Trinity}    & 43.69\% & 1583 \\
-Adam                & \textbf{43.88\%} & 969  \\
+RMSProp             & 61.46\% & 965  \\
+SGD (Nesterov)      & \textbf{63.82\%} & 946  \\
+\textbf{Trinity}    & 61.38\% & 1583 \\
+Adam                & 62.25\% & 969  \\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1068,11 +1068,11 @@ Adam                & \textbf{43.88\%} & 969  \\
 
 The empirical findings demonstrate that Trinity consistently establishes a superior performance ceiling in highly complex, parameter-dense architectures, while revealing nuanced structural trade-offs in compact models.
 
-In \textbf{Experiment 1} (Figure \ref{fig:exp1}), training the massive Wide-ResNet architecture from scratch on severely imbalanced data causes vanilla SGD to struggle significantly, plateauing at just 16.62\%. This degradation directly aligns with recent theoretical findings on gradient starvation under heavy-tailed class imbalance \cite{kunstner2024heavy}. Trinity achieves a peak accuracy of 63.39\%, substantially outperforming both Adam (60.38\%) and RMSProp (34.20\%). 
+In \textbf{Experiment 1} (Figure \ref{fig:exp1}), training the massive Wide-ResNet architecture from scratch on severely imbalanced data shows that SGD achieves the highest peak accuracy of 66.17\%. Trinity reaches a competitive peak accuracy of 63.07\%, outperforming both Adam (61.79\%) and RMSProp (59.68\%). 
 
 In \textbf{Experiment 2} (Figure \ref{fig:exp2}), the non-local attention mechanics of the Vision Transformer shift the performance boundaries. Even within this heavily normalized sequence space, Trinity achieves a validation accuracy of 62.96\% over 300 epochs, establishing a clear ceiling over Adam (59.25\%), RMSProp (57.46\%), and SGD (56.52\%). Naturally, Trinity incurs a deterministic computational time overhead due to the periodic calculation of dual K-FAC factor inversions and the auxiliary forward passes required by the RDSA estimator (e.g., 487s vs. 385s for Adam in Exp 1, and 312s vs. 230s in Exp 2). However, this explicit structural tracking translates directly to a +3.71 percentage point accuracy gain in the ViT architecture, demonstrating a highly favorable trade-off between step-time complexity and overall geometric convergence capability.
 
-In \textbf{Experiment 3} (Figure \ref{fig:exp3}), the compact ResNet-18 backbone yields a different optimization dynamic. Here, Adam achieves a slightly higher accuracy at 43.88\%, followed by Trinity at 43.69\%. This indicates that for lower-capacity models trained on highly constrained datasets, the aggressive structural preconditioning of Trinity acts as a heavy regularizer. While this prevents overfitting, it limits the model from perfectly memorizing the sparse training distribution compared to unconstrained adaptive tracking.
+In \textbf{Experiment 3} (Figure \ref{fig:exp3}), the compact ResNet-18 backbone yields a different optimization dynamic. Here, SGD achieves the highest accuracy at 63.82\%, followed by Adam at 62.25\% and RMSProp at 61.46\%. Trinity reaches 61.38\%, indicating that for lower-capacity models trained on highly constrained datasets, the aggressive structural preconditioning acts as a heavy regularizer. While this prevents overfitting, it can slightly limit peak validation accuracy compared to unconstrained adaptive tracking.
 
 \definecolor{colorhybrid}{RGB}{31, 119, 180}   % Modern Steel Blue
 \definecolor{coloradam}{RGB}{214, 39, 40}     % Academic Muted Red
@@ -1122,7 +1122,7 @@ In \textbf{Experiment 3} (Figure \ref{fig:exp3}), the compact ResNet-18 backbone
       line width=1.3pt,
       color=colorhybrid,
       mark=none,
-    ] table[x=epoch, y=val_acc, col sep=comma] {exp1_hybrid.csv};
+    ] table[x=epoch, y=val_acc, col sep=comma] {extra/baseline_experiments/exp1_hybrid.csv};
     \addlegendentry{Trinity}
 
     % --- Adam ---
@@ -1130,7 +1130,7 @@ In \textbf{Experiment 3} (Figure \ref{fig:exp3}), the compact ResNet-18 backbone
       line width=0.9pt,
       color=coloradam,
       mark=none,
-    ] table[x=epoch, y=val_acc, col sep=comma] {exp1_adam.csv};
+    ] table[x=epoch, y=val_acc, col sep=comma] {extra/baseline_experiments/exp1_adam.csv};
     \addlegendentry{Adam}
 
     % --- RMSProp ---
@@ -1138,7 +1138,7 @@ In \textbf{Experiment 3} (Figure \ref{fig:exp3}), the compact ResNet-18 backbone
       line width=0.9pt,
       color=colorrmsprop,
       mark=none,
-    ] table[x=epoch, y=val_acc, col sep=comma] {exp1_rmsprop.csv};
+    ] table[x=epoch, y=val_acc, col sep=comma] {extra/baseline_experiments/exp1_rmsprop.csv};
     \addlegendentry{RMSProp}
 
     % --- SGD ---
@@ -1146,19 +1146,19 @@ In \textbf{Experiment 3} (Figure \ref{fig:exp3}), the compact ResNet-18 backbone
       line width=0.9pt,
       color=colorsgd,
       mark=none,
-    ] table[x=epoch, y=val_acc, col sep=comma] {exp1_sgd.csv};
+    ] table[x=epoch, y=val_acc, col sep=comma] {extra/baseline_experiments/exp1_sgd.csv};
     \addlegendentry{SGD}
 
     % --- Clean Callout for Peak Value ---
     \node[
       font=\fontseries{b}\selectfont\footnotesize,
-      color=colorhybrid,
+      color=colorsgd,
       fill=white,
       fill opacity=0.8,
       text opacity=1,
       inner sep=1pt,
       anchor=south east,
-    ] at (axis cs:195,64.2) {63.39\%};
+    ] at (axis cs:195,67.5) {66.17\%};
 
     \end{axis}
   \end{tikzpicture}
@@ -1207,7 +1207,7 @@ In \textbf{Experiment 3} (Figure \ref{fig:exp3}), the compact ResNet-18 backbone
       line width=1.3pt,
       color=colorhybrid,
       mark=none,
-    ] table[x=epoch, y=val_acc, col sep=comma] {exp2_hybrid.csv};
+    ] table[x=epoch, y=val_acc, col sep=comma] {extra/baseline_experiments/exp2_hybrid.csv};
     \addlegendentry{Trinity}
 
     % --- Adam ---
@@ -1215,7 +1215,7 @@ In \textbf{Experiment 3} (Figure \ref{fig:exp3}), the compact ResNet-18 backbone
       line width=0.9pt,
       color=coloradam,
       mark=none,
-    ] table[x=epoch, y=val_acc, col sep=comma] {exp2_adam.csv};
+    ] table[x=epoch, y=val_acc, col sep=comma] {extra/baseline_experiments/exp2_adam.csv};
     \addlegendentry{Adam}
 
     % --- RMSProp ---
@@ -1223,7 +1223,7 @@ In \textbf{Experiment 3} (Figure \ref{fig:exp3}), the compact ResNet-18 backbone
       line width=0.9pt,
       color=colorrmsprop,
       mark=none,
-    ] table[x=epoch, y=val_acc, col sep=comma] {exp2_rmsprop.csv};
+    ] table[x=epoch, y=val_acc, col sep=comma] {extra/baseline_experiments/exp2_rmsprop.csv};
     \addlegendentry{RMSProp}
 
     % --- SGD ---
@@ -1231,7 +1231,7 @@ In \textbf{Experiment 3} (Figure \ref{fig:exp3}), the compact ResNet-18 backbone
       line width=0.9pt,
       color=colorsgd,
       mark=none,
-    ] table[x=epoch, y=val_acc, col sep=comma] {exp2_sgd.csv};
+    ] table[x=epoch, y=val_acc, col sep=comma] {extra/baseline_experiments/exp2_sgd.csv};
     \addlegendentry{SGD}
 
     % --- Clean Callout for Peak Value ---
@@ -1265,10 +1265,10 @@ In \textbf{Experiment 3} (Figure \ref{fig:exp3}), the compact ResNet-18 backbone
       xlabel style={font=\small, yshift=2pt},
       ylabel style={font=\small, xshift=-2pt},
       tick label style={font=\footnotesize},
-      xmin=1,   xmax=85,
-      ymin=5,   ymax=50,
-      xtick={1,10,20,30,40,50,60,70,85},
-      ytick={10,20,30,40,50},
+      xmin=1,   xmax=200,
+      ymin=5,   ymax=72,
+      xtick={1,25,50,75,100,125,150,175,200},
+      ytick={10,20,30,40,50,60,70},
       minor tick num=4,
       grid=both,
       minor grid style={line width=0.2pt, draw=black!5},
@@ -1296,7 +1296,7 @@ In \textbf{Experiment 3} (Figure \ref{fig:exp3}), the compact ResNet-18 backbone
       color=colorhybrid,
       mark=none,
     ] table[x=epoch, y=val_acc, col sep=comma]
-      {exp3_hybrid.csv};
+      {extra/baseline_experiments/exp3_hybrid.csv};
     \addlegendentry{Trinity}
 
     % --- Adam ---
@@ -1305,7 +1305,7 @@ In \textbf{Experiment 3} (Figure \ref{fig:exp3}), the compact ResNet-18 backbone
       color=coloradam,
       mark=none,
     ] table[x=epoch, y=val_acc, col sep=comma]
-      {exp3_adam.csv};
+      {extra/baseline_experiments/exp3_adam.csv};
     \addlegendentry{Adam}
 
     % --- RMSProp ---
@@ -1314,7 +1314,7 @@ In \textbf{Experiment 3} (Figure \ref{fig:exp3}), the compact ResNet-18 backbone
       color=colorrmsprop,
       mark=none,
     ] table[x=epoch, y=val_acc, col sep=comma]
-      {exp3_rmsprop.csv};
+      {extra/baseline_experiments/exp3_rmsprop.csv};
     \addlegendentry{RMSProp}
 
     % --- SGD ---
@@ -1323,19 +1323,19 @@ In \textbf{Experiment 3} (Figure \ref{fig:exp3}), the compact ResNet-18 backbone
       color=colorsgd,
       mark=none,
     ] table[x=epoch, y=val_acc, col sep=comma]
-      {exp3_sgd.csv};
+      {extra/baseline_experiments/exp3_sgd.csv};
     \addlegendentry{SGD}
 
-    % --- Peak Trinity callout ---
+    % --- Peak SGD callout ---
     \node[
       font=\fontseries{b}\selectfont\footnotesize,
-      color=colorhybrid,
+      color=colorsgd,
       fill=white,
       fill opacity=0.85,
       text opacity=1,
       inner sep=1pt,
       anchor=east,
-    ] at (axis cs:80,45.0) {43.69\%};
+    ] at (axis cs:195,65.0) {63.82\%};
 
     % --- Peak Adam callout ---
     \node[
@@ -1346,7 +1346,7 @@ In \textbf{Experiment 3} (Figure \ref{fig:exp3}), the compact ResNet-18 backbone
       text opacity=1,
       inner sep=1pt,
       anchor=east,
-    ] at (axis cs:80,41.2) {43.88\%};
+    ] at (axis cs:195,61.0) {62.25\%};
 
     \end{axis}
   \end{tikzpicture}
