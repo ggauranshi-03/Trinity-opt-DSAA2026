@@ -114,7 +114,8 @@ def main():
     model = CIFAR100MTransformer(num_classes=num_classes).to(device)
     criterion = nn.CrossEntropyLoss()
 
-    optimizer, scheduler, needs_closure = build_optimizer(args.optimizer, model, cfg, epochs)
+    optimizer, scheduler, needs_closure = build_optimizer(args.optimizer, model, cfg, epochs,
+                                                           model_name='transformer')
 
     run = wandb.init(project=f"{cfg['wandb']['project']}-transformer",
                       group=f"{ds_cfg['name']}_imb{ds_cfg['imb_factor']}",

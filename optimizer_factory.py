@@ -10,18 +10,26 @@ def load_config(path='config.yaml'):
         return yaml.safe_load(f)
 
 
-def build_optimizer(name, model, cfg, epochs):
+def build_optimizer(name, model, cfg, epochs, model_name=None):
     """Build an optimizer + CosineAnnealingLR scheduler from config.yaml settings.
 
     Returns (optimizer, scheduler, needs_closure) where `needs_closure` tells the
     training loop whether optimizer.step() must be called with a closure (Trinity's
     ZO sensor needs to recompute the loss; the standard baselines do not).
+
+    `model_name` (e.g. 'transformer') selects a per-architecture override block
+    under `optimizers.<name>.overrides.<model_name>` in config.yaml, applied on top
+    of that optimizer's shared hyperparameters. See config.yaml's trinity.overrides
+    for why the transformer needs different sensor/GC settings than ResNet-18.
     """
     name = name.lower()
     if name not in cfg['optimizers']:
         raise ValueError(f"No hyperparameters for optimizer '{name}' in config.yaml "
                           f"(available: {list(cfg['optimizers'].keys())})")
-    p = cfg['optimizers'][name]
+    p = dict(cfg['optimizers'][name])
+    overrides = p.pop('overrides', {}) or {}
+    if model_name and model_name in overrides:
+        p.update(overrides[model_name])
 
     if name == 'adam':
         optimizer = torch.optim.Adam(

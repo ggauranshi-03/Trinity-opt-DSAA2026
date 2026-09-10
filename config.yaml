@@ -16,7 +16,7 @@ dataset:
   num_workers: 2
 
 training:
-  epochs: 100
+  epochs: 200
   grad_clip_norm: 1.0
   seed: 42
   lr_schedule: cosine     # CosineAnnealingLR over `epochs`
@@ -47,7 +47,7 @@ optimizers:
     betas: [0.9, 0.999]
     eps: 1.0e-8
     weight_decay: 1.0e-4
-    damping: 0.01
+    damping: 0.5
     kfac_stat_interval: 10
     kfac_inv_interval: 100
     kfac_decay: 0.95
@@ -77,3 +77,49 @@ optimizers:
     use_escape: true
     use_grafting: true
     force_so_always: false
+
+    # Per-architecture overrides, applied on top of the block above.
+    #
+    # transformer: diagnosed 2026-09-09. Root cause of Trinity badly underperforming
+    # Adam on CIFAR100MTransformer (74 blocks, embed_dim=768):
+    #   1. use_gc hurts this architecture. Controlled A/B (K-FAC forced on, otherwise
+    #      identical): 62.7% train acc with GC off vs 51.8% with GC on at 15 epochs.
+    #      GC (Yong et al. 2020) was validated on CNNs; there is no evidence it helps
+    #      Linear Q/K/V/out_proj/MLP weights here, and repeated measurement shows it
+    #      costs 4-10 points of train accuracy every time it's on.
+    #   2. K-FAC never engages in time. sensor_nblocks=2 / sensor_interval=100 was
+    #      tuned for ResNet-18 (~18-20 blocks); the transformer has 74. At the shared
+    #      defaults, rho_ema (ema_alpha=0.7) never converges below rho_lo=0.15 within
+    #      100 epochs -> logs show "SO: 0/74" for the ENTIRE run, i.e. Trinity runs as
+    #      plain (GC-crippled) AdamW the whole time. Raising sensor_nblocks, lowering
+    #      sensor_interval, and lowering ema_alpha (fewer real samples needed per
+    #      block to trust them) lets SO blocks actually turn on partway through
+    #      training. Validated: with these overrides, 30-epoch run reaches SO:22/74
+    #      with 22/22 successful K-FAC inversions and 61%+ train acc, vs. the shared
+    #      defaults still stuck at SO:0/74 and ~48-51% train acc at the same point.
+    #   Sensor overhead rises with sensor_nblocks (roughly proportional), so this
+    #   trades some throughput for K-FAC actually being reachable at all.
+    #   3. Once SO blocks engage, they stall training. In the real 200-epoch run with
+    #      overrides 1-2 only, loss went flat at ~1.13-1.18 from epoch 13 to 71 (Adam
+    #      kept improving over the same stretch) right as rho on those 22 blocks
+    #      collapsed toward 0 -- i.e. K-FAC's correction became very sharp/aggressive
+    #      and stopped helping. Controlled 45-epoch A/B (damping=0.5 vs damping=0.01
+    #      vs beta_max=0.1, all else equal): damping=0.5 wins clearly and
+    #      consistently (loss 1.042 vs 1.131 vs 1.176, acc 64.0% vs 59.9% vs 58.5% at
+    #      epoch 45), and its grafting_scale sits at ~0.97-1.00 (vs ~0.85-0.89 at
+    #      damping=0.01), meaning K-FAC's own step is already close in magnitude to
+    #      shadow-AdamW's -- i.e. higher damping pulls K-FAC's direction back toward
+    #      the safe, Adam-like one instead of the sharp one that was stalling
+    #      training. Reducing beta_max (fewer SO blocks) instead did NOT help -- it
+    #      was the worst of the three -- so the fix is "make K-FAC gentler," not "use
+    #      it on fewer blocks." Caveat: this A/B used a 45-epoch cosine schedule, not
+    #      the real run's 200-epoch one, so it didn't reproduce the exact stall (all
+    #      three kept improving); it's a controlled comparison of the two knobs, not
+    #      a full repro -- confirm the real 200-epoch stall clears with this value.
+    overrides:
+      transformer:
+        use_gc: false
+        sensor_nblocks: 8
+        sensor_interval: 50
+        ema_alpha: 0.3
+        damping: 0.5
