@@ -106,6 +106,13 @@ def main():
     parser.add_argument('--embed_dim', type=int, default=384)
     parser.add_argument('--num_heads', type=int, default=6)
     parser.add_argument('--dim_feedforward', type=int, default=1536)
+    parser.add_argument('--wandb_project', type=str, default=None,
+                         help="Literal wandb project name, used as-is (no suffix appended). "
+                              "Default: '{config.wandb.project}-transformer-small'.")
+    parser.add_argument('--run_name', type=str, default=None,
+                         help="wandb run name, e.g. an ablation variant like 'trinity_no_gc'. "
+                              "Default: --optimizer's value (ambiguous when several ablation "
+                              "arms all use --optimizer trinity).")
     args = parser.parse_args()
 
     cfg = load_config(args.config)
@@ -115,9 +122,13 @@ def main():
     torch.manual_seed(tr_cfg.get('seed', 42))
 
     os.makedirs(args.output_dir, exist_ok=True)
+    # run_name (e.g. an ablation variant like 'trinity_no_gc') distinguishes the CSV
+    # filename when several arms share --optimizer trinity -- without this they'd all
+    # write transformer_small_trinity_..._imb....csv and silently overwrite each other.
+    run_tag = args.run_name if args.run_name else args.optimizer
     csv_path = os.path.join(
         args.output_dir,
-        f"transformer_small_{args.optimizer}_{ds_cfg['name']}_imb{ds_cfg['imb_factor']}.csv")
+        f"transformer_small_{run_tag}_{ds_cfg['name']}_imb{ds_cfg['imb_factor']}.csv")
     with open(csv_path, 'w') as f:
         f.write("epoch,train_loss,train_acc,val_loss,val_acc,head_acc,med_acc,tail_acc,time_s\n")
 
@@ -134,9 +145,10 @@ def main():
     optimizer, scheduler, needs_closure = build_optimizer(args.optimizer, model, cfg, epochs,
                                                            model_name='transformer_small')
 
-    run = wandb.init(project=f"{cfg['wandb']['project']}-transformer-small",
+    wandb_project = args.wandb_project if args.wandb_project else f"{cfg['wandb']['project']}-transformer-small"
+    run = wandb.init(project=wandb_project,
                       group=f"{ds_cfg['name']}_imb{ds_cfg['imb_factor']}",
-                      name=args.optimizer,
+                      name=args.run_name if args.run_name else args.optimizer,
                       config={**vars(args), **ds_cfg, **tr_cfg, 'optimizer': args.optimizer})
 
     for epoch in range(epochs):
