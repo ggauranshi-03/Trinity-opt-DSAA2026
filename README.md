@@ -41,15 +41,17 @@ Trinity-opt-DSAA2026/
 ├── requirements.txt                   # Environment dependencies
 ├── .gitignore                         # Git exclusion rules
 │
-├── trinity_optimizer.py               # Standalone Trinity optimizer (FO + SO + ZO)
+├── trinity_optimizer.py               # Standalone Trinity optimizer (ZO sensor + gated K-FAC + AdamW)
 ├── datasets_lt.py                     # Long-tailed CIFAR-10/100 datasets & shot evaluators
+├── config.yaml                        # ALL hyperparameters: dataset, training, wandb, per-optimizer
+├── optimizer_factory.py               # Builds Adam/RMSprop/SGD/Trinity + scheduler from config.yaml
 │
-├── train_resnet18_dsaa.py             # ResNet-18 benchmark training script
-├── train_wide_resnet_dsaa.py          # Wide-ResNet-101-2 benchmark training script
-├── train_transformer_dsaa.py          # 100M Transformer (ViT) benchmark training script
+├── train_resnet18_dsaa.py             # ResNet-18 benchmark training script (--optimizer flag)
+├── train_wide_resnet_dsaa.py          # Wide-ResNet-101-2 benchmark training script (--optimizer flag)
+├── train_transformer_dsaa.py          # 100M Transformer (ViT) benchmark training script (--optimizer flag)
+├── plot_optimizer_comparison.py       # Accuracy-vs-epoch comparison plot across optimizers
 │
 ├── run_full_ablation.py               # Ablation study runner (FO, ZO, SO, FO_ZO, FO_SO, Full)
-├── run_sensitivity_and_optuna.py      # Optuna hyperparameter sweeps & sensitivity analysis
 │
 ├── scripts/                           # Execution bash & SLURM scripts
 │   ├── README.md                      # Documentation of execution scripts
@@ -92,7 +94,9 @@ pip install -r requirements.txt
 
 ### 2. Using the Trinity Optimizer
 
-Import and use `Trinity` just like any standard PyTorch optimizer:
+Import and use `Trinity` just like any standard PyTorch optimizer. `step()` requires a
+`closure()` that recomputes the loss under `torch.no_grad()` for the same minibatch —
+it's needed by the forward-only ZO curvature sensor:
 
 ```python
 import torch
@@ -103,13 +107,12 @@ model = models.resnet18(num_classes=10).cuda()
 optimizer = Trinity(
     model=model,
     lr=1e-3,
-    damping=1e-2,       # K-FAC damping factor
-    kfac_interval=10,   # K-FAC curvature update interval
-    zo_interval=20,     # Zeroth-order perturbation interval
-    zo_scale=0.1,       # Zeroth-order augmentation scale
-    use_fo=True,
-    use_so=True,
-    use_zo=True
+    damping=1e-2,           # K-FAC damping factor
+    sensor_interval=100,    # ZO curvature sensing interval (steps)
+    sensor_probes=4,        # antithetic probes per sensed block
+    beta_max=0.3,           # fraction of blocks allowed in K-FAC (SO) mode
+    use_so=True,            # enable gated K-FAC preconditioning
+    use_zo=True,            # enable ZO sensing + saddle-escape actuator
 )
 
 criterion = torch.nn.CrossEntropyLoss()
@@ -121,7 +124,6 @@ for inputs, targets in dataloader:
     loss = criterion(outputs, targets)
     loss.backward()
 
-    # Define loss closure for Zeroth-Order finite-difference steps
     def closure():
         with torch.no_grad():
             return criterion(model(inputs), targets)
@@ -129,24 +131,77 @@ for inputs, targets in dataloader:
     optimizer.step(closure=closure)
 ```
 
+All hyperparameters used in the benchmark scripts below (including the full Trinity
+sensor/controller/K-FAC/escape configuration) live in [`config.yaml`](config.yaml) —
+nothing is hardcoded in the training scripts.
+
 ---
 
 ## 🏃 Running Experiments
 
-### Benchmarks
+### Benchmarks: comparing optimizers
 
-Run benchmarks individually across architectures:
+Each training script accepts `--optimizer {adam,rmsprop,sgd,trinity}` and reads every
+other setting (dataset, batch size, epochs, LR schedule, per-optimizer hyperparameters)
+from [`config.yaml`](config.yaml), so all four optimizers are trained under identical
+conditions — same architecture, same Long-Tailed CIFAR data, same schedule.
+
+Edit `config.yaml` to change the dataset/imbalance factor/epoch budget, then run all
+four optimizers for a given architecture:
 
 ```bash
-# Train ResNet-18 on Long-Tailed CIFAR-10 (imbalance 0.01, 300 epochs)
-python3 train_resnet18_dsaa.py --dataset cifar10 --imb_factor 0.01 --epochs 300
+# ResNet-18
+python train_resnet18_dsaa.py --optimizer adam
+python train_resnet18_dsaa.py --optimizer rmsprop
+python train_resnet18_dsaa.py --optimizer sgd
+python train_resnet18_dsaa.py --optimizer trinity
 
-# Train Wide-ResNet-101-2 on Long-Tailed CIFAR-10 (imbalance 0.01, 200 epochs)
-python3 train_wide_resnet_dsaa.py --dataset cifar10 --imb_factor 0.01 --epochs 200
+# Wide-ResNet-101-2
+python train_wide_resnet_dsaa.py --optimizer adam
+python train_wide_resnet_dsaa.py --optimizer rmsprop
+python train_wide_resnet_dsaa.py --optimizer sgd
+python train_wide_resnet_dsaa.py --optimizer trinity
 
-# Train 100M Transformer on Long-Tailed CIFAR-10 (100 epochs)
-python3 train_transformer_dsaa.py --dataset cifar10 --imb_factor 0.01 --epochs 100
+# 100M Transformer (ViT-style)
+python train_transformer_dsaa.py --optimizer adam
+python train_transformer_dsaa.py --optimizer rmsprop
+python train_transformer_dsaa.py --optimizer sgd
+python train_transformer_dsaa.py --optimizer trinity
 ```
+
+Or loop over all three architectures and four optimizers in one go:
+
+```bash
+for opt in adam rmsprop sgd trinity; do
+  python train_resnet18_dsaa.py --optimizer $opt
+  python train_wide_resnet_dsaa.py --optimizer $opt
+  python train_transformer_dsaa.py --optimizer $opt
+done
+```
+
+Each run writes `results_dsaa2026/{model}_{optimizer}_{dataset}_imb{imb_factor}.csv`
+with per-epoch train/val loss, accuracy, and head/medium/tail shot accuracy.
+
+**wandb.** Every run also logs to Weights & Biases. The project name comes from
+`wandb.project` in `config.yaml` (default `trinity-optimizer-comparison`), suffixed
+per architecture — e.g. `trinity-optimizer-comparison-resnet18` — so **one wandb
+project holds every optimizer's run for a given model + dataset** as separate,
+directly comparable runs (named `adam`, `rmsprop`, `sgd`, `trinity`).
+
+### Comparison plots
+
+Once the CSVs for all four optimizers exist for a model, generate the
+accuracy-vs-epoch comparison plot (converging curves with final-accuracy labels):
+
+```bash
+python plot_optimizer_comparison.py --model resnet18
+python plot_optimizer_comparison.py --model wideresnet
+python plot_optimizer_comparison.py --model transformer
+# or all three at once:
+python plot_optimizer_comparison.py --model all
+```
+
+Plots are saved to `figs/{model}_{dataset}_imb{imb_factor}_val_acc.png`.
 
 ### Ablation Studies
 

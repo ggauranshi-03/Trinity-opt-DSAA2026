@@ -4,7 +4,6 @@ import argparse
 
 import torch
 import torch.nn as nn
-import torchvision.models as models
 import wandb
 
 from datasets_lt import get_dataloaders, PerClassEvaluator
@@ -13,11 +12,100 @@ from optimizer_factory import load_config, build_optimizer, OPTIMIZER_CHOICES
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
 
+class MultiheadSelfAttention(nn.Module):
+    def __init__(self, embed_dim=384, num_heads=6):
+        super().__init__()
+        self.embed_dim = embed_dim
+        self.num_heads = num_heads
+        self.head_dim = embed_dim // num_heads
+        assert self.head_dim * num_heads == embed_dim, "embed_dim must be divisible by num_heads"
+
+        # Explicit linear modules so Trinity discovers and preconditions Q, K, V, and Out
+        self.q_proj = nn.Linear(embed_dim, embed_dim)
+        self.k_proj = nn.Linear(embed_dim, embed_dim)
+        self.v_proj = nn.Linear(embed_dim, embed_dim)
+        self.out_proj = nn.Linear(embed_dim, embed_dim)
+
+    def forward(self, x):
+        B, S, D = x.shape
+        q = self.q_proj(x).view(B, S, self.num_heads, self.head_dim).transpose(1, 2)
+        k = self.k_proj(x).view(B, S, self.num_heads, self.head_dim).transpose(1, 2)
+        v = self.v_proj(x).view(B, S, self.num_heads, self.head_dim).transpose(1, 2)
+
+        out = torch.nn.functional.scaled_dot_product_attention(q, k, v)
+        out = out.transpose(1, 2).reshape(B, S, D)
+        return self.out_proj(out)
+
+
+class TransformerBlock(nn.Module):
+    def __init__(self, embed_dim=384, num_heads=6, dim_feedforward=1536):
+        super().__init__()
+        self.norm1 = nn.LayerNorm(embed_dim)
+        self.self_attn = MultiheadSelfAttention(embed_dim, num_heads)
+        self.norm2 = nn.LayerNorm(embed_dim)
+        self.linear1 = nn.Linear(embed_dim, dim_feedforward)
+        self.activation = nn.GELU()
+        self.linear2 = nn.Linear(dim_feedforward, embed_dim)
+
+    def forward(self, x):
+        # norm_first (Pre-LN)
+        x = x + self.self_attn(self.norm1(x))
+        x = x + self.linear2(self.activation(self.linear1(self.norm2(x))))
+        return x
+
+
+class CIFAR100MTransformerSmall(nn.Module):
+    """Same architecture family as CIFAR100MTransformer (train_transformer_dsaa.py),
+    shrunk from depth=12/embed_dim=768 (74 Trinity blocks) to depth=6/embed_dim=384
+    (38 blocks: patch_embed + 6*(q,k,v,out,linear1,linear2) + head).
+
+    Why: the 74-block version made Trinity's ZO sensor too slow to cover every block
+    (sensor_nblocks/sensor_interval were tuned for ResNet-18's ~18-20 blocks), so
+    K-FAC never turned on within a normal training budget. Halving the depth and
+    embed_dim roughly halves the block count, closing most of that gap while
+    keeping this a genuine transformer (attention + MLP blocks, LayerNorm, no
+    convolutional inductive bias) for an architectural-generality comparison.
+    """
+    def __init__(self, num_classes=10, depth=6, embed_dim=384, num_heads=6, dim_feedforward=1536):
+        super().__init__()
+        self.patch_size = 4
+        self.embed_dim = embed_dim
+
+        self.patch_embed = nn.Conv2d(3, self.embed_dim, kernel_size=self.patch_size, stride=self.patch_size)
+        self.cls_token = nn.Parameter(torch.zeros(1, 1, self.embed_dim))
+        self.pos_embed = nn.Parameter(torch.zeros(1, 64 + 1, self.embed_dim))
+        nn.init.trunc_normal_(self.pos_embed, std=0.02)
+        nn.init.trunc_normal_(self.cls_token, std=0.02)
+
+        self.blocks = nn.ModuleList([
+            TransformerBlock(embed_dim=self.embed_dim, num_heads=num_heads, dim_feedforward=dim_feedforward)
+            for _ in range(depth)
+        ])
+
+        self.norm = nn.LayerNorm(self.embed_dim)
+        self.head = nn.Linear(self.embed_dim, num_classes)
+
+    def forward(self, x):
+        B = x.shape[0]
+        x = self.patch_embed(x).flatten(2).transpose(1, 2)
+        cls_tokens = self.cls_token.expand(B, -1, -1)
+        x = torch.cat((cls_tokens, x), dim=1)
+        x = x + self.pos_embed
+        for block in self.blocks:
+            x = block(x)
+        x = self.norm(x[:, 0])
+        return self.head(x)
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--optimizer', type=str, default='trinity', choices=OPTIMIZER_CHOICES)
     parser.add_argument('--config', type=str, default='config.yaml')
     parser.add_argument('--output_dir', type=str, default='results_dsaa2026')
+    parser.add_argument('--depth', type=int, default=6)
+    parser.add_argument('--embed_dim', type=int, default=384)
+    parser.add_argument('--num_heads', type=int, default=6)
+    parser.add_argument('--dim_feedforward', type=int, default=1536)
     args = parser.parse_args()
 
     cfg = load_config(args.config)
@@ -29,7 +117,7 @@ def main():
     os.makedirs(args.output_dir, exist_ok=True)
     csv_path = os.path.join(
         args.output_dir,
-        f"resnet18_{args.optimizer}_{ds_cfg['name']}_imb{ds_cfg['imb_factor']}.csv")
+        f"transformer_small_{args.optimizer}_{ds_cfg['name']}_imb{ds_cfg['imb_factor']}.csv")
     with open(csv_path, 'w') as f:
         f.write("epoch,train_loss,train_acc,val_loss,val_acc,head_acc,med_acc,tail_acc,time_s\n")
 
@@ -38,13 +126,15 @@ def main():
         num_workers=ds_cfg['num_workers'])
     evaluator = PerClassEvaluator(num_classes, img_num_list)
 
-    model = models.resnet18(weights=None, num_classes=num_classes).to(device)
+    model = CIFAR100MTransformerSmall(
+        num_classes=num_classes, depth=args.depth, embed_dim=args.embed_dim,
+        num_heads=args.num_heads, dim_feedforward=args.dim_feedforward).to(device)
     criterion = nn.CrossEntropyLoss()
 
     optimizer, scheduler, needs_closure = build_optimizer(args.optimizer, model, cfg, epochs,
-                                                           model_name='resnet18')
+                                                           model_name='transformer_small')
 
-    run = wandb.init(project=f"{cfg['wandb']['project']}-resnet18",
+    run = wandb.init(project=f"{cfg['wandb']['project']}-transformer-small",
                       group=f"{ds_cfg['name']}_imb{ds_cfg['imb_factor']}",
                       name=args.optimizer,
                       config={**vars(args), **ds_cfg, **tr_cfg, 'optimizer': args.optimizer})

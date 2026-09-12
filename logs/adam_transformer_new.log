@@ -1,0 +1,240 @@
+nohup: ignoring input
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /home/anant/.netrc.
+wandb: Currently logged in as: anant-jain (dcll-iiitd) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: setting up run z2zb5af8
+wandb: Tracking run with wandb version 0.29.0
+wandb: Run data is saved locally in /home/anant/update-trinity/Trinity-opt-DSAA2026/wandb/run-20260910_061727-z2zb5af8
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run adam
+wandb: ⭐️ View project at https://wandb.ai/dcll-iiitd/new-transformer-trinity-optimizer-comparison-200-transformer-small
+wandb: 🚀 View run at https://wandb.ai/dcll-iiitd/new-transformer-trinity-optimizer-comparison-200-transformer-small/runs/z2zb5af8
+[*] Generated Long-Tailed CIFAR-10 (Imbalance: 0.01). Total train samples: 12406
+[adam] Epoch 1/200 - Loss: 1.3933, Val Acc: 19.92%, Head: 24.90%, Med: 0.00%, Tail: 0.00%
+[adam] Epoch 2/200 - Loss: 1.2568, Val Acc: 26.03%, Head: 32.54%, Med: 0.00%, Tail: 0.00%
+[adam] Epoch 3/200 - Loss: 1.1431, Val Acc: 24.31%, Head: 30.39%, Med: 0.00%, Tail: 0.00%
+[adam] Epoch 4/200 - Loss: 1.1068, Val Acc: 23.31%, Head: 29.14%, Med: 0.00%, Tail: 0.00%
+[adam] Epoch 5/200 - Loss: 1.1105, Val Acc: 22.35%, Head: 27.94%, Med: 0.00%, Tail: 0.00%
+[adam] Epoch 6/200 - Loss: 1.0946, Val Acc: 26.19%, Head: 32.74%, Med: 0.00%, Tail: 0.00%
+[adam] Epoch 7/200 - Loss: 1.0635, Val Acc: 23.31%, Head: 29.14%, Med: 0.00%, Tail: 0.00%
+[adam] Epoch 8/200 - Loss: 1.0447, Val Acc: 26.69%, Head: 33.36%, Med: 0.00%, Tail: 0.00%
+[adam] Epoch 9/200 - Loss: 1.0219, Val Acc: 25.32%, Head: 31.65%, Med: 0.00%, Tail: 0.00%
+[adam] Epoch 10/200 - Loss: 1.0056, Val Acc: 25.50%, Head: 31.88%, Med: 0.00%, Tail: 0.00%
+[adam] Epoch 11/200 - Loss: 0.9694, Val Acc: 28.44%, Head: 35.55%, Med: 0.00%, Tail: 0.00%
+[adam] Epoch 12/200 - Loss: 0.9700, Val Acc: 29.04%, Head: 36.30%, Med: 0.00%, Tail: 0.00%
+[adam] Epoch 13/200 - Loss: 0.9555, Val Acc: 29.97%, Head: 37.46%, Med: 0.00%, Tail: 0.00%
+[adam] Epoch 14/200 - Loss: 0.9383, Val Acc: 29.88%, Head: 37.35%, Med: 0.00%, Tail: 0.00%
+[adam] Epoch 15/200 - Loss: 0.9154, Val Acc: 34.55%, Head: 43.19%, Med: 0.00%, Tail: 0.00%
+[adam] Epoch 16/200 - Loss: 0.9007, Val Acc: 30.78%, Head: 38.48%, Med: 0.00%, Tail: 0.00%
+[adam] Epoch 17/200 - Loss: 0.8904, Val Acc: 34.04%, Head: 42.55%, Med: 0.00%, Tail: 0.00%
+[adam] Epoch 18/200 - Loss: 0.8730, Val Acc: 33.31%, Head: 41.60%, Med: 0.15%, Tail: 0.00%
+[adam] Epoch 19/200 - Loss: 0.8599, Val Acc: 32.02%, Head: 40.02%, Med: 0.00%, Tail: 0.00%
+[adam] Epoch 20/200 - Loss: 0.8539, Val Acc: 32.55%, Head: 40.66%, Med: 0.10%, Tail: 0.00%
+[adam] Epoch 21/200 - Loss: 0.8438, Val Acc: 30.68%, Head: 38.35%, Med: 0.00%, Tail: 0.00%
+[adam] Epoch 22/200 - Loss: 0.8338, Val Acc: 30.98%, Head: 38.71%, Med: 0.05%, Tail: 0.00%
+[adam] Epoch 23/200 - Loss: 0.8214, Val Acc: 34.82%, Head: 43.42%, Med: 0.40%, Tail: 0.00%
+[adam] Epoch 24/200 - Loss: 0.8071, Val Acc: 35.12%, Head: 43.64%, Med: 1.05%, Tail: 0.00%
+[adam] Epoch 25/200 - Loss: 0.8044, Val Acc: 32.01%, Head: 40.00%, Med: 0.05%, Tail: 0.00%
+[adam] Epoch 26/200 - Loss: 0.7900, Val Acc: 37.20%, Head: 46.39%, Med: 0.45%, Tail: 0.00%
+[adam] Epoch 27/200 - Loss: 0.7811, Val Acc: 30.92%, Head: 38.64%, Med: 0.05%, Tail: 0.00%
+[adam] Epoch 28/200 - Loss: 0.7667, Val Acc: 37.97%, Head: 46.88%, Med: 2.35%, Tail: 0.00%
+[adam] Epoch 29/200 - Loss: 0.7521, Val Acc: 36.60%, Head: 45.51%, Med: 0.95%, Tail: 0.00%
+[adam] Epoch 30/200 - Loss: 0.7453, Val Acc: 37.23%, Head: 46.48%, Med: 0.25%, Tail: 0.00%
+[adam] Epoch 31/200 - Loss: 0.7304, Val Acc: 39.97%, Head: 49.76%, Med: 0.80%, Tail: 0.00%
+[adam] Epoch 32/200 - Loss: 0.7228, Val Acc: 39.74%, Head: 49.36%, Med: 1.25%, Tail: 0.00%
+[adam] Epoch 33/200 - Loss: 0.7084, Val Acc: 37.80%, Head: 47.21%, Med: 0.15%, Tail: 0.00%
+[adam] Epoch 34/200 - Loss: 0.7059, Val Acc: 42.76%, Head: 52.10%, Med: 5.40%, Tail: 0.00%
+[adam] Epoch 35/200 - Loss: 0.6970, Val Acc: 34.84%, Head: 43.44%, Med: 0.45%, Tail: 0.00%
+[adam] Epoch 36/200 - Loss: 0.6864, Val Acc: 35.34%, Head: 44.11%, Med: 0.25%, Tail: 0.00%
+[adam] Epoch 37/200 - Loss: 0.6800, Val Acc: 41.97%, Head: 51.33%, Med: 4.55%, Tail: 0.00%
+[adam] Epoch 38/200 - Loss: 0.6656, Val Acc: 38.75%, Head: 48.15%, Med: 1.15%, Tail: 0.00%
+[adam] Epoch 39/200 - Loss: 0.6611, Val Acc: 41.27%, Head: 50.73%, Med: 3.45%, Tail: 0.00%
+[adam] Epoch 40/200 - Loss: 0.6615, Val Acc: 41.34%, Head: 51.52%, Med: 0.60%, Tail: 0.00%
+[adam] Epoch 41/200 - Loss: 0.6352, Val Acc: 41.23%, Head: 51.21%, Med: 1.30%, Tail: 0.00%
+[adam] Epoch 42/200 - Loss: 0.6299, Val Acc: 42.41%, Head: 51.39%, Med: 6.50%, Tail: 0.00%
+[adam] Epoch 43/200 - Loss: 0.6212, Val Acc: 40.84%, Head: 50.51%, Med: 2.15%, Tail: 0.00%
+[adam] Epoch 44/200 - Loss: 0.6203, Val Acc: 43.18%, Head: 53.89%, Med: 0.35%, Tail: 0.00%
+[adam] Epoch 45/200 - Loss: 0.6068, Val Acc: 41.64%, Head: 51.90%, Med: 0.60%, Tail: 0.00%
+[adam] Epoch 46/200 - Loss: 0.5909, Val Acc: 42.62%, Head: 53.23%, Med: 0.20%, Tail: 0.00%
+[adam] Epoch 47/200 - Loss: 0.5879, Val Acc: 43.52%, Head: 52.86%, Med: 6.15%, Tail: 0.00%
+[adam] Epoch 48/200 - Loss: 0.5824, Val Acc: 43.10%, Head: 53.14%, Med: 2.95%, Tail: 0.00%
+[adam] Epoch 49/200 - Loss: 0.5747, Val Acc: 48.08%, Head: 57.76%, Med: 9.35%, Tail: 0.00%
+[adam] Epoch 50/200 - Loss: 0.5615, Val Acc: 45.72%, Head: 56.69%, Med: 1.85%, Tail: 0.00%
+[adam] Epoch 51/200 - Loss: 0.5561, Val Acc: 43.71%, Head: 52.81%, Med: 7.30%, Tail: 0.00%
+[adam] Epoch 52/200 - Loss: 0.5441, Val Acc: 46.49%, Head: 56.92%, Med: 4.75%, Tail: 0.00%
+[adam] Epoch 53/200 - Loss: 0.5329, Val Acc: 43.41%, Head: 53.85%, Med: 1.65%, Tail: 0.00%
+[adam] Epoch 54/200 - Loss: 0.5307, Val Acc: 46.38%, Head: 55.86%, Med: 8.45%, Tail: 0.00%
+[adam] Epoch 55/200 - Loss: 0.5234, Val Acc: 48.58%, Head: 58.16%, Med: 10.25%, Tail: 0.00%
+[adam] Epoch 56/200 - Loss: 0.5169, Val Acc: 47.84%, Head: 57.25%, Med: 10.20%, Tail: 0.00%
+[adam] Epoch 57/200 - Loss: 0.5150, Val Acc: 46.07%, Head: 55.83%, Med: 7.05%, Tail: 0.00%
+[adam] Epoch 58/200 - Loss: 0.4956, Val Acc: 47.12%, Head: 56.71%, Med: 8.75%, Tail: 0.00%
+[adam] Epoch 59/200 - Loss: 0.4937, Val Acc: 45.51%, Head: 55.92%, Med: 3.85%, Tail: 0.00%
+[adam] Epoch 60/200 - Loss: 0.4841, Val Acc: 45.16%, Head: 55.62%, Med: 3.30%, Tail: 0.00%
+[adam] Epoch 61/200 - Loss: 0.4763, Val Acc: 48.67%, Head: 56.88%, Med: 15.85%, Tail: 0.00%
+[adam] Epoch 62/200 - Loss: 0.4623, Val Acc: 44.76%, Head: 54.71%, Med: 4.95%, Tail: 0.00%
+[adam] Epoch 63/200 - Loss: 0.4629, Val Acc: 46.92%, Head: 56.96%, Med: 6.75%, Tail: 0.00%
+[adam] Epoch 64/200 - Loss: 0.4503, Val Acc: 46.54%, Head: 55.76%, Med: 9.65%, Tail: 0.00%
+[adam] Epoch 65/200 - Loss: 0.4453, Val Acc: 49.40%, Head: 58.95%, Med: 11.20%, Tail: 0.00%
+[adam] Epoch 66/200 - Loss: 0.4298, Val Acc: 46.05%, Head: 56.23%, Med: 5.35%, Tail: 0.00%
+[adam] Epoch 67/200 - Loss: 0.4271, Val Acc: 44.98%, Head: 54.35%, Med: 7.50%, Tail: 0.00%
+[adam] Epoch 68/200 - Loss: 0.4177, Val Acc: 47.86%, Head: 58.12%, Med: 6.80%, Tail: 0.00%
+[adam] Epoch 69/200 - Loss: 0.4184, Val Acc: 49.62%, Head: 58.81%, Med: 12.85%, Tail: 0.00%
+[adam] Epoch 70/200 - Loss: 0.3970, Val Acc: 47.67%, Head: 58.08%, Med: 6.05%, Tail: 0.00%
+[adam] Epoch 71/200 - Loss: 0.3978, Val Acc: 47.73%, Head: 57.02%, Med: 10.55%, Tail: 0.00%
+[adam] Epoch 72/200 - Loss: 0.3929, Val Acc: 47.90%, Head: 57.76%, Med: 8.45%, Tail: 0.00%
+[adam] Epoch 73/200 - Loss: 0.3680, Val Acc: 46.24%, Head: 55.48%, Med: 9.30%, Tail: 0.00%
+[adam] Epoch 74/200 - Loss: 0.3623, Val Acc: 48.00%, Head: 57.31%, Med: 10.75%, Tail: 0.00%
+[adam] Epoch 75/200 - Loss: 0.3605, Val Acc: 50.26%, Head: 58.38%, Med: 17.80%, Tail: 0.00%
+[adam] Epoch 76/200 - Loss: 0.3663, Val Acc: 52.50%, Head: 61.11%, Med: 18.05%, Tail: 0.00%
+[adam] Epoch 77/200 - Loss: 0.3378, Val Acc: 49.67%, Head: 58.05%, Med: 16.15%, Tail: 0.00%
+[adam] Epoch 78/200 - Loss: 0.3408, Val Acc: 51.86%, Head: 59.61%, Med: 20.85%, Tail: 0.00%
+[adam] Epoch 79/200 - Loss: 0.3174, Val Acc: 47.49%, Head: 57.14%, Med: 8.90%, Tail: 0.00%
+[adam] Epoch 80/200 - Loss: 0.3227, Val Acc: 48.37%, Head: 56.49%, Med: 15.90%, Tail: 0.00%
+[adam] Epoch 81/200 - Loss: 0.3224, Val Acc: 51.01%, Head: 59.29%, Med: 17.90%, Tail: 0.00%
+[adam] Epoch 82/200 - Loss: 0.3072, Val Acc: 52.14%, Head: 59.16%, Med: 24.05%, Tail: 0.00%
+[adam] Epoch 83/200 - Loss: 0.3012, Val Acc: 48.77%, Head: 57.59%, Med: 13.50%, Tail: 0.00%
+[adam] Epoch 84/200 - Loss: 0.2962, Val Acc: 50.26%, Head: 57.36%, Med: 21.85%, Tail: 0.00%
+[adam] Epoch 85/200 - Loss: 0.2916, Val Acc: 48.09%, Head: 58.50%, Med: 6.45%, Tail: 0.00%
+[adam] Epoch 86/200 - Loss: 0.2794, Val Acc: 47.43%, Head: 55.92%, Med: 13.45%, Tail: 0.00%
+[adam] Epoch 87/200 - Loss: 0.2763, Val Acc: 49.85%, Head: 58.25%, Med: 16.25%, Tail: 0.00%
+[adam] Epoch 88/200 - Loss: 0.2736, Val Acc: 47.29%, Head: 57.69%, Med: 5.70%, Tail: 0.00%
+[adam] Epoch 89/200 - Loss: 0.2529, Val Acc: 49.95%, Head: 59.50%, Med: 11.75%, Tail: 0.00%
+[adam] Epoch 90/200 - Loss: 0.2573, Val Acc: 48.92%, Head: 57.81%, Med: 13.35%, Tail: 0.00%
+[adam] Epoch 91/200 - Loss: 0.2409, Val Acc: 52.70%, Head: 60.51%, Med: 21.45%, Tail: 0.00%
+[adam] Epoch 92/200 - Loss: 0.2363, Val Acc: 47.80%, Head: 57.50%, Med: 9.00%, Tail: 0.00%
+[adam] Epoch 93/200 - Loss: 0.2275, Val Acc: 49.25%, Head: 58.45%, Med: 12.45%, Tail: 0.00%
+[adam] Epoch 94/200 - Loss: 0.2185, Val Acc: 51.06%, Head: 57.98%, Med: 23.40%, Tail: 0.00%
+[adam] Epoch 95/200 - Loss: 0.2203, Val Acc: 49.78%, Head: 58.62%, Med: 14.40%, Tail: 0.00%
+[adam] Epoch 96/200 - Loss: 0.2108, Val Acc: 47.38%, Head: 55.71%, Med: 14.05%, Tail: 0.00%
+[adam] Epoch 97/200 - Loss: 0.1989, Val Acc: 49.11%, Head: 57.56%, Med: 15.30%, Tail: 0.00%
+[adam] Epoch 98/200 - Loss: 0.2024, Val Acc: 49.10%, Head: 57.06%, Med: 17.25%, Tail: 0.00%
+[adam] Epoch 99/200 - Loss: 0.1959, Val Acc: 48.11%, Head: 56.90%, Med: 12.95%, Tail: 0.00%
+[adam] Epoch 100/200 - Loss: 0.1944, Val Acc: 47.14%, Head: 56.58%, Med: 9.40%, Tail: 0.00%
+[adam] Epoch 101/200 - Loss: 0.1843, Val Acc: 45.98%, Head: 55.17%, Med: 9.20%, Tail: 0.00%
+[adam] Epoch 102/200 - Loss: 0.1758, Val Acc: 49.33%, Head: 58.99%, Med: 10.70%, Tail: 0.00%
+[adam] Epoch 103/200 - Loss: 0.1711, Val Acc: 47.06%, Head: 56.54%, Med: 9.15%, Tail: 0.00%
+[adam] Epoch 104/200 - Loss: 0.1725, Val Acc: 48.21%, Head: 57.41%, Med: 11.40%, Tail: 0.00%
+[adam] Epoch 105/200 - Loss: 0.1739, Val Acc: 47.75%, Head: 56.36%, Med: 13.30%, Tail: 0.00%
+[adam] Epoch 106/200 - Loss: 0.1623, Val Acc: 50.39%, Head: 59.00%, Med: 15.95%, Tail: 0.00%
+[adam] Epoch 107/200 - Loss: 0.1560, Val Acc: 49.96%, Head: 59.25%, Med: 12.80%, Tail: 0.00%
+[adam] Epoch 108/200 - Loss: 0.1462, Val Acc: 49.00%, Head: 57.69%, Med: 14.25%, Tail: 0.00%
+[adam] Epoch 109/200 - Loss: 0.1460, Val Acc: 48.65%, Head: 57.41%, Med: 13.60%, Tail: 0.00%
+[adam] Epoch 110/200 - Loss: 0.1415, Val Acc: 47.25%, Head: 56.85%, Med: 8.85%, Tail: 0.00%
+[adam] Epoch 111/200 - Loss: 0.1418, Val Acc: 48.25%, Head: 57.79%, Med: 10.10%, Tail: 0.00%
+[adam] Epoch 112/200 - Loss: 0.1337, Val Acc: 46.51%, Head: 55.80%, Med: 9.35%, Tail: 0.00%
+[adam] Epoch 113/200 - Loss: 0.1322, Val Acc: 48.16%, Head: 56.15%, Med: 16.20%, Tail: 0.00%
+[adam] Epoch 114/200 - Loss: 0.1273, Val Acc: 48.68%, Head: 57.75%, Med: 12.40%, Tail: 0.00%
+[adam] Epoch 115/200 - Loss: 0.1222, Val Acc: 50.03%, Head: 57.49%, Med: 20.20%, Tail: 0.00%
+[adam] Epoch 116/200 - Loss: 0.1137, Val Acc: 49.49%, Head: 57.66%, Med: 16.80%, Tail: 0.00%
+[adam] Epoch 117/200 - Loss: 0.1155, Val Acc: 47.47%, Head: 56.45%, Med: 11.55%, Tail: 0.00%
+[adam] Epoch 118/200 - Loss: 0.1122, Val Acc: 48.44%, Head: 57.81%, Med: 10.95%, Tail: 0.00%
+[adam] Epoch 119/200 - Loss: 0.1089, Val Acc: 47.09%, Head: 55.75%, Med: 12.45%, Tail: 0.00%
+[adam] Epoch 120/200 - Loss: 0.0950, Val Acc: 47.95%, Head: 56.49%, Med: 13.80%, Tail: 0.00%
+[adam] Epoch 121/200 - Loss: 0.1036, Val Acc: 47.98%, Head: 56.11%, Med: 15.45%, Tail: 0.00%
+[adam] Epoch 122/200 - Loss: 0.1012, Val Acc: 50.03%, Head: 58.46%, Med: 16.30%, Tail: 0.00%
+[adam] Epoch 123/200 - Loss: 0.0983, Val Acc: 49.33%, Head: 57.55%, Med: 16.45%, Tail: 0.00%
+[adam] Epoch 124/200 - Loss: 0.0961, Val Acc: 50.15%, Head: 58.40%, Med: 17.15%, Tail: 0.00%
+[adam] Epoch 125/200 - Loss: 0.0819, Val Acc: 49.02%, Head: 58.23%, Med: 12.20%, Tail: 0.00%
+[adam] Epoch 126/200 - Loss: 0.0832, Val Acc: 48.72%, Head: 57.31%, Med: 14.35%, Tail: 0.00%
+[adam] Epoch 127/200 - Loss: 0.0867, Val Acc: 47.01%, Head: 56.50%, Med: 9.05%, Tail: 0.00%
+[adam] Epoch 128/200 - Loss: 0.0797, Val Acc: 48.12%, Head: 57.46%, Med: 10.75%, Tail: 0.00%
+[adam] Epoch 129/200 - Loss: 0.0833, Val Acc: 49.03%, Head: 58.09%, Med: 12.80%, Tail: 0.00%
+[adam] Epoch 130/200 - Loss: 0.0717, Val Acc: 49.78%, Head: 58.11%, Med: 16.45%, Tail: 0.00%
+[adam] Epoch 131/200 - Loss: 0.0736, Val Acc: 48.67%, Head: 57.70%, Med: 12.55%, Tail: 0.00%
+[adam] Epoch 132/200 - Loss: 0.0746, Val Acc: 48.93%, Head: 58.65%, Med: 10.05%, Tail: 0.00%
+[adam] Epoch 133/200 - Loss: 0.0668, Val Acc: 48.17%, Head: 57.64%, Med: 10.30%, Tail: 0.00%
+[adam] Epoch 134/200 - Loss: 0.0633, Val Acc: 48.51%, Head: 56.86%, Med: 15.10%, Tail: 0.00%
+[adam] Epoch 135/200 - Loss: 0.0581, Val Acc: 48.52%, Head: 57.49%, Med: 12.65%, Tail: 0.00%
+[adam] Epoch 136/200 - Loss: 0.0563, Val Acc: 48.88%, Head: 58.45%, Med: 10.60%, Tail: 0.00%
+[adam] Epoch 137/200 - Loss: 0.0621, Val Acc: 50.35%, Head: 58.77%, Med: 16.65%, Tail: 0.00%
+[adam] Epoch 138/200 - Loss: 0.0564, Val Acc: 48.62%, Head: 57.66%, Med: 12.45%, Tail: 0.00%
+[adam] Epoch 139/200 - Loss: 0.0542, Val Acc: 48.40%, Head: 57.64%, Med: 11.45%, Tail: 0.00%
+[adam] Epoch 140/200 - Loss: 0.0529, Val Acc: 48.00%, Head: 56.17%, Med: 15.30%, Tail: 0.00%
+[adam] Epoch 141/200 - Loss: 0.0502, Val Acc: 49.74%, Head: 58.06%, Med: 16.45%, Tail: 0.00%
+[adam] Epoch 142/200 - Loss: 0.0489, Val Acc: 48.63%, Head: 57.54%, Med: 13.00%, Tail: 0.00%
+[adam] Epoch 143/200 - Loss: 0.0460, Val Acc: 49.80%, Head: 58.99%, Med: 13.05%, Tail: 0.00%
+[adam] Epoch 144/200 - Loss: 0.0445, Val Acc: 47.79%, Head: 56.86%, Med: 11.50%, Tail: 0.00%
+[adam] Epoch 145/200 - Loss: 0.0409, Val Acc: 48.82%, Head: 57.34%, Med: 14.75%, Tail: 0.00%
+[adam] Epoch 146/200 - Loss: 0.0420, Val Acc: 49.10%, Head: 58.21%, Med: 12.65%, Tail: 0.00%
+[adam] Epoch 147/200 - Loss: 0.0403, Val Acc: 47.63%, Head: 56.45%, Med: 12.35%, Tail: 0.00%
+[adam] Epoch 148/200 - Loss: 0.0356, Val Acc: 48.20%, Head: 56.89%, Med: 13.45%, Tail: 0.00%
+[adam] Epoch 149/200 - Loss: 0.0337, Val Acc: 49.15%, Head: 57.89%, Med: 14.20%, Tail: 0.00%
+[adam] Epoch 150/200 - Loss: 0.0362, Val Acc: 48.79%, Head: 57.42%, Med: 14.25%, Tail: 0.00%
+[adam] Epoch 151/200 - Loss: 0.0312, Val Acc: 47.83%, Head: 56.86%, Med: 11.70%, Tail: 0.00%
+[adam] Epoch 152/200 - Loss: 0.0297, Val Acc: 47.48%, Head: 56.61%, Med: 10.95%, Tail: 0.00%
+[adam] Epoch 153/200 - Loss: 0.0274, Val Acc: 47.77%, Head: 56.85%, Med: 11.45%, Tail: 0.00%
+[adam] Epoch 154/200 - Loss: 0.0251, Val Acc: 47.78%, Head: 57.10%, Med: 10.50%, Tail: 0.00%
+[adam] Epoch 155/200 - Loss: 0.0266, Val Acc: 47.84%, Head: 57.34%, Med: 9.85%, Tail: 0.00%
+[adam] Epoch 156/200 - Loss: 0.0276, Val Acc: 47.96%, Head: 56.70%, Med: 13.00%, Tail: 0.00%
+[adam] Epoch 157/200 - Loss: 0.0259, Val Acc: 49.20%, Head: 57.95%, Med: 14.20%, Tail: 0.00%
+[adam] Epoch 158/200 - Loss: 0.0257, Val Acc: 49.19%, Head: 57.77%, Med: 14.85%, Tail: 0.00%
+[adam] Epoch 159/200 - Loss: 0.0266, Val Acc: 48.47%, Head: 57.77%, Med: 11.25%, Tail: 0.00%
+[adam] Epoch 160/200 - Loss: 0.0207, Val Acc: 48.66%, Head: 58.01%, Med: 11.25%, Tail: 0.00%
+[adam] Epoch 161/200 - Loss: 0.0213, Val Acc: 48.86%, Head: 57.76%, Med: 13.25%, Tail: 0.00%
+[adam] Epoch 162/200 - Loss: 0.0171, Val Acc: 48.08%, Head: 57.15%, Med: 11.80%, Tail: 0.00%
+[adam] Epoch 163/200 - Loss: 0.0187, Val Acc: 48.07%, Head: 57.69%, Med: 9.60%, Tail: 0.00%
+[adam] Epoch 164/200 - Loss: 0.0169, Val Acc: 48.44%, Head: 57.33%, Med: 12.90%, Tail: 0.00%
+[adam] Epoch 165/200 - Loss: 0.0186, Val Acc: 48.80%, Head: 57.51%, Med: 13.95%, Tail: 0.00%
+[adam] Epoch 166/200 - Loss: 0.0165, Val Acc: 48.06%, Head: 57.74%, Med: 9.35%, Tail: 0.00%
+[adam] Epoch 167/200 - Loss: 0.0155, Val Acc: 48.29%, Head: 57.69%, Med: 10.70%, Tail: 0.00%
+[adam] Epoch 168/200 - Loss: 0.0138, Val Acc: 47.90%, Head: 57.31%, Med: 10.25%, Tail: 0.00%
+[adam] Epoch 169/200 - Loss: 0.0162, Val Acc: 48.64%, Head: 56.92%, Med: 15.50%, Tail: 0.00%
+[adam] Epoch 170/200 - Loss: 0.0145, Val Acc: 49.32%, Head: 58.34%, Med: 13.25%, Tail: 0.00%
+[adam] Epoch 171/200 - Loss: 0.0126, Val Acc: 49.21%, Head: 57.99%, Med: 14.10%, Tail: 0.00%
+[adam] Epoch 172/200 - Loss: 0.0105, Val Acc: 47.54%, Head: 56.74%, Med: 10.75%, Tail: 0.00%
+[adam] Epoch 173/200 - Loss: 0.0121, Val Acc: 48.91%, Head: 58.05%, Med: 12.35%, Tail: 0.00%
+[adam] Epoch 174/200 - Loss: 0.0098, Val Acc: 48.36%, Head: 57.71%, Med: 10.95%, Tail: 0.00%
+[adam] Epoch 175/200 - Loss: 0.0094, Val Acc: 48.60%, Head: 57.48%, Med: 13.10%, Tail: 0.00%
+[adam] Epoch 176/200 - Loss: 0.0087, Val Acc: 47.78%, Head: 56.91%, Med: 11.25%, Tail: 0.00%
+[adam] Epoch 177/200 - Loss: 0.0106, Val Acc: 48.71%, Head: 57.70%, Med: 12.75%, Tail: 0.00%
+[adam] Epoch 178/200 - Loss: 0.0102, Val Acc: 48.30%, Head: 57.41%, Med: 11.85%, Tail: 0.00%
+[adam] Epoch 179/200 - Loss: 0.0085, Val Acc: 48.45%, Head: 57.61%, Med: 11.80%, Tail: 0.00%
+[adam] Epoch 180/200 - Loss: 0.0091, Val Acc: 48.64%, Head: 57.61%, Med: 12.75%, Tail: 0.00%
+[adam] Epoch 181/200 - Loss: 0.0079, Val Acc: 48.37%, Head: 57.27%, Med: 12.75%, Tail: 0.00%
+[adam] Epoch 182/200 - Loss: 0.0079, Val Acc: 48.21%, Head: 57.49%, Med: 11.10%, Tail: 0.00%
+[adam] Epoch 183/200 - Loss: 0.0084, Val Acc: 48.49%, Head: 57.79%, Med: 11.30%, Tail: 0.00%
+[adam] Epoch 184/200 - Loss: 0.0079, Val Acc: 48.26%, Head: 57.61%, Med: 10.85%, Tail: 0.00%
+[adam] Epoch 185/200 - Loss: 0.0062, Val Acc: 48.48%, Head: 57.52%, Med: 12.30%, Tail: 0.00%
+[adam] Epoch 186/200 - Loss: 0.0065, Val Acc: 47.96%, Head: 57.25%, Med: 10.80%, Tail: 0.00%
+[adam] Epoch 187/200 - Loss: 0.0067, Val Acc: 48.39%, Head: 57.80%, Med: 10.75%, Tail: 0.00%
+[adam] Epoch 188/200 - Loss: 0.0073, Val Acc: 48.60%, Head: 57.95%, Med: 11.20%, Tail: 0.00%
+[adam] Epoch 189/200 - Loss: 0.0063, Val Acc: 48.51%, Head: 57.71%, Med: 11.70%, Tail: 0.00%
+[adam] Epoch 190/200 - Loss: 0.0068, Val Acc: 48.39%, Head: 57.70%, Med: 11.15%, Tail: 0.00%
+[adam] Epoch 191/200 - Loss: 0.0062, Val Acc: 48.51%, Head: 57.74%, Med: 11.60%, Tail: 0.00%
+[adam] Epoch 192/200 - Loss: 0.0060, Val Acc: 48.24%, Head: 57.59%, Med: 10.85%, Tail: 0.00%
+[adam] Epoch 193/200 - Loss: 0.0067, Val Acc: 48.27%, Head: 57.52%, Med: 11.25%, Tail: 0.00%
+[adam] Epoch 194/200 - Loss: 0.0067, Val Acc: 48.35%, Head: 57.50%, Med: 11.75%, Tail: 0.00%
+[adam] Epoch 195/200 - Loss: 0.0058, Val Acc: 48.29%, Head: 57.52%, Med: 11.35%, Tail: 0.00%
+[adam] Epoch 196/200 - Loss: 0.0054, Val Acc: 48.42%, Head: 57.61%, Med: 11.65%, Tail: 0.00%
+[adam] Epoch 197/200 - Loss: 0.0062, Val Acc: 48.45%, Head: 57.66%, Med: 11.60%, Tail: 0.00%
+[adam] Epoch 198/200 - Loss: 0.0061, Val Acc: 48.34%, Head: 57.55%, Med: 11.50%, Tail: 0.00%
+[adam] Epoch 199/200 - Loss: 0.0060, Val Acc: 48.34%, Head: 57.55%, Med: 11.50%, Tail: 0.00%
+wandb: updating run metadata
+wandb: uploading wandb-summary.json; uploading config.yaml; uploading output.log
+wandb: uploading wandb-summary.json; uploading config.yaml
+wandb: uploading history steps 196-199, summary, console lines 196-199
+wandb: 
+wandb: Run history:
+wandb:        epoch ▁▁▁▁▁▁▂▂▂▂▂▂▃▃▃▃▃▃▃▃▅▅▅▅▅▅▅▆▆▆▆▆▆▆▇▇▇▇▇█
+wandb:    train/acc ▁▃▃▃▄▄▄▄▅▅▅▅▆▆▆▆▇▇▇▇▇▇▇▇▇▇██████████████
+wandb:   train/loss █▆▆▆▅▄▄▄▄▄▄▃▃▃▃▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:      val/acc ▁▂▃▅▅▄▆▆▆▆▇▇█▇▇█▇███▇▇█▇█▇█▇▇▇█▇██▇▇▇▇▇▇
+wandb: val/head_acc ▁▄▄▄▅▇▇█▇▇█▇██████▇██▇▇▇█▇███████▇██████
+wandb:     val/loss ▄▅▅▃▃▂▂▂▂▃▁▂▂▂▁▂▂▂▃▂▃▂▃▄▄▄▄▅▆▄▆▅▆▆▆▇▇███
+wandb:  val/med_acc ▁▁▁▁▁▁▁▁▃▁▃▄▄▄▃▄▇▆▃█▆▆▆▆▆▅▄▆▄▆▆▆▆▅▅▆▅▅▅▅
+wandb: val/tail_acc ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb: 
+wandb: Run summary:
+wandb:        epoch 200
+wandb:    train/acc 99.90327
+wandb:   train/loss 0.00562
+wandb:      val/acc 48.37
+wandb: val/head_acc 57.65
+wandb:     val/loss 3.90337
+wandb:  val/med_acc 11.25
+wandb: val/tail_acc 0
+wandb: 
+wandb: 🚀 View run adam at: https://wandb.ai/dcll-iiitd/new-transformer-trinity-optimizer-comparison-200-transformer-small/runs/z2zb5af8
+wandb: ⭐️ View project at: https://wandb.ai/dcll-iiitd/new-transformer-trinity-optimizer-comparison-200-transformer-small
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20260910_061727-z2zb5af8/logs
+[adam] Epoch 200/200 - Loss: 0.0056, Val Acc: 48.37%, Head: 57.65%, Med: 11.25%, Tail: 0.00%

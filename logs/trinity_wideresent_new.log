@@ -1,0 +1,248 @@
+nohup: ignoring input
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /home/anant/.netrc.
+wandb: Currently logged in as: anant-jain (dcll-iiitd) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: setting up run vjaigo1o
+wandb: Tracking run with wandb version 0.29.0
+wandb: Run data is saved locally in /home/anant/update-trinity/Trinity-opt-DSAA2026/wandb/run-20260910_104606-vjaigo1o
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run trinity
+wandb: ⭐️ View project at https://wandb.ai/dcll-iiitd/wideresnet-trinity-optimizer-comparison-200-wideresnet
+wandb: 🚀 View run at https://wandb.ai/dcll-iiitd/wideresnet-trinity-optimizer-comparison-200-wideresnet/runs/vjaigo1o
+[*] Generated Long-Tailed CIFAR-10 (Imbalance: 0.01). Total train samples: 12406
+[Trinity] d_max=4800: 22.700% of trackable parameters permanently excluded from K-FAC (kept on AdamW).
+<sys>:0: UserWarning: Full backward hook is firing when gradients are computed with respect to module outputs since no inputs require gradients. See https://docs.pytorch.org/docs/main/generated/torch.nn.Module.html#torch.nn.Module.register_full_backward_hook for more details.
+[trinity] Epoch 1/200 - Loss: 2.7424, Val Acc: 10.40%, Head: 12.69%, Med: 1.25%, Tail: 0.00% | SO: 0/105, rho: 0.971, nu: 0.055, escape: 0, kfac_inv: 0/0, graft_scale: 1.000
+[trinity] Epoch 2/200 - Loss: 1.6820, Val Acc: 20.49%, Head: 25.61%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.914, nu: 0.176, escape: 0, kfac_inv: 0/0, graft_scale: 1.000
+[trinity] Epoch 3/200 - Loss: 1.2576, Val Acc: 26.14%, Head: 32.67%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.856, nu: 0.252, escape: 0, kfac_inv: 0/0, graft_scale: 1.000
+[trinity] Epoch 4/200 - Loss: 1.0943, Val Acc: 27.52%, Head: 34.40%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.799, nu: 0.312, escape: 0, kfac_inv: 0/0, graft_scale: 1.000
+[trinity] Epoch 5/200 - Loss: 1.0234, Val Acc: 29.04%, Head: 36.30%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.741, nu: 0.386, escape: 0, kfac_inv: 0/0, graft_scale: 1.000
+[trinity] Epoch 6/200 - Loss: 0.9357, Val Acc: 30.04%, Head: 37.55%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.684, nu: 0.471, escape: 0, kfac_inv: 0/0, graft_scale: 1.000
+[trinity] Epoch 7/200 - Loss: 0.8737, Val Acc: 33.16%, Head: 41.45%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.626, nu: 0.486, escape: 0, kfac_inv: 0/0, graft_scale: 1.000
+[trinity] Epoch 8/200 - Loss: 0.8246, Val Acc: 34.98%, Head: 43.73%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.602, nu: 0.536, escape: 0, kfac_inv: 0/0, graft_scale: 1.000
+[trinity] Epoch 9/200 - Loss: 0.7822, Val Acc: 36.30%, Head: 45.38%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.564, nu: 0.536, escape: 0, kfac_inv: 0/0, graft_scale: 1.000
+[trinity] Epoch 10/200 - Loss: 0.7474, Val Acc: 37.79%, Head: 47.24%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.531, nu: 0.457, escape: 0, kfac_inv: 0/0, graft_scale: 1.000
+[trinity] Epoch 11/200 - Loss: 0.7096, Val Acc: 35.30%, Head: 44.12%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.498, nu: 0.419, escape: 0, kfac_inv: 0/0, graft_scale: 1.000
+[trinity] Epoch 12/200 - Loss: 0.7068, Val Acc: 38.12%, Head: 47.65%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.464, nu: 0.467, escape: 0, kfac_inv: 0/0, graft_scale: 1.000
+[trinity] Epoch 13/200 - Loss: 0.6567, Val Acc: 40.06%, Head: 50.08%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.431, nu: 0.460, escape: 0, kfac_inv: 0/0, graft_scale: 1.000
+[trinity] Epoch 14/200 - Loss: 0.6385, Val Acc: 39.59%, Head: 49.49%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.397, nu: 0.431, escape: 0, kfac_inv: 0/0, graft_scale: 1.000
+[trinity] Epoch 15/200 - Loss: 0.6070, Val Acc: 41.60%, Head: 52.00%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.381, nu: 0.440, escape: 0, kfac_inv: 0/0, graft_scale: 1.000
+[trinity] Epoch 16/200 - Loss: 0.5719, Val Acc: 44.73%, Head: 55.91%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.350, nu: 0.431, escape: 0, kfac_inv: 0/0, graft_scale: 1.000
+[trinity] Epoch 17/200 - Loss: 0.5597, Val Acc: 46.23%, Head: 57.79%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.328, nu: 0.398, escape: 0, kfac_inv: 0/0, graft_scale: 1.000
+[trinity] Epoch 18/200 - Loss: 0.5757, Val Acc: 44.78%, Head: 55.98%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.309, nu: 0.390, escape: 0, kfac_inv: 0/0, graft_scale: 1.000
+[trinity] Epoch 19/200 - Loss: 0.5291, Val Acc: 47.30%, Head: 59.12%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.289, nu: 0.421, escape: 0, kfac_inv: 0/0, graft_scale: 1.000
+[trinity] Epoch 20/200 - Loss: 0.5081, Val Acc: 43.29%, Head: 53.38%, Med: 2.95%, Tail: 0.00% | SO: 0/105, rho: 0.270, nu: 0.369, escape: 0, kfac_inv: 0/0, graft_scale: 1.000
+[trinity] Epoch 21/200 - Loss: 0.4855, Val Acc: 46.16%, Head: 57.70%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.250, nu: 0.407, escape: 0, kfac_inv: 0/0, graft_scale: 1.000
+[trinity] Epoch 22/200 - Loss: 0.4681, Val Acc: 49.12%, Head: 61.06%, Med: 1.35%, Tail: 0.00% | SO: 0/105, rho: 0.231, nu: 0.360, escape: 0, kfac_inv: 0/0, graft_scale: 1.000
+[trinity] Epoch 23/200 - Loss: 0.4469, Val Acc: 49.16%, Head: 59.92%, Med: 6.10%, Tail: 0.00% | SO: 0/105, rho: 0.221, nu: 0.407, escape: 0, kfac_inv: 0/0, graft_scale: 1.000
+[trinity] Epoch 24/200 - Loss: 0.4229, Val Acc: 54.29%, Head: 64.86%, Med: 12.00%, Tail: 0.00% | SO: 0/105, rho: 0.203, nu: 0.464, escape: 0, kfac_inv: 0/0, graft_scale: 1.000
+[trinity] Epoch 25/200 - Loss: 0.4020, Val Acc: 54.85%, Head: 65.69%, Med: 11.50%, Tail: 0.00% | SO: 0/105, rho: 0.191, nu: 0.462, escape: 0, kfac_inv: 0/0, graft_scale: 1.000
+[trinity] Epoch 26/200 - Loss: 0.3787, Val Acc: 51.92%, Head: 61.44%, Med: 13.85%, Tail: 0.00% | SO: 0/105, rho: 0.179, nu: 0.471, escape: 0, kfac_inv: 0/0, graft_scale: 1.000
+[trinity] Epoch 27/200 - Loss: 0.3738, Val Acc: 54.11%, Head: 64.80%, Med: 11.35%, Tail: 0.00% | SO: 0/105, rho: 0.168, nu: 0.471, escape: 0, kfac_inv: 0/0, graft_scale: 1.000
+[trinity] Epoch 28/200 - Loss: 0.3591, Val Acc: 48.47%, Head: 60.19%, Med: 1.60%, Tail: 0.00% | SO: 0/105, rho: 0.157, nu: 0.526, escape: 0, kfac_inv: 0/0, graft_scale: 1.000
+[trinity] Epoch 29/200 - Loss: 0.3459, Val Acc: 53.85%, Head: 67.14%, Med: 0.70%, Tail: 0.00% | SO: 0/105, rho: 0.146, nu: 0.483, escape: 0, kfac_inv: 0/0, graft_scale: 1.000
+[trinity] Epoch 30/200 - Loss: 0.3379, Val Acc: 56.14%, Head: 66.94%, Med: 12.95%, Tail: 0.00% | SO: 0/105, rho: 0.140, nu: 0.512, escape: 0, kfac_inv: 0/0, graft_scale: 1.000
+[trinity] Epoch 31/200 - Loss: 0.3126, Val Acc: 56.48%, Head: 65.21%, Med: 21.55%, Tail: 0.00% | SO: 0/105, rho: 0.129, nu: 0.536, escape: 0, kfac_inv: 0/0, graft_scale: 1.000
+[trinity] Epoch 32/200 - Loss: 0.3143, Val Acc: 57.49%, Head: 66.64%, Med: 20.90%, Tail: 0.00% | SO: 0/105, rho: 0.118, nu: 0.471, escape: 0, kfac_inv: 0/0, graft_scale: 1.000
+[trinity] Epoch 33/200 - Loss: 0.2921, Val Acc: 54.64%, Head: 65.72%, Med: 10.30%, Tail: 0.00% | SO: 7/105, rho: 0.111, nu: 0.519, escape: 0, kfac_inv: 7/7, graft_scale: 0.999
+[trinity] Epoch 34/200 - Loss: 0.2798, Val Acc: 54.79%, Head: 65.76%, Med: 10.90%, Tail: 0.00% | SO: 21/105, rho: 0.104, nu: 0.510, escape: 0, kfac_inv: 0/0, graft_scale: 0.949
+[trinity] Epoch 35/200 - Loss: 0.2525, Val Acc: 57.58%, Head: 65.97%, Med: 24.00%, Tail: 0.00% | SO: 35/105, rho: 0.098, nu: 0.502, escape: 0, kfac_inv: 21/21, graft_scale: 0.856
+[trinity] Epoch 36/200 - Loss: 0.2527, Val Acc: 54.66%, Head: 64.08%, Med: 17.00%, Tail: 0.00% | SO: 40/105, rho: 0.091, nu: 0.436, escape: 0, kfac_inv: 35/35, graft_scale: 0.787
+[trinity] Epoch 37/200 - Loss: 0.2535, Val Acc: 57.22%, Head: 67.28%, Med: 17.00%, Tail: 0.00% | SO: 40/105, rho: 0.085, nu: 0.452, escape: 0, kfac_inv: 40/40, graft_scale: 0.752
+[trinity] Epoch 38/200 - Loss: 0.2569, Val Acc: 59.27%, Head: 68.16%, Med: 23.70%, Tail: 0.00% | SO: 40/105, rho: 0.081, nu: 0.438, escape: 0, kfac_inv: 40/40, graft_scale: 0.753
+[trinity] Epoch 39/200 - Loss: 0.2265, Val Acc: 57.99%, Head: 66.96%, Med: 22.10%, Tail: 0.00% | SO: 40/105, rho: 0.075, nu: 0.424, escape: 0, kfac_inv: 40/40, graft_scale: 0.738
+[trinity] Epoch 40/200 - Loss: 0.2193, Val Acc: 59.08%, Head: 67.46%, Med: 25.55%, Tail: 0.00% | SO: 40/105, rho: 0.069, nu: 0.471, escape: 0, kfac_inv: 40/40, graft_scale: 0.733
+[trinity] Epoch 41/200 - Loss: 0.2032, Val Acc: 59.34%, Head: 66.49%, Med: 30.75%, Tail: 0.00% | SO: 40/105, rho: 0.064, nu: 0.448, escape: 1, kfac_inv: 40/40, graft_scale: 0.720
+[trinity] Epoch 42/200 - Loss: 0.1997, Val Acc: 57.46%, Head: 66.56%, Med: 21.05%, Tail: 0.00% | SO: 40/105, rho: 0.061, nu: 0.488, escape: 0, kfac_inv: 40/40, graft_scale: 0.718
+[trinity] Epoch 43/200 - Loss: 0.1958, Val Acc: 60.90%, Head: 68.11%, Med: 32.05%, Tail: 0.00% | SO: 40/105, rho: 0.057, nu: 0.448, escape: 0, kfac_inv: 40/40, graft_scale: 0.738
+[trinity] Epoch 44/200 - Loss: 0.1890, Val Acc: 58.78%, Head: 66.95%, Med: 26.10%, Tail: 0.00% | SO: 40/105, rho: 0.053, nu: 0.476, escape: 0, kfac_inv: 40/40, graft_scale: 0.757
+[trinity] Epoch 45/200 - Loss: 0.1686, Val Acc: 57.92%, Head: 67.35%, Med: 20.20%, Tail: 0.00% | SO: 40/105, rho: 0.051, nu: 0.464, escape: 0, kfac_inv: 40/40, graft_scale: 0.777
+[trinity] Epoch 46/200 - Loss: 0.1627, Val Acc: 59.29%, Head: 68.14%, Med: 23.90%, Tail: 0.00% | SO: 40/105, rho: 0.047, nu: 0.452, escape: 0, kfac_inv: 40/40, graft_scale: 0.776
+[trinity] Epoch 47/200 - Loss: 0.1699, Val Acc: 59.33%, Head: 65.40%, Med: 35.05%, Tail: 0.00% | SO: 40/105, rho: 0.044, nu: 0.429, escape: 0, kfac_inv: 40/40, graft_scale: 0.761
+[trinity] Epoch 48/200 - Loss: 0.1674, Val Acc: 60.36%, Head: 69.67%, Med: 23.10%, Tail: 0.00% | SO: 40/105, rho: 0.040, nu: 0.381, escape: 0, kfac_inv: 40/40, graft_scale: 0.752
+[trinity] Epoch 49/200 - Loss: 0.1639, Val Acc: 58.30%, Head: 66.75%, Med: 24.50%, Tail: 0.00% | SO: 40/105, rho: 0.037, nu: 0.398, escape: 1, kfac_inv: 40/40, graft_scale: 0.736
+[trinity] Epoch 50/200 - Loss: 0.1511, Val Acc: 58.14%, Head: 67.81%, Med: 19.45%, Tail: 0.00% | SO: 40/105, rho: 0.035, nu: 0.367, escape: 0, kfac_inv: 40/40, graft_scale: 0.727
+[trinity] Epoch 51/200 - Loss: 0.1422, Val Acc: 60.32%, Head: 69.14%, Med: 25.05%, Tail: 0.00% | SO: 40/105, rho: 0.033, nu: 0.426, escape: 0, kfac_inv: 40/40, graft_scale: 0.735
+[trinity] Epoch 52/200 - Loss: 0.1357, Val Acc: 58.97%, Head: 66.83%, Med: 27.55%, Tail: 0.00% | SO: 40/105, rho: 0.031, nu: 0.393, escape: 0, kfac_inv: 40/40, graft_scale: 0.749
+[trinity] Epoch 53/200 - Loss: 0.1279, Val Acc: 60.74%, Head: 67.71%, Med: 32.85%, Tail: 0.00% | SO: 40/105, rho: 0.030, nu: 0.381, escape: 0, kfac_inv: 40/40, graft_scale: 0.777
+[trinity] Epoch 54/200 - Loss: 0.1412, Val Acc: 58.83%, Head: 67.95%, Med: 22.35%, Tail: 0.00% | SO: 40/105, rho: 0.028, nu: 0.374, escape: 0, kfac_inv: 40/40, graft_scale: 0.779
+[trinity] Epoch 55/200 - Loss: 0.1283, Val Acc: 59.96%, Head: 67.69%, Med: 29.05%, Tail: 0.00% | SO: 40/105, rho: 0.025, nu: 0.448, escape: 0, kfac_inv: 40/40, graft_scale: 0.769
+[trinity] Epoch 56/200 - Loss: 0.1171, Val Acc: 60.67%, Head: 69.19%, Med: 26.60%, Tail: 0.00% | SO: 40/105, rho: 0.023, nu: 0.510, escape: 0, kfac_inv: 40/40, graft_scale: 0.777
+[trinity] Epoch 57/200 - Loss: 0.1220, Val Acc: 57.33%, Head: 67.03%, Med: 18.55%, Tail: 0.00% | SO: 40/105, rho: 0.022, nu: 0.498, escape: 0, kfac_inv: 40/40, graft_scale: 0.773
+[trinity] Epoch 58/200 - Loss: 0.1219, Val Acc: 58.85%, Head: 68.95%, Med: 18.45%, Tail: 0.00% | SO: 40/105, rho: 0.021, nu: 0.474, escape: 0, kfac_inv: 40/40, graft_scale: 0.747
+[trinity] Epoch 59/200 - Loss: 0.1094, Val Acc: 61.48%, Head: 68.89%, Med: 31.85%, Tail: 0.00% | SO: 40/105, rho: 0.019, nu: 0.474, escape: 0, kfac_inv: 40/40, graft_scale: 0.745
+[trinity] Epoch 60/200 - Loss: 0.1137, Val Acc: 61.18%, Head: 69.41%, Med: 28.25%, Tail: 0.00% | SO: 40/105, rho: 0.019, nu: 0.467, escape: 0, kfac_inv: 40/40, graft_scale: 0.747
+[trinity] Epoch 61/200 - Loss: 0.1160, Val Acc: 58.74%, Head: 68.10%, Med: 21.30%, Tail: 0.00% | SO: 40/105, rho: 0.017, nu: 0.445, escape: 0, kfac_inv: 40/40, graft_scale: 0.770
+[trinity] Epoch 62/200 - Loss: 0.0967, Val Acc: 60.60%, Head: 69.76%, Med: 23.95%, Tail: 0.00% | SO: 40/105, rho: 0.016, nu: 0.467, escape: 0, kfac_inv: 40/40, graft_scale: 0.778
+[trinity] Epoch 63/200 - Loss: 0.0987, Val Acc: 61.20%, Head: 67.81%, Med: 34.75%, Tail: 0.00% | SO: 40/105, rho: 0.015, nu: 0.402, escape: 0, kfac_inv: 40/40, graft_scale: 0.764
+[trinity] Epoch 64/200 - Loss: 0.1017, Val Acc: 61.02%, Head: 67.83%, Med: 33.80%, Tail: 0.00% | SO: 40/105, rho: 0.014, nu: 0.383, escape: 0, kfac_inv: 40/40, graft_scale: 0.771
+[trinity] Epoch 65/200 - Loss: 0.0952, Val Acc: 61.50%, Head: 69.22%, Med: 30.60%, Tail: 0.00% | SO: 40/105, rho: 0.013, nu: 0.379, escape: 0, kfac_inv: 40/40, graft_scale: 0.782
+[trinity] Epoch 66/200 - Loss: 0.1045, Val Acc: 62.93%, Head: 70.84%, Med: 31.30%, Tail: 0.00% | SO: 40/105, rho: 0.012, nu: 0.400, escape: 0, kfac_inv: 40/40, graft_scale: 0.779
+[trinity] Epoch 67/200 - Loss: 0.0806, Val Acc: 59.41%, Head: 67.59%, Med: 26.70%, Tail: 0.00% | SO: 40/105, rho: 0.012, nu: 0.414, escape: 0, kfac_inv: 0/0, graft_scale: 0.770
+[trinity] Epoch 68/200 - Loss: 0.0752, Val Acc: 59.85%, Head: 68.79%, Med: 24.10%, Tail: 0.00% | SO: 40/105, rho: 0.011, nu: 0.452, escape: 0, kfac_inv: 40/40, graft_scale: 0.768
+[trinity] Epoch 69/200 - Loss: 0.0696, Val Acc: 59.99%, Head: 68.88%, Med: 24.45%, Tail: 0.00% | SO: 40/105, rho: 0.010, nu: 0.521, escape: 0, kfac_inv: 40/40, graft_scale: 0.780
+[trinity] Epoch 70/200 - Loss: 0.0727, Val Acc: 61.33%, Head: 68.67%, Med: 31.95%, Tail: 0.00% | SO: 40/105, rho: 0.009, nu: 0.576, escape: 0, kfac_inv: 40/40, graft_scale: 0.793
+[trinity] Epoch 71/200 - Loss: 0.0628, Val Acc: 58.85%, Head: 68.15%, Med: 21.65%, Tail: 0.00% | SO: 40/105, rho: 0.009, nu: 0.545, escape: 0, kfac_inv: 40/40, graft_scale: 0.783
+[trinity] Epoch 72/200 - Loss: 0.0706, Val Acc: 58.93%, Head: 69.21%, Med: 17.80%, Tail: 0.00% | SO: 40/105, rho: 0.008, nu: 0.510, escape: 0, kfac_inv: 40/40, graft_scale: 0.777
+[trinity] Epoch 73/200 - Loss: 0.0675, Val Acc: 59.62%, Head: 67.65%, Med: 27.50%, Tail: 0.00% | SO: 40/105, rho: 0.007, nu: 0.510, escape: 0, kfac_inv: 40/40, graft_scale: 0.764
+[trinity] Epoch 74/200 - Loss: 0.0612, Val Acc: 59.65%, Head: 67.85%, Med: 26.85%, Tail: 0.00% | SO: 40/105, rho: 0.007, nu: 0.514, escape: 0, kfac_inv: 40/40, graft_scale: 0.757
+[trinity] Epoch 75/200 - Loss: 0.0690, Val Acc: 60.78%, Head: 69.29%, Med: 26.75%, Tail: 0.00% | SO: 40/105, rho: 0.007, nu: 0.498, escape: 0, kfac_inv: 40/40, graft_scale: 0.757
+[trinity] Epoch 76/200 - Loss: 0.0594, Val Acc: 60.89%, Head: 69.16%, Med: 27.80%, Tail: 0.00% | SO: 40/105, rho: 0.006, nu: 0.412, escape: 0, kfac_inv: 40/40, graft_scale: 0.765
+[trinity] Epoch 77/200 - Loss: 0.0624, Val Acc: 58.55%, Head: 68.59%, Med: 18.40%, Tail: 0.00% | SO: 40/105, rho: 0.006, nu: 0.355, escape: 0, kfac_inv: 40/40, graft_scale: 0.779
+[trinity] Epoch 78/200 - Loss: 0.0506, Val Acc: 58.87%, Head: 68.41%, Med: 20.70%, Tail: 0.00% | SO: 40/105, rho: 0.005, nu: 0.312, escape: 0, kfac_inv: 40/40, graft_scale: 0.787
+[trinity] Epoch 79/200 - Loss: 0.0528, Val Acc: 57.85%, Head: 67.14%, Med: 20.70%, Tail: 0.00% | SO: 40/105, rho: 0.005, nu: 0.331, escape: 0, kfac_inv: 40/40, graft_scale: 0.781
+[trinity] Epoch 80/200 - Loss: 0.0556, Val Acc: 57.98%, Head: 67.42%, Med: 20.20%, Tail: 0.00% | SO: 40/105, rho: 0.005, nu: 0.343, escape: 2, kfac_inv: 40/40, graft_scale: 0.780
+[trinity] Epoch 81/200 - Loss: 0.0516, Val Acc: 59.54%, Head: 69.26%, Med: 20.65%, Tail: 0.00% | SO: 40/105, rho: 0.004, nu: 0.360, escape: 0, kfac_inv: 40/40, graft_scale: 0.783
+[trinity] Epoch 82/200 - Loss: 0.0522, Val Acc: 59.62%, Head: 67.66%, Med: 27.45%, Tail: 0.00% | SO: 40/105, rho: 0.004, nu: 0.374, escape: 0, kfac_inv: 40/40, graft_scale: 0.769
+[trinity] Epoch 83/200 - Loss: 0.0470, Val Acc: 61.20%, Head: 70.61%, Med: 23.55%, Tail: 0.00% | SO: 40/105, rho: 0.004, nu: 0.388, escape: 0, kfac_inv: 40/40, graft_scale: 0.756
+[trinity] Epoch 84/200 - Loss: 0.0446, Val Acc: 60.72%, Head: 69.96%, Med: 23.75%, Tail: 0.00% | SO: 40/105, rho: 0.004, nu: 0.417, escape: 0, kfac_inv: 40/40, graft_scale: 0.756
+[trinity] Epoch 85/200 - Loss: 0.0399, Val Acc: 60.23%, Head: 69.36%, Med: 23.70%, Tail: 0.00% | SO: 40/105, rho: 0.003, nu: 0.407, escape: 0, kfac_inv: 40/40, graft_scale: 0.768
+[trinity] Epoch 86/200 - Loss: 0.0470, Val Acc: 60.78%, Head: 69.38%, Med: 26.40%, Tail: 0.00% | SO: 40/105, rho: 0.003, nu: 0.433, escape: 0, kfac_inv: 40/40, graft_scale: 0.793
+[trinity] Epoch 87/200 - Loss: 0.0478, Val Acc: 58.15%, Head: 67.44%, Med: 21.00%, Tail: 0.00% | SO: 40/105, rho: 0.003, nu: 0.438, escape: 0, kfac_inv: 40/40, graft_scale: 0.786
+[trinity] Epoch 88/200 - Loss: 0.0450, Val Acc: 59.34%, Head: 69.21%, Med: 19.85%, Tail: 0.00% | SO: 40/105, rho: 0.003, nu: 0.474, escape: 0, kfac_inv: 40/40, graft_scale: 0.783
+[trinity] Epoch 89/200 - Loss: 0.0402, Val Acc: 60.41%, Head: 70.22%, Med: 21.15%, Tail: 0.00% | SO: 40/105, rho: 0.003, nu: 0.469, escape: 0, kfac_inv: 40/40, graft_scale: 0.781
+[trinity] Epoch 90/200 - Loss: 0.0428, Val Acc: 58.85%, Head: 68.21%, Med: 21.40%, Tail: 0.00% | SO: 40/105, rho: 0.002, nu: 0.443, escape: 0, kfac_inv: 40/40, graft_scale: 0.773
+[trinity] Epoch 91/200 - Loss: 0.0393, Val Acc: 61.49%, Head: 70.15%, Med: 26.85%, Tail: 0.00% | SO: 40/105, rho: 0.002, nu: 0.431, escape: 0, kfac_inv: 40/40, graft_scale: 0.778
+[trinity] Epoch 92/200 - Loss: 0.0347, Val Acc: 59.82%, Head: 68.81%, Med: 23.85%, Tail: 0.00% | SO: 40/105, rho: 0.002, nu: 0.469, escape: 3, kfac_inv: 40/40, graft_scale: 0.764
+[trinity] Epoch 93/200 - Loss: 0.0308, Val Acc: 59.82%, Head: 69.36%, Med: 21.65%, Tail: 0.00% | SO: 40/105, rho: 0.002, nu: 0.433, escape: 0, kfac_inv: 40/40, graft_scale: 0.770
+[trinity] Epoch 94/200 - Loss: 0.0291, Val Acc: 60.94%, Head: 69.81%, Med: 25.45%, Tail: 0.00% | SO: 40/105, rho: 0.002, nu: 0.443, escape: 0, kfac_inv: 40/40, graft_scale: 0.788
+[trinity] Epoch 95/200 - Loss: 0.0369, Val Acc: 58.87%, Head: 69.36%, Med: 16.90%, Tail: 0.00% | SO: 40/105, rho: 0.002, nu: 0.410, escape: 1, kfac_inv: 40/40, graft_scale: 0.789
+[trinity] Epoch 96/200 - Loss: 0.0365, Val Acc: 62.37%, Head: 70.06%, Med: 31.60%, Tail: 0.00% | SO: 40/105, rho: 0.002, nu: 0.390, escape: 0, kfac_inv: 40/40, graft_scale: 0.791
+[trinity] Epoch 97/200 - Loss: 0.0309, Val Acc: 60.13%, Head: 68.94%, Med: 24.90%, Tail: 0.00% | SO: 40/105, rho: 0.002, nu: 0.405, escape: 3, kfac_inv: 40/40, graft_scale: 0.787
+[trinity] Epoch 98/200 - Loss: 0.0279, Val Acc: 61.39%, Head: 69.66%, Med: 28.30%, Tail: 0.00% | SO: 40/105, rho: 0.001, nu: 0.393, escape: 0, kfac_inv: 40/40, graft_scale: 0.777
+[trinity] Epoch 99/200 - Loss: 0.0281, Val Acc: 61.11%, Head: 69.51%, Med: 27.50%, Tail: 0.00% | SO: 40/105, rho: 0.001, nu: 0.431, escape: 0, kfac_inv: 40/40, graft_scale: 0.772
+[trinity] Epoch 100/200 - Loss: 0.0285, Val Acc: 59.43%, Head: 68.35%, Med: 23.75%, Tail: 0.00% | SO: 40/105, rho: 0.001, nu: 0.464, escape: 0, kfac_inv: 40/40, graft_scale: 0.771
+[trinity] Epoch 101/200 - Loss: 0.0237, Val Acc: 60.87%, Head: 69.46%, Med: 26.50%, Tail: 0.00% | SO: 40/105, rho: 0.001, nu: 0.517, escape: 5, kfac_inv: 0/0, graft_scale: 0.781
+[trinity] Epoch 102/200 - Loss: 0.0239, Val Acc: 59.50%, Head: 68.03%, Med: 25.40%, Tail: 0.00% | SO: 40/105, rho: 0.001, nu: 0.505, escape: 0, kfac_inv: 40/40, graft_scale: 0.787
+[trinity] Epoch 103/200 - Loss: 0.0246, Val Acc: 58.75%, Head: 69.42%, Med: 16.05%, Tail: 0.00% | SO: 40/105, rho: 0.001, nu: 0.510, escape: 0, kfac_inv: 40/40, graft_scale: 0.798
+[trinity] Epoch 104/200 - Loss: 0.0256, Val Acc: 60.68%, Head: 69.45%, Med: 25.60%, Tail: 0.00% | SO: 40/105, rho: 0.001, nu: 0.500, escape: 0, kfac_inv: 40/40, graft_scale: 0.794
+[trinity] Epoch 105/200 - Loss: 0.0225, Val Acc: 59.40%, Head: 68.53%, Med: 22.90%, Tail: 0.00% | SO: 40/105, rho: 0.001, nu: 0.467, escape: 0, kfac_inv: 40/40, graft_scale: 0.783
+[trinity] Epoch 106/200 - Loss: 0.0570, Val Acc: 61.07%, Head: 69.42%, Med: 27.65%, Tail: 0.00% | SO: 40/105, rho: 0.001, nu: 0.474, escape: 0, kfac_inv: 40/40, graft_scale: 0.788
+[trinity] Epoch 107/200 - Loss: 0.0297, Val Acc: 60.18%, Head: 69.14%, Med: 24.35%, Tail: 0.00% | SO: 40/105, rho: 0.001, nu: 0.460, escape: 0, kfac_inv: 40/40, graft_scale: 0.802
+[trinity] Epoch 108/200 - Loss: 0.0227, Val Acc: 60.31%, Head: 68.30%, Med: 28.35%, Tail: 0.00% | SO: 40/105, rho: 0.001, nu: 0.400, escape: 0, kfac_inv: 40/40, graft_scale: 0.800
+[trinity] Epoch 109/200 - Loss: 0.0186, Val Acc: 61.61%, Head: 70.21%, Med: 27.20%, Tail: 0.00% | SO: 40/105, rho: 0.001, nu: 0.381, escape: 0, kfac_inv: 40/40, graft_scale: 0.794
+[trinity] Epoch 110/200 - Loss: 0.0190, Val Acc: 60.63%, Head: 69.53%, Med: 25.05%, Tail: 0.00% | SO: 40/105, rho: 0.001, nu: 0.352, escape: 0, kfac_inv: 40/40, graft_scale: 0.792
+[trinity] Epoch 111/200 - Loss: 0.0175, Val Acc: 60.60%, Head: 69.71%, Med: 24.15%, Tail: 0.00% | SO: 40/105, rho: 0.001, nu: 0.402, escape: 5, kfac_inv: 40/40, graft_scale: 0.798
+[trinity] Epoch 112/200 - Loss: 0.0186, Val Acc: 59.10%, Head: 69.61%, Med: 17.05%, Tail: 0.00% | SO: 40/105, rho: 0.001, nu: 0.393, escape: 0, kfac_inv: 40/40, graft_scale: 0.797
+[trinity] Epoch 113/200 - Loss: 0.0145, Val Acc: 61.00%, Head: 69.99%, Med: 25.05%, Tail: 0.00% | SO: 40/105, rho: 0.001, nu: 0.410, escape: 0, kfac_inv: 40/40, graft_scale: 0.792
+[trinity] Epoch 114/200 - Loss: 0.0125, Val Acc: 60.05%, Head: 68.94%, Med: 24.50%, Tail: 0.00% | SO: 40/105, rho: 0.001, nu: 0.424, escape: 0, kfac_inv: 40/40, graft_scale: 0.791
+[trinity] Epoch 115/200 - Loss: 0.0126, Val Acc: 61.63%, Head: 70.29%, Med: 27.00%, Tail: 0.00% | SO: 40/105, rho: 0.001, nu: 0.383, escape: 0, kfac_inv: 40/40, graft_scale: 0.783
+[trinity] Epoch 116/200 - Loss: 0.0199, Val Acc: 62.05%, Head: 70.10%, Med: 29.85%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.431, escape: 0, kfac_inv: 40/40, graft_scale: 0.783
+[trinity] Epoch 117/200 - Loss: 0.0153, Val Acc: 59.43%, Head: 69.42%, Med: 19.45%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.460, escape: 3, kfac_inv: 40/40, graft_scale: 0.789
+[trinity] Epoch 118/200 - Loss: 0.0170, Val Acc: 61.11%, Head: 69.45%, Med: 27.75%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.469, escape: 0, kfac_inv: 40/40, graft_scale: 0.797
+[trinity] Epoch 119/200 - Loss: 0.0158, Val Acc: 61.37%, Head: 70.83%, Med: 23.55%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.443, escape: 0, kfac_inv: 40/40, graft_scale: 0.812
+[trinity] Epoch 120/200 - Loss: 0.0130, Val Acc: 59.86%, Head: 69.78%, Med: 20.20%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.436, escape: 0, kfac_inv: 40/40, graft_scale: 0.799
+[trinity] Epoch 121/200 - Loss: 0.0092, Val Acc: 60.20%, Head: 69.25%, Med: 24.00%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.398, escape: 1, kfac_inv: 40/40, graft_scale: 0.789
+[trinity] Epoch 122/200 - Loss: 0.0123, Val Acc: 59.44%, Head: 68.59%, Med: 22.85%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.424, escape: 2, kfac_inv: 40/40, graft_scale: 0.796
+[trinity] Epoch 123/200 - Loss: 0.0140, Val Acc: 59.32%, Head: 68.46%, Med: 22.75%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.429, escape: 1, kfac_inv: 40/40, graft_scale: 0.787
+[trinity] Epoch 124/200 - Loss: 0.0133, Val Acc: 61.29%, Head: 71.16%, Med: 21.80%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.395, escape: 0, kfac_inv: 40/40, graft_scale: 0.783
+[trinity] Epoch 125/200 - Loss: 0.0119, Val Acc: 62.00%, Head: 69.81%, Med: 30.75%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.371, escape: 4, kfac_inv: 40/40, graft_scale: 0.786
+[trinity] Epoch 126/200 - Loss: 0.0113, Val Acc: 60.83%, Head: 70.92%, Med: 20.45%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.345, escape: 0, kfac_inv: 40/40, graft_scale: 0.791
+[trinity] Epoch 127/200 - Loss: 0.0091, Val Acc: 61.31%, Head: 70.09%, Med: 26.20%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.395, escape: 7, kfac_inv: 40/40, graft_scale: 0.798
+[trinity] Epoch 128/200 - Loss: 0.0085, Val Acc: 60.54%, Head: 70.09%, Med: 22.35%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.414, escape: 0, kfac_inv: 40/40, graft_scale: 0.788
+[trinity] Epoch 129/200 - Loss: 0.0068, Val Acc: 60.87%, Head: 69.67%, Med: 25.65%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.431, escape: 1, kfac_inv: 40/40, graft_scale: 0.781
+[trinity] Epoch 130/200 - Loss: 0.0077, Val Acc: 61.59%, Head: 70.21%, Med: 27.10%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.436, escape: 0, kfac_inv: 40/40, graft_scale: 0.782
+[trinity] Epoch 131/200 - Loss: 0.0074, Val Acc: 61.01%, Head: 69.47%, Med: 27.15%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.448, escape: 0, kfac_inv: 40/40, graft_scale: 0.783
+[trinity] Epoch 132/200 - Loss: 0.0097, Val Acc: 61.44%, Head: 70.92%, Med: 23.50%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.436, escape: 1, kfac_inv: 40/40, graft_scale: 0.777
+[trinity] Epoch 133/200 - Loss: 0.0090, Val Acc: 60.29%, Head: 70.03%, Med: 21.35%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.419, escape: 0, kfac_inv: 40/40, graft_scale: 0.783
+[trinity] Epoch 134/200 - Loss: 0.0049, Val Acc: 61.11%, Head: 70.29%, Med: 24.40%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.426, escape: 0, kfac_inv: 0/0, graft_scale: 0.773
+[trinity] Epoch 135/200 - Loss: 0.0100, Val Acc: 63.48%, Head: 71.16%, Med: 32.75%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.452, escape: 6, kfac_inv: 40/40, graft_scale: 0.789
+[trinity] Epoch 136/200 - Loss: 0.0073, Val Acc: 62.60%, Head: 70.62%, Med: 30.50%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.429, escape: 4, kfac_inv: 40/40, graft_scale: 0.795
+[trinity] Epoch 137/200 - Loss: 0.0057, Val Acc: 62.28%, Head: 71.22%, Med: 26.50%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.426, escape: 5, kfac_inv: 40/40, graft_scale: 0.784
+[trinity] Epoch 138/200 - Loss: 0.0051, Val Acc: 61.80%, Head: 71.39%, Med: 23.45%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.376, escape: 0, kfac_inv: 40/40, graft_scale: 0.792
+[trinity] Epoch 139/200 - Loss: 0.0072, Val Acc: 62.51%, Head: 71.55%, Med: 26.35%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.352, escape: 1, kfac_inv: 40/40, graft_scale: 0.789
+[trinity] Epoch 140/200 - Loss: 0.0070, Val Acc: 61.41%, Head: 71.62%, Med: 20.55%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.319, escape: 0, kfac_inv: 40/40, graft_scale: 0.786
+[trinity] Epoch 141/200 - Loss: 0.0055, Val Acc: 62.59%, Head: 71.15%, Med: 28.35%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.355, escape: 4, kfac_inv: 40/40, graft_scale: 0.792
+[trinity] Epoch 142/200 - Loss: 0.0055, Val Acc: 61.55%, Head: 70.89%, Med: 24.20%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.362, escape: 0, kfac_inv: 40/40, graft_scale: 0.792
+[trinity] Epoch 143/200 - Loss: 0.0041, Val Acc: 60.72%, Head: 70.42%, Med: 21.90%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.338, escape: 3, kfac_inv: 40/40, graft_scale: 0.799
+[trinity] Epoch 144/200 - Loss: 0.0058, Val Acc: 60.96%, Head: 69.67%, Med: 26.10%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.305, escape: 0, kfac_inv: 40/40, graft_scale: 0.807
+[trinity] Epoch 145/200 - Loss: 0.0057, Val Acc: 61.73%, Head: 70.24%, Med: 27.70%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.288, escape: 2, kfac_inv: 40/40, graft_scale: 0.803
+[trinity] Epoch 146/200 - Loss: 0.0054, Val Acc: 62.28%, Head: 71.20%, Med: 26.60%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.286, escape: 0, kfac_inv: 40/40, graft_scale: 0.805
+[trinity] Epoch 147/200 - Loss: 0.0037, Val Acc: 61.04%, Head: 70.54%, Med: 23.05%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.305, escape: 0, kfac_inv: 40/40, graft_scale: 0.803
+[trinity] Epoch 148/200 - Loss: 0.0039, Val Acc: 61.74%, Head: 70.38%, Med: 27.20%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.360, escape: 2, kfac_inv: 40/40, graft_scale: 0.790
+[trinity] Epoch 149/200 - Loss: 0.0045, Val Acc: 62.45%, Head: 70.16%, Med: 31.60%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.360, escape: 4, kfac_inv: 40/40, graft_scale: 0.798
+[trinity] Epoch 150/200 - Loss: 0.0043, Val Acc: 61.28%, Head: 70.79%, Med: 23.25%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.374, escape: 6, kfac_inv: 40/40, graft_scale: 0.801
+[trinity] Epoch 151/200 - Loss: 0.0033, Val Acc: 62.42%, Head: 70.78%, Med: 29.00%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.407, escape: 9, kfac_inv: 40/40, graft_scale: 0.801
+[trinity] Epoch 152/200 - Loss: 0.0042, Val Acc: 61.99%, Head: 69.91%, Med: 30.30%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.510, escape: 14, kfac_inv: 40/40, graft_scale: 0.798
+[trinity] Epoch 153/200 - Loss: 0.0033, Val Acc: 62.41%, Head: 71.20%, Med: 27.25%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.529, escape: 0, kfac_inv: 40/40, graft_scale: 0.797
+[trinity] Epoch 154/200 - Loss: 0.0035, Val Acc: 61.40%, Head: 70.61%, Med: 24.55%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.531, escape: 0, kfac_inv: 40/40, graft_scale: 0.801
+[trinity] Epoch 155/200 - Loss: 0.0040, Val Acc: 61.26%, Head: 70.45%, Med: 24.50%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.540, escape: 1, kfac_inv: 40/40, graft_scale: 0.808
+[trinity] Epoch 156/200 - Loss: 0.0023, Val Acc: 60.70%, Head: 69.66%, Med: 24.85%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.583, escape: 11, kfac_inv: 40/40, graft_scale: 0.794
+[trinity] Epoch 157/200 - Loss: 0.0021, Val Acc: 61.60%, Head: 69.91%, Med: 28.35%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.598, escape: 0, kfac_inv: 40/40, graft_scale: 0.797
+[trinity] Epoch 158/200 - Loss: 0.0010, Val Acc: 60.77%, Head: 69.04%, Med: 27.70%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.636, escape: 11, kfac_inv: 40/40, graft_scale: 0.799
+[trinity] Epoch 159/200 - Loss: 0.0027, Val Acc: 61.37%, Head: 69.74%, Med: 27.90%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.579, escape: 0, kfac_inv: 40/40, graft_scale: 0.801
+[trinity] Epoch 160/200 - Loss: 0.0027, Val Acc: 61.92%, Head: 70.17%, Med: 28.90%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.464, escape: 0, kfac_inv: 40/40, graft_scale: 0.807
+[trinity] Epoch 161/200 - Loss: 0.0016, Val Acc: 62.19%, Head: 70.35%, Med: 29.55%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.479, escape: 0, kfac_inv: 40/40, graft_scale: 0.809
+[trinity] Epoch 162/200 - Loss: 0.0014, Val Acc: 61.35%, Head: 69.74%, Med: 27.80%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.488, escape: 1, kfac_inv: 40/40, graft_scale: 0.802
+[trinity] Epoch 163/200 - Loss: 0.0005, Val Acc: 61.35%, Head: 70.14%, Med: 26.20%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.469, escape: 2, kfac_inv: 40/40, graft_scale: 0.801
+[trinity] Epoch 164/200 - Loss: 0.0015, Val Acc: 62.65%, Head: 70.96%, Med: 29.40%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.433, escape: 0, kfac_inv: 40/40, graft_scale: 0.791
+[trinity] Epoch 165/200 - Loss: 0.0018, Val Acc: 62.07%, Head: 70.84%, Med: 27.00%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.355, escape: 3, kfac_inv: 40/40, graft_scale: 0.782
+[trinity] Epoch 166/200 - Loss: 0.0013, Val Acc: 62.30%, Head: 70.92%, Med: 27.80%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.324, escape: 6, kfac_inv: 40/40, graft_scale: 0.785
+[trinity] Epoch 167/200 - Loss: 0.0016, Val Acc: 62.37%, Head: 71.33%, Med: 26.55%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.314, escape: 0, kfac_inv: 0/0, graft_scale: 0.792
+[trinity] Epoch 168/200 - Loss: 0.0016, Val Acc: 62.57%, Head: 71.60%, Med: 26.45%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.376, escape: 7, kfac_inv: 40/40, graft_scale: 0.795
+[trinity] Epoch 169/200 - Loss: 0.0019, Val Acc: 61.45%, Head: 70.16%, Med: 26.60%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.352, escape: 2, kfac_inv: 40/40, graft_scale: 0.801
+[trinity] Epoch 170/200 - Loss: 0.0010, Val Acc: 62.71%, Head: 71.14%, Med: 29.00%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.381, escape: 0, kfac_inv: 40/40, graft_scale: 0.792
+[trinity] Epoch 171/200 - Loss: 0.0009, Val Acc: 62.58%, Head: 70.67%, Med: 30.20%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.374, escape: 1, kfac_inv: 40/40, graft_scale: 0.791
+[trinity] Epoch 172/200 - Loss: 0.0009, Val Acc: 62.55%, Head: 70.91%, Med: 29.10%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.379, escape: 1, kfac_inv: 40/40, graft_scale: 0.794
+[trinity] Epoch 173/200 - Loss: 0.0008, Val Acc: 62.30%, Head: 70.78%, Med: 28.40%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.424, escape: 6, kfac_inv: 40/40, graft_scale: 0.788
+[trinity] Epoch 174/200 - Loss: 0.0012, Val Acc: 62.38%, Head: 71.38%, Med: 26.40%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.426, escape: 2, kfac_inv: 40/40, graft_scale: 0.790
+[trinity] Epoch 175/200 - Loss: 0.0014, Val Acc: 61.75%, Head: 70.64%, Med: 26.20%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.410, escape: 2, kfac_inv: 40/40, graft_scale: 0.798
+[trinity] Epoch 176/200 - Loss: 0.0009, Val Acc: 62.21%, Head: 71.50%, Med: 25.05%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.402, escape: 4, kfac_inv: 40/40, graft_scale: 0.797
+[trinity] Epoch 177/200 - Loss: 0.0007, Val Acc: 62.27%, Head: 71.30%, Med: 26.15%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.410, escape: 4, kfac_inv: 40/40, graft_scale: 0.795
+[trinity] Epoch 178/200 - Loss: 0.0017, Val Acc: 62.13%, Head: 71.33%, Med: 25.35%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.405, escape: 0, kfac_inv: 40/40, graft_scale: 0.803
+[trinity] Epoch 179/200 - Loss: 0.0007, Val Acc: 61.94%, Head: 71.08%, Med: 25.40%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.405, escape: 2, kfac_inv: 40/40, graft_scale: 0.795
+[trinity] Epoch 180/200 - Loss: 0.0009, Val Acc: 62.18%, Head: 71.08%, Med: 26.60%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.469, escape: 8, kfac_inv: 40/40, graft_scale: 0.791
+[trinity] Epoch 181/200 - Loss: 0.0009, Val Acc: 62.22%, Head: 71.10%, Med: 26.70%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.467, escape: 0, kfac_inv: 40/40, graft_scale: 0.796
+[trinity] Epoch 182/200 - Loss: 0.0005, Val Acc: 62.12%, Head: 71.06%, Med: 26.35%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.450, escape: 3, kfac_inv: 40/40, graft_scale: 0.791
+[trinity] Epoch 183/200 - Loss: 0.0004, Val Acc: 62.09%, Head: 70.71%, Med: 27.60%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.483, escape: 6, kfac_inv: 40/40, graft_scale: 0.786
+[trinity] Epoch 184/200 - Loss: 0.0004, Val Acc: 61.95%, Head: 70.79%, Med: 26.60%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.507, escape: 3, kfac_inv: 40/40, graft_scale: 0.775
+[trinity] Epoch 185/200 - Loss: 0.0005, Val Acc: 62.34%, Head: 70.78%, Med: 28.60%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.493, escape: 2, kfac_inv: 40/40, graft_scale: 0.780
+[trinity] Epoch 186/200 - Loss: 0.0004, Val Acc: 62.22%, Head: 71.04%, Med: 26.95%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.493, escape: 0, kfac_inv: 40/40, graft_scale: 0.779
+[trinity] Epoch 187/200 - Loss: 0.0006, Val Acc: 62.36%, Head: 71.12%, Med: 27.30%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.450, escape: 2, kfac_inv: 40/40, graft_scale: 0.779
+[trinity] Epoch 188/200 - Loss: 0.0010, Val Acc: 62.19%, Head: 70.81%, Med: 27.70%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.412, escape: 4, kfac_inv: 40/40, graft_scale: 0.781
+[trinity] Epoch 189/200 - Loss: 0.0008, Val Acc: 62.31%, Head: 71.06%, Med: 27.30%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.412, escape: 2, kfac_inv: 40/40, graft_scale: 0.777
+[trinity] Epoch 190/200 - Loss: 0.0003, Val Acc: 62.22%, Head: 71.11%, Med: 26.65%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.443, escape: 9, kfac_inv: 40/40, graft_scale: 0.784
+[trinity] Epoch 191/200 - Loss: 0.0006, Val Acc: 62.39%, Head: 71.05%, Med: 27.75%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.493, escape: 10, kfac_inv: 40/40, graft_scale: 0.785
+[trinity] Epoch 192/200 - Loss: 0.0004, Val Acc: 62.20%, Head: 71.06%, Med: 26.75%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.471, escape: 7, kfac_inv: 40/40, graft_scale: 0.781
+[trinity] Epoch 193/200 - Loss: 0.0002, Val Acc: 62.06%, Head: 70.85%, Med: 26.90%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.521, escape: 7, kfac_inv: 40/40, graft_scale: 0.778
+[trinity] Epoch 194/200 - Loss: 0.0002, Val Acc: 62.62%, Head: 71.26%, Med: 28.05%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.519, escape: 0, kfac_inv: 40/40, graft_scale: 0.781
+[trinity] Epoch 195/200 - Loss: 0.0003, Val Acc: 62.22%, Head: 70.95%, Med: 27.30%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.517, escape: 0, kfac_inv: 40/40, graft_scale: 0.782
+[trinity] Epoch 196/200 - Loss: 0.0005, Val Acc: 62.43%, Head: 70.96%, Med: 28.30%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.545, escape: 9, kfac_inv: 40/40, graft_scale: 0.789
+[trinity] Epoch 197/200 - Loss: 0.0010, Val Acc: 62.00%, Head: 70.44%, Med: 28.25%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.519, escape: 6, kfac_inv: 40/40, graft_scale: 0.792
+[trinity] Epoch 198/200 - Loss: 0.0004, Val Acc: 62.21%, Head: 70.75%, Med: 28.05%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.460, escape: 0, kfac_inv: 40/40, graft_scale: 0.795
+[trinity] Epoch 199/200 - Loss: 0.0004, Val Acc: 62.15%, Head: 70.88%, Med: 27.25%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.355, escape: 1, kfac_inv: 40/40, graft_scale: 0.789
+wandb: updating run metadata
+wandb: uploading output.log; uploading wandb-summary.json; uploading config.yaml
+wandb: uploading wandb-summary.json; uploading config.yaml
+wandb: uploading history steps 199-199, summary, console lines 200-200
+wandb: 
+wandb: Run history:
+wandb:                       epoch ▁▁▂▂▂▂▃▃▃▃▃▃▃▃▃▄▄▄▄▄▅▅▅▅▅▆▆▆▆▆▇▇▇▇▇█████
+wandb:                   train/acc ▁▂▃▄▅▅▆▆▆▆▇▇████████████████████████████
+wandb:                  train/loss █▅▅▅▄▃▂▂▂▂▂▂▂▂▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       trinity/blocks_probed ▁███████▁█████▁██▁█▁███▁████████████████
+wandb:        trinity/escape_fires ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▃▆▄▁▃▁▆▁▂▁▁▆▃▁▆█
+wandb:  trinity/grafting_scale_max ▁▁▁▁▁▁▁▁▁▁▁▁▃▃▂▂▄▃▃█▅▇█▇█▅▇▅▄▄▅▅▅▄▃▆▃▄▆▃
+wandb: trinity/grafting_scale_mean ███████▁▁▁▁▁▂▂▂▂▂▂▂▃▂▃▂▃▂▂▂▂▃▃▃▃▂▃▃▂▂▂▂▂
+wandb:  trinity/grafting_scale_min ███████▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:       trinity/kfac_inv_fail ▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁▁
+wandb:    trinity/kfac_inv_success ▁▁▁▁▁▁▁▁███████████████████▁████████████
+wandb:                         +13 ...
+wandb: 
+wandb: Run summary:
+wandb:                       epoch 200
+wandb:                   train/acc 99.98388
+wandb:                  train/loss 0.00062
+wandb:       trinity/blocks_probed 14
+wandb:        trinity/escape_fires 2
+wandb:  trinity/grafting_scale_max 1.06081
+wandb: trinity/grafting_scale_mean 0.78596
+wandb:  trinity/grafting_scale_min 0.05905
+wandb:       trinity/kfac_inv_fail 0
+wandb:    trinity/kfac_inv_success 40
+wandb:                         +13 ...
+wandb: 
+wandb: 🚀 View run trinity at: https://wandb.ai/dcll-iiitd/wideresnet-trinity-optimizer-comparison-200-wideresnet/runs/vjaigo1o
+wandb: ⭐️ View project at: https://wandb.ai/dcll-iiitd/wideresnet-trinity-optimizer-comparison-200-wideresnet
+wandb: Synced 5 W&B file(s), 0 media file(s), 0 artifact file(s) and 0 other file(s)
+wandb: Find logs at: ./wandb/run-20260910_104606-vjaigo1o/logs
+[trinity] Epoch 200/200 - Loss: 0.0006, Val Acc: 62.45%, Head: 70.80%, Med: 29.05%, Tail: 0.00% | SO: 40/105, rho: 0.000, nu: 0.324, escape: 2, kfac_inv: 40/40, graft_scale: 0.786
