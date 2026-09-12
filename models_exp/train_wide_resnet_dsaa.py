@@ -18,6 +18,12 @@ def main():
     parser.add_argument('--optimizer', type=str, default='trinity', choices=OPTIMIZER_CHOICES)
     parser.add_argument('--config', type=str, default='config.yaml')
     parser.add_argument('--output_dir', type=str, default='results_dsaa2026')
+    parser.add_argument('--wandb_project', type=str, default=None,
+                         help="Literal wandb project name, used as-is (no suffix appended). "
+                              "Default: '{config.wandb.project}-wideresnet'.")
+    parser.add_argument('--run_name', type=str, default=None,
+                         help="wandb run name, e.g. an ablation variant like 'trinity_no_gc'. "
+                              "Default: --optimizer's value.")
     args = parser.parse_args()
 
     cfg = load_config(args.config)
@@ -27,9 +33,13 @@ def main():
     torch.manual_seed(tr_cfg.get('seed', 42))
 
     os.makedirs(args.output_dir, exist_ok=True)
+    # run_name (e.g. an ablation variant like 'trinity_no_gc') distinguishes the CSV
+    # filename when several arms share --optimizer trinity -- without this they'd all
+    # write wideresnet_trinity_..._imb....csv and silently overwrite each other.
+    run_tag = args.run_name if args.run_name else args.optimizer
     csv_path = os.path.join(
         args.output_dir,
-        f"resnet18_{args.optimizer}_{ds_cfg['name']}_imb{ds_cfg['imb_factor']}.csv")
+        f"wideresnet_{run_tag}_{ds_cfg['name']}_imb{ds_cfg['imb_factor']}.csv")
     with open(csv_path, 'w') as f:
         f.write("epoch,train_loss,train_acc,val_loss,val_acc,head_acc,med_acc,tail_acc,time_s\n")
 
@@ -38,15 +48,16 @@ def main():
         num_workers=ds_cfg['num_workers'])
     evaluator = PerClassEvaluator(num_classes, img_num_list)
 
-    model = models.resnet18(weights=None, num_classes=num_classes).to(device)
+    model = models.wide_resnet101_2(weights=None, num_classes=num_classes).to(device)
     criterion = nn.CrossEntropyLoss()
 
     optimizer, scheduler, needs_closure = build_optimizer(args.optimizer, model, cfg, epochs,
-                                                           model_name='resnet18')
+                                                           model_name='wide_resnet')
 
-    run = wandb.init(project=f"{cfg['wandb']['project']}-resnet18",
+    wandb_project = args.wandb_project if args.wandb_project else f"{cfg['wandb']['project']}-wideresnet"
+    run = wandb.init(project=wandb_project,
                       group=f"{ds_cfg['name']}_imb{ds_cfg['imb_factor']}",
-                      name=args.optimizer,
+                      name=args.run_name if args.run_name else args.optimizer,
                       config={**vars(args), **ds_cfg, **tr_cfg, 'optimizer': args.optimizer})
 
     for epoch in range(epochs):
