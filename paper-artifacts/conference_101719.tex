@@ -83,7 +83,7 @@ First-order optimization methods, though empirically scalable, are fundamentally
 
 However, the value of preconditioning is not uniform across blocks. If a block's Fisher Information Matrix is near-isotropic, the preconditioned gradient $\mathbf{F}^{-1}\nabla L$ is roughly proportional to the raw gradient $\nabla L$, meaning the expensive matrix inversion buys almost nothing. Despite this, such anisotropy is rarely measured during training, and the inversion budget is spent uniformly across the network.
 
-The primary reason this anisotropy remains unmeasured is that traditional diagnostics require Hessian-vector products or full eigendecompositions. These operations are typically as expensive as the preconditioning step they are meant to evaluate, making them impractical for dynamic runtime control.
+The primary reason this curvature anisotropy---the directional ill-conditioning where the loss landscape curves sharply along certain parameter directions while remaining nearly flat along others---remains unmeasured is that traditional diagnostics require Hessian-vector products or full eigendecompositions. These operations are typically as expensive as the preconditioning step they are meant to evaluate, making them impractical for dynamic runtime control.
 
 Our core insight is that two forward passes can provide a second difference rather than a first difference, yielding an unbiased quadratic form $\mathbf{z}^T \mathbf{H} \mathbf{z}$. This operates at the same computational cost as a standard zeroth-order gradient estimate but is significantly more informative, circumventing the $\mathcal{O}(d)$ variance issues that dominate standard backpropagation in differentiable settings.
 

@@ -1,0 +1,92 @@
+[*] Generated Long-Tailed CIFAR-10 (Imbalance: 0.01). Total train samples: 12406
+[Trinity] d_max=2400: 66.208% of trackable parameters permanently excluded from K-FAC (kept on AdamW).
+wandb: [wandb.login()] Loaded credentials for https://api.wandb.ai from /home/anant/.netrc.
+wandb: Currently logged in as: anant-jain (dcll-iiitd) to https://api.wandb.ai. Use `wandb login --relogin` to force relogin
+wandb: setting up run viu2ndxa
+wandb: Tracking run with wandb version 0.29.0
+wandb: Run data is saved locally in /home/anant/update-trinity/Trinity-opt-DSAA2026/wandb/run-20260914_105347-viu2ndxa
+wandb: Run `wandb offline` to turn off syncing.
+wandb: Syncing run trinity_fast
+wandb: ⭐️ View project at https://wandb.ai/dcll-iiitd/wideresnet-trinity-optimizer-comparison-200-wideresnet
+wandb: 🚀 View run at https://wandb.ai/dcll-iiitd/wideresnet-trinity-optimizer-comparison-200-wideresnet/runs/viu2ndxa
+<sys>:0: UserWarning: Full backward hook is firing when gradients are computed with respect to module outputs since no inputs require gradients. See https://docs.pytorch.org/docs/main/generated/torch.nn.Module.html#torch.nn.Module.register_full_backward_hook for more details.
+[trinity] Epoch 1/200 - Loss: 2.7403, Val Acc: 10.53%, Head: 12.89%, Med: 1.10%, Tail: 0.00% | SO: 0/105, rho: 1.000, nu: 0.000, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 2/200 - Loss: 1.6933, Val Acc: 18.67%, Head: 23.34%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.989, nu: 0.019, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 3/200 - Loss: 1.2732, Val Acc: 24.03%, Head: 30.04%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.979, nu: 0.029, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 4/200 - Loss: 1.0927, Val Acc: 25.97%, Head: 32.46%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.968, nu: 0.033, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 5/200 - Loss: 1.0064, Val Acc: 26.24%, Head: 32.80%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.958, nu: 0.038, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 6/200 - Loss: 0.9360, Val Acc: 28.90%, Head: 36.12%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.947, nu: 0.045, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 7/200 - Loss: 0.8712, Val Acc: 30.74%, Head: 38.42%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.936, nu: 0.048, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 8/200 - Loss: 0.8472, Val Acc: 30.24%, Head: 37.80%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.926, nu: 0.055, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 9/200 - Loss: 0.8020, Val Acc: 34.90%, Head: 43.62%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.915, nu: 0.060, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 10/200 - Loss: 0.7476, Val Acc: 34.99%, Head: 43.74%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.905, nu: 0.064, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 11/200 - Loss: 0.7193, Val Acc: 33.73%, Head: 42.16%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.894, nu: 0.074, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 12/200 - Loss: 0.7024, Val Acc: 38.66%, Head: 48.33%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.883, nu: 0.081, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 13/200 - Loss: 0.6592, Val Acc: 39.53%, Head: 49.41%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.873, nu: 0.093, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 14/200 - Loss: 0.6269, Val Acc: 41.42%, Head: 51.77%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.867, nu: 0.100, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 15/200 - Loss: 0.5984, Val Acc: 40.56%, Head: 50.70%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.857, nu: 0.102, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 16/200 - Loss: 0.5697, Val Acc: 42.29%, Head: 52.86%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.852, nu: 0.112, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 17/200 - Loss: 0.5467, Val Acc: 46.11%, Head: 57.64%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.841, nu: 0.121, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 18/200 - Loss: 0.5534, Val Acc: 46.36%, Head: 57.95%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.836, nu: 0.131, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 19/200 - Loss: 0.5510, Val Acc: 43.94%, Head: 54.92%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.830, nu: 0.148, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 20/200 - Loss: 0.5005, Val Acc: 47.09%, Head: 58.86%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.820, nu: 0.150, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 21/200 - Loss: 0.4997, Val Acc: 51.16%, Head: 63.95%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.814, nu: 0.150, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 22/200 - Loss: 0.4746, Val Acc: 44.07%, Head: 55.09%, Med: 0.00%, Tail: 0.00% | SO: 0/105, rho: 0.809, nu: 0.150, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 23/200 - Loss: 0.4597, Val Acc: 51.15%, Head: 63.92%, Med: 0.05%, Tail: 0.00% | SO: 0/105, rho: 0.798, nu: 0.167, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 24/200 - Loss: 0.4311, Val Acc: 53.12%, Head: 65.84%, Med: 2.25%, Tail: 0.00% | SO: 0/105, rho: 0.793, nu: 0.179, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 25/200 - Loss: 0.4107, Val Acc: 51.25%, Head: 62.14%, Med: 7.70%, Tail: 0.00% | SO: 0/105, rho: 0.788, nu: 0.186, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 26/200 - Loss: 0.3919, Val Acc: 54.60%, Head: 66.35%, Med: 7.60%, Tail: 0.00% | SO: 0/105, rho: 0.777, nu: 0.198, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 27/200 - Loss: 0.3828, Val Acc: 53.92%, Head: 65.55%, Med: 7.40%, Tail: 0.00% | SO: 0/105, rho: 0.772, nu: 0.217, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 28/200 - Loss: 0.3778, Val Acc: 52.73%, Head: 65.41%, Med: 2.00%, Tail: 0.00% | SO: 0/105, rho: 0.767, nu: 0.226, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 29/200 - Loss: 0.3717, Val Acc: 53.36%, Head: 66.34%, Med: 1.45%, Tail: 0.00% | SO: 0/105, rho: 0.756, nu: 0.243, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 30/200 - Loss: 0.3419, Val Acc: 55.97%, Head: 67.42%, Med: 10.15%, Tail: 0.00% | SO: 0/105, rho: 0.751, nu: 0.243, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 31/200 - Loss: 0.3263, Val Acc: 53.24%, Head: 63.89%, Med: 10.65%, Tail: 0.00% | SO: 0/105, rho: 0.745, nu: 0.248, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 32/200 - Loss: 0.3224, Val Acc: 56.25%, Head: 66.44%, Med: 15.50%, Tail: 0.00% | SO: 0/105, rho: 0.735, nu: 0.252, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 33/200 - Loss: 0.3027, Val Acc: 57.46%, Head: 67.54%, Med: 17.15%, Tail: 0.00% | SO: 0/105, rho: 0.730, nu: 0.269, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 34/200 - Loss: 0.2960, Val Acc: 56.05%, Head: 64.85%, Med: 20.85%, Tail: 0.00% | SO: 0/105, rho: 0.730, nu: 0.269, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 35/200 - Loss: 0.2771, Val Acc: 54.69%, Head: 63.50%, Med: 19.45%, Tail: 0.00% | SO: 0/105, rho: 0.724, nu: 0.269, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 36/200 - Loss: 0.2693, Val Acc: 54.17%, Head: 64.14%, Med: 14.30%, Tail: 0.00% | SO: 0/105, rho: 0.714, nu: 0.279, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 37/200 - Loss: 0.8533, Val Acc: 44.75%, Head: 55.85%, Med: 0.35%, Tail: 0.00% | SO: 0/105, rho: 0.708, nu: 0.281, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 38/200 - Loss: 0.6158, Val Acc: 50.60%, Head: 60.84%, Med: 9.65%, Tail: 0.00% | SO: 0/105, rho: 0.703, nu: 0.286, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 39/200 - Loss: 0.3450, Val Acc: 52.10%, Head: 62.86%, Med: 9.05%, Tail: 0.00% | SO: 0/105, rho: 0.692, nu: 0.288, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 40/200 - Loss: 0.3841, Val Acc: 58.91%, Head: 67.91%, Med: 22.90%, Tail: 0.00% | SO: 0/105, rho: 0.687, nu: 0.300, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 41/200 - Loss: 0.3233, Val Acc: 57.30%, Head: 66.78%, Med: 19.40%, Tail: 0.00% | SO: 0/105, rho: 0.682, nu: 0.314, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 42/200 - Loss: 0.2656, Val Acc: 48.04%, Head: 59.21%, Med: 3.35%, Tail: 0.00% | SO: 0/105, rho: 0.671, nu: 0.317, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 43/200 - Loss: 0.2429, Val Acc: 56.75%, Head: 67.47%, Med: 13.85%, Tail: 0.00% | SO: 0/105, rho: 0.666, nu: 0.317, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 44/200 - Loss: 0.2327, Val Acc: 56.75%, Head: 66.42%, Med: 18.05%, Tail: 0.00% | SO: 0/105, rho: 0.661, nu: 0.331, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 45/200 - Loss: 0.2179, Val Acc: 57.85%, Head: 68.06%, Med: 17.00%, Tail: 0.00% | SO: 0/105, rho: 0.650, nu: 0.350, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 46/200 - Loss: 0.2036, Val Acc: 57.23%, Head: 67.50%, Med: 16.15%, Tail: 0.00% | SO: 0/105, rho: 0.645, nu: 0.364, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 47/200 - Loss: 0.1913, Val Acc: 59.29%, Head: 66.92%, Med: 28.75%, Tail: 0.00% | SO: 0/105, rho: 0.639, nu: 0.367, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 48/200 - Loss: 0.1992, Val Acc: 57.19%, Head: 67.29%, Med: 16.80%, Tail: 0.00% | SO: 0/105, rho: 0.629, nu: 0.374, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 49/200 - Loss: 0.1859, Val Acc: 57.84%, Head: 66.92%, Med: 21.50%, Tail: 0.00% | SO: 0/105, rho: 0.623, nu: 0.393, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 50/200 - Loss: 0.1801, Val Acc: 58.27%, Head: 67.17%, Med: 22.65%, Tail: 0.00% | SO: 0/105, rho: 0.618, nu: 0.400, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 51/200 - Loss: 0.1702, Val Acc: 58.41%, Head: 67.44%, Med: 22.30%, Tail: 0.00% | SO: 0/105, rho: 0.608, nu: 0.410, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 52/200 - Loss: 0.1660, Val Acc: 56.57%, Head: 67.12%, Med: 14.35%, Tail: 0.00% | SO: 0/105, rho: 0.602, nu: 0.421, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 53/200 - Loss: 0.1529, Val Acc: 59.95%, Head: 69.04%, Med: 23.60%, Tail: 0.00% | SO: 0/105, rho: 0.592, nu: 0.436, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 54/200 - Loss: 0.1556, Val Acc: 59.84%, Head: 67.94%, Med: 27.45%, Tail: 0.00% | SO: 0/105, rho: 0.586, nu: 0.436, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 55/200 - Loss: 0.1516, Val Acc: 60.63%, Head: 68.47%, Med: 29.25%, Tail: 0.00% | SO: 0/105, rho: 0.578, nu: 0.426, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 56/200 - Loss: 0.1368, Val Acc: 60.57%, Head: 68.96%, Med: 27.00%, Tail: 0.00% | SO: 0/105, rho: 0.572, nu: 0.410, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 57/200 - Loss: 0.1303, Val Acc: 57.52%, Head: 67.25%, Med: 18.60%, Tail: 0.00% | SO: 0/105, rho: 0.566, nu: 0.410, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 58/200 - Loss: 0.1704, Val Acc: 60.12%, Head: 69.45%, Med: 22.80%, Tail: 0.00% | SO: 0/105, rho: 0.559, nu: 0.405, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 59/200 - Loss: 0.1249, Val Acc: 59.68%, Head: 68.81%, Med: 23.15%, Tail: 0.00% | SO: 0/105, rho: 0.553, nu: 0.400, escape: 0, kfac_inv: 0/0, graft_scale: nan
+[trinity] Epoch 60/200 - Loss: 0.1243, Val Acc: 59.61%, Head: 69.59%, Med: 19.70%, Tail: 0.00% | SO: 0/105, rho: 0.547, nu: 0.395, escape: 0, kfac_inv: 0/0, graft_scale: nan
+Traceback (most recent call last):
+  File "/home/anant/update-trinity/Trinity-opt-DSAA2026/models_exp/train_wide_resnet_dsaa.py", line 152, in <module>
+    main()
+    ~~~~^^
+  File "/home/anant/update-trinity/Trinity-opt-DSAA2026/models_exp/train_wide_resnet_dsaa.py", line 81, in main
+    optimizer.step(closure)
+    ~~~~~~~~~~~~~~^^^^^^^^^
+  File "/home/anant/miniconda3/lib/python3.13/site-packages/torch/optim/lr_scheduler.py", line 166, in wrapper
+    return func.__get__(opt, opt.__class__)(*args, **kwargs)
+           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^
+  File "/home/anant/miniconda3/lib/python3.13/site-packages/torch/optim/optimizer.py", line 530, in wrapper
+    out = func(*args, **kwargs)
+  File "/home/anant/miniconda3/lib/python3.13/site-packages/torch/utils/_contextlib.py", line 124, in decorate_context
+    return func(*args, **kwargs)
+  File "/home/anant/update-trinity/Trinity-opt-DSAA2026/trinity_optimizer.py", line 549, in step
+    # ---- Phase 3: K-FAC factors + gated inverses ----
+KeyboardInterrupt
+[1;34mwandb[0m: 
+[1;34mwandb[0m: 🚀 View run [33mtrinity_fast[0m at: [34mhttps://wandb.ai/dcll-iiitd/wideresnet-trinity-optimizer-comparison-200-wideresnet/runs/viu2ndxa[0m
+[1;34mwandb[0m: Find logs at: [1;35mwandb/run-20260914_105347-viu2ndxa/logs[0m
